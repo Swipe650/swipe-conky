@@ -2,7 +2,7 @@
 
 This repository contains my conky configuration files and radiotray bash scripts
 
-.conkyrc sits at the root of the home directory
+.conkyrc sits at the root of the home directory (rename conkyrc_bak to .conkyrc
 
 ##############
 
