@@ -130,7 +130,7 @@ ${fs_bar /home}
 # RADIOTRAY
 ${voffset -8}${font Open Sans:Bold:size=10}${color dodgerblue3}RADIO ${hr 5}${if_running radiotray}
 
-${voffset -8}${color}${if_match "${execi 10 /home/swipe/.conky/conkyradiotray/scriptradio}" == "NO"}${color #efefef}${font Open Sans:size=10:bold}Radiotray is not running${else}${color #efefef}${font Open Sans:size=11:bold}RadioTray is running:
+${voffset -8}${color}${if_match "${execi 10 /home/swipe/.conky/conkyradiotray/scriptradio}" == "NO"}${color #efefef}${font Open Sans:size=10:bold}Radiotray is not playing${else}${color #efefef}${font Open Sans:size=10.5:bold}RadioTray is playing:
 ${voffset 6}${color aaaaaa}${font Open Sans:size=10:bold}Station:${font}${color}  
 
 ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.radiotray.getCurrentRadio} 
