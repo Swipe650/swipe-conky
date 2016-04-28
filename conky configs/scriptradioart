@@ -6,6 +6,11 @@ plan_rock='Planet Rock'
 hdr='Hard Drivin Radio'
 big80s='Big 80s Metal'
 kfi='KFI'
+twit='TWiT.am'
+ragga='Raggakings'
+fivelive='5live'
+radiofour='Radio 4'
+radiostoke='Radio Stoke'
 radio_paradise='Radio Paradise' 
 
 
@@ -30,10 +35,25 @@ case "$station" in
     "$kfi" )
         cp -f /home/swipe/.local/share/radiotray/kfi  /home/swipe/.local/share/radiotray/icon
 ;;
+    "$twit" )
+        cp -f /home/swipe/.local/share/radiotray/twit  /home/swipe/.local/share/radiotray/icon
+;;
+    "$ragga" )
+        cp -f /home/swipe/.local/share/radiotray/ragga  /home/swipe/.local/share/radiotray/icon
+;;
+    "$fivelive" )
+        cp -f /home/swipe/.local/share/radiotray/5live  /home/swipe/.local/share/radiotray/icon
+;;
+    "$radiofour" )
+        cp -f /home/swipe/.local/share/radiotray/radio4  /home/swipe/.local/share/radiotray/icon
+;;
+    "$radiostoke" )
+        cp -f /home/swipe/.local/share/radiotray/radiostoke  /home/swipe/.local/share/radiotray/icon
+;;
     "$radio_paradise" )
 ;;
     *)
-        rm -f /home/swipe/.local/share/radiotray/icon
+        cp -f /home/swipe/.local/share/radiotray/radiotray  /home/swipe/.local/share/radiotray/icon
 ;;
 esac
 exit 0
