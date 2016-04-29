@@ -97,7 +97,7 @@ ${voffset -13}${alignr}${offset -60}${top mem 4} %
 # NETWORK
 ${voffset -8}${font Open Sans:Bold:size=10}${color dodgerblue3}NETWORK ${hr 5}
 $color${font Open Sans:bold:size=8.5}External IP ${font}${alignr}${execi 60 curl http://ip.tupeux.com --connect-timeout 2 | grep -o "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*"}$font
-${voffset -14}$alignc${execpi 4 echo "\${font}\${color}ping: \${font Open Sans:bold:size=8.5}\${color #66aaff}$(ping -W 1 -c 1 8.8.8.8 -q | grep rtt | egrep [0-9]+\.[0-9]+ -o | head -n 2 | tail -n 1)\${font}\${color} ms"}
+${voffset -15}$alignc${execpi 4 echo "\${font Open Sans:bold:size=8.5}\${color #66aaff}$(ping -W 1 -c 1 8.8.8.8 -q | grep rtt | egrep [0-9]+\.[0-9]+ -o | head -n 2 | tail -n 1)\${font}\${color} ms"}
 
 #${voffset -10}${font Open Sans:bold:size=8.5}Ethernet $font$alignr ${addr enp0s25}
 #↑ ${upspeedf enp0s25} kb/s $alignr ${totalup enp0s25}
@@ -137,7 +137,8 @@ ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus net.sourceforge.ra
 
 ${color aaaaaa}${font Open Sans:size=10:bold}Artist & Title:${font}${color}   
 
-${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w 45}${color}${image ~/.local/share/radiotray/icon -p 170,800 -s 110x110 -f 1}${endif} 
+#${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w 45}${color}${image ~/.local/share/radiotray/icon -p 170,800 -s 110x110 -f 1}${endif} 
+${font Open Sans:size=9:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray/noinfo}${color}${image ~/.local/share/radiotray/icon -p 170,795 -s 110x110 -f 1}${endif} 
 $else${color #696969}${font Open Sans:size=10:bold}No activity${font}$endif
 ${voffset -12}${exec /home/swipe/.conky/conkyradiotray/scriptradioart}
 ${voffset -200}
