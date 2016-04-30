@@ -1,0 +1,9 @@
+#!/bin/bash 
+st=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.radiotray.getCurrentRadio)
+lbc_uk='LBC UK'
+station=${st}
+if [ "$station" = "$lbc_uk" ];
+then
+cp -f /home/swipe/.local/share/radiotray/lbc  /home/swipe/.local/share/radiotray/icon
+fi
+exit 0
