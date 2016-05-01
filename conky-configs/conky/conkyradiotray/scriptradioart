@@ -13,6 +13,7 @@ radiofour='Radio 4'
 radiostoke='Radio Stoke'
 radio_paradise='Radio Paradise' 
 leftcoast70s='Left Coast 70s'
+killall='Killall Radio'
 
 station=${st}
 
@@ -52,6 +53,9 @@ case "$station" in
 ;;
     "$leftcoast70s" )
         cp -f /home/swipe/.local/share/radiotray/leftcoast70s  /home/swipe/.local/share/radiotray/icon
+;;
+    "$killall" )
+        cp -f /home/swipe/.local/share/radiotray/killall  /home/swipe/.local/share/radiotray/icon
 ;;
     "$radio_paradise" )
 ;;
