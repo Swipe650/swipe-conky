@@ -131,7 +131,7 @@ ${fs_bar /home}
 # RADIOTRAY
 ${if_running radiotray}
 
-${voffset -8}${color}${if_match "${execi 10 /home/swipe/.conky/conkyradiotray/scriptradio}" == "NO"}${voffset 10}${else}${voffset -27}${font Open Sans:Bold:size=10}${color dodgerblue3}RADIO ${hr 5}
+${voffset -8}${color}${if_match "${execi 10 /home/swipe/.conky/conkyradiotray/scriptradio}" == "NO"}${voffset 10}${else}${voffset -25}${font Open Sans:Bold:size=10}${color dodgerblue3}RADIO ${hr 5}
 ${voffset 8}${color #efefef}${font Open Sans:size=10.5:bold}RadioTray is playing:
 ${voffset 6}${color aaaaaa}${font Open Sans:size=10:bold}Station:${font}${color}  
 
