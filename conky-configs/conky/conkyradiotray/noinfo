@@ -4,10 +4,15 @@ then
 st=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.radiotray.getCurrentRadio)
 so=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w150) 
 status='Playing' 
-artist=${so: -7}   
+artist=${so: -7}  
+status2='"1"' 
+artist2=${so: -3} 
 if [ "$artist" = "$status" ]; 
 then 
 title='No info'   
+elif [ "$artist2" = "$status2" ]; 
+then 
+title='No info'  
 else 
 title=$so 
 fi
