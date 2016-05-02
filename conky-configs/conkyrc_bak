@@ -49,7 +49,7 @@ $sysname $kernel $alignr $machine
 Uptime: $alignr $uptime
 #Last System Update:$alignr${execi 60 sh ~/bin/pacman-date.sh}
 #GPU Temperature $alignr ${execi 60 sensors | grep 'temp1:' | cut -c16-19}°C
-Motherboard Temp: $alignr ${execi 60 sensors | grep 'temp2:' | cut -c16-22}
+#Motherboard Temp: $alignr ${execi 60 sensors | grep 'temp2:' | cut -c16-22}
 
 # MEMORY
 ${voffset -8}${font Open Sans:Bold:size=10}${color dodgerblue3}MEMORY ${membar 4} 
@@ -140,7 +140,7 @@ ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus net.sourceforge.ra
 ${color aaaaaa}${font Open Sans:size=10:bold}Artist & Title:${font}${color}   
 
 #${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w 45}${color}${image ~/.local/share/radiotray/icon -p 170,800 -s 110x110 -f 1}${endif} 
-${font Open Sans:size=9:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray/noinfo| fold -s -w 45}${color}${image ~/.local/share/radiotray/icon -p 170,795 -s 110x110 -f 1}${endif} 
+${font Open Sans:size=9:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray/noinfo| fold -s -w 45}${color}${image ~/.local/share/radiotray/icon -p 170,783 -s 110x110 -f 1}${endif} 
 $else${voffset 40}${color #696969}${font Open Sans:size=10:bold}${font}$endif
 ${voffset -12}${exec /home/swipe/.conky/conkyradiotray/scriptradioart}
 ${voffset -225}
