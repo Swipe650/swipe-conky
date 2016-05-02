@@ -10,6 +10,7 @@ twit='TWiT.am'
 ragga='Raggakings'
 fivelive='5live'
 radiofour='Radio 4'
+radiofourextra='Radio 4 Extra'
 radiostoke='Radio Stoke'
 radio_paradise='Radio Paradise' 
 leftcoast70s='Left Coast 70s'
@@ -48,6 +49,9 @@ case "$station" in
 ;;
     "$radiofour" )
         cp -f /home/swipe/.local/share/radiotray/radio4  /home/swipe/.local/share/radiotray/icon
+;;
+    "$radiofourextra" )
+        cp -f /home/swipe/.local/share/radiotray/radio4extra  /home/swipe/.local/share/radiotray/icon
 ;;
     "$radiostoke" )
         cp -f /home/swipe/.local/share/radiotray/radiostoke  /home/swipe/.local/share/radiotray/icon
