@@ -118,7 +118,7 @@ ${voffset -14}$alignc${downspeedgraph wlp2s0 10,120 000000 66aaff}
 # HDD
 ${voffset -8}${font Open Sans:Bold:size=10}${color dodgerblue3}DISCS ${hr 5}
 ${voffset -14}
-$color${font Open Sans:bold:size=10}/dev/sda${font Open Sans:size=8.5}${alignc -50}${color} write: ${color 66aaff}${font Open Sans:bold:size=8.5}${diskio_write /dev/sda}${color}$alignr ${font Open Sans:size=8.5}$alignr read: ${color 66aaff}${font Open Sans:bold:size=8.5}$alignr${diskio_read /dev/sda}
+$color${font Open Sans:bold:size=9}/dev/sda3${font Open Sans:size=8.5}${alignc -50}${color} write: ${color 66aaff}${font Open Sans:bold:size=8.5}${diskio_write /dev/sda3}${color}$alignr ${font Open Sans:size=8.5}$alignr read: ${color 66aaff}${font Open Sans:bold:size=8.5}$alignr${diskio_read /dev/sda}
 ${voffset -8}
 $color${font Open Sans:bold:size=8.5}${font Open Sans:bold:size=8.5}ROOT$font${alignc -20}${fs_used /} / ${fs_size /}$alignr ${fs_used_perc /} %
 ${fs_bar /}
