@@ -3,8 +3,6 @@ st=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.
 lbc_uk='LBC UK'
 lbc_london='LBC London'
 plan_rock='Planet Rock'
-hdr='Hard Drivin Radio'
-big80s='Big 80s Metal'
 kfi='KFI'
 twit='TWiT.am'
 ragga='Raggakings'
@@ -13,11 +11,10 @@ radiofour='Radio 4'
 radiofourextra='Radio 4 Extra'
 radiostoke='Radio Stoke'
 radio_paradise='Radio Paradise' 
-leftcoast70s='Left Coast 70s'
-killall='Killall Radio'
 soma='Space Station Soma'
 crl='Classic Rock Lounge'
 pingrad='Pinguin Radio'
+hr80s='Hard Rockin 80s'
 
 station=${st}
 
@@ -30,12 +27,6 @@ case "$station" in
 ;;
     "$plan_rock" )
         cp -f /home/swipe/.local/share/radiotray/planrock  /home/swipe/.local/share/radiotray/icon
-;;
-    "$hdr" )
-        cp -f /home/swipe/.local/share/radiotray/hdr  /home/swipe/.local/share/radiotray/icon
-;;
-    "$big80s" )
-        cp -f /home/swipe/.local/share/radiotray/big80s  /home/swipe/.local/share/radiotray/icon
 ;;
     "$kfi" )
         cp -f /home/swipe/.local/share/radiotray/kfi  /home/swipe/.local/share/radiotray/icon
@@ -58,12 +49,6 @@ case "$station" in
     "$radiostoke" )
         cp -f /home/swipe/.local/share/radiotray/radiostoke  /home/swipe/.local/share/radiotray/icon
 ;;
-    "$leftcoast70s" )
-        cp -f /home/swipe/.local/share/radiotray/leftcoast70s  /home/swipe/.local/share/radiotray/icon
-;;
-    "$killall" )
-        cp -f /home/swipe/.local/share/radiotray/killall  /home/swipe/.local/share/radiotray/icon
-;;
     "$soma" )
         cp -f /home/swipe/.local/share/radiotray/soma  /home/swipe/.local/share/radiotray/icon
 ;;
@@ -72,6 +57,9 @@ case "$station" in
 ;;
     "$pingrad" )
         cp -f /home/swipe/.local/share/radiotray/pingrad  /home/swipe/.local/share/radiotray/icon
+;;
+    "$hr80s" )
+        cp -f /home/swipe/.local/share/radiotray/hr80s  /home/swipe/.local/share/radiotray/icon
 ;;
     "$radio_paradise" )
 ;;
