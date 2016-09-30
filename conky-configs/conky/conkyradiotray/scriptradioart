@@ -15,6 +15,7 @@ soma='Space Station Soma'
 crl='Classic Rock Lounge'
 pingrad='Pinguin Radio'
 hr80s='Hard Rockin 80s'
+talkradio='TalkRadio'
 
 station=${st}
 
@@ -60,6 +61,9 @@ case "$station" in
 ;;
     "$hr80s" )
         cp -f /home/swipe/.local/share/radiotray/hr80s  /home/swipe/.local/share/radiotray/icon
+;;
+    "$talkradio" )
+        cp -f /home/swipe/.local/share/radiotray/talkradio  /home/swipe/.local/share/radiotray/icon
 ;;
     "$radio_paradise" )
 ;;
