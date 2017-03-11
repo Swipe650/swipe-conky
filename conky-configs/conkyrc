@@ -10,7 +10,7 @@ own_window_type dock
 own_window_transparent no
 own_window_argb_visual yes 
 #own_window_argb_value 90
-own_window_argb_value 150
+own_window_argb_value 110
 own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 #own_window_hints decorated,below,sticky,skip_taskbar,skip_pager
 double_buffer yes
@@ -76,11 +76,11 @@ $color${font Open Sans:bold:size=8.5}Free:$font $swapfree
 
 # CPU
 ${voffset -8}${font Open Sans:Bold:size=10}${color dodgerblue3}CPU ${voffset 3}$color${cpubar 5}
-$color${font}Intel® Core™ i5-5250U @ ${freq_g cpu0}GHz $alignr $cpu% @ ${execi 2 sensors | grep 'Physical id 0' | cut -c18-19}°C
-${font}Core 0 - ${execi 2 sensors | grep 'Core 0' | cut -c18-19}°C ${alignc 60}${cpubar cpu1}${color}
-${font}Core 1 - ${execi 2 sensors | grep 'Core 1' | cut -c18-19}°C ${alignc 60}${cpubar cpu2}${color}
-${font}Core 2 - ${execi 2 sensors | grep 'Core 0' | cut -c18-19}°C ${alignc 60}${cpubar cpu3}${color}
-${font}Core 3 - ${execi 2 sensors | grep 'Core 1' | cut -c18-19}°C ${alignc 60}${cpubar cpu4}${color}
+$color${font}Intel® Core™ i5-5250U @ ${freq_g cpu0}GHz $alignr $cpu% @ ${execi 2 sensors | grep 'Package id 0' | cut -c17-18}°C
+${font}Core 0 - ${execi 2 sensors | grep 'Core 0' | cut -c17-18}°C ${alignc 60}${cpubar cpu1}${color}
+${font}Core 1 - ${execi 2 sensors | grep 'Core 1' | cut -c17-18}°C ${alignc 60}${cpubar cpu2}${color}
+${font}Core 2 - ${execi 2 sensors | grep 'Core 0' | cut -c17-18}°C ${alignc 60}${cpubar cpu3}${color}
+${font}Core 3 - ${execi 2 sensors | grep 'Core 1' | cut -c17-18}°C ${alignc 60}${cpubar cpu4}${color}
 ${font}CPU Fan Speed - ${execi 2 sensors | grep 'fan2' | cut -c24-31} ${alignc 60}
 
 ${voffset -8}${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}TOP PROCESSES${color}${font}${voffset -1} --------------------- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}RAM${color}${font}${voffset -1} ----- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}CPU${color}${font}${voffset -1} --
@@ -138,11 +138,11 @@ ${if_running radiotray}
 
 ${voffset -8}${color}${if_match "${execi 10 /home/swipe/.conky/conkyradiotray/scriptradio}" == "NO"}${voffset 10}${else}${voffset -25}${font Open Sans:Bold:size=10}${color dodgerblue3}RADIO ${voffset -1}${hr 6}
 ${voffset 8}${color #efefef}${font Open Sans:size=10.5:bold}RadioTray is playing:
-${voffset 6}${color aaaaaa}${font Open Sans:size=10:bold}Station:${font}${color}  
+${voffset 4}${voffset 6}${color aaaaaa}${font Open Sans:size=10:bold}Station:${font}${color}  
 
 ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.radiotray.getCurrentRadio} 
 
-${color aaaaaa}${font Open Sans:size=10:bold}Artist & Title:${font}${color}   
+${voffset 2}${color aaaaaa}${font Open Sans:size=10:bold}Artist & Title:${font}${color}   
 
 #${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w 45}${color}${image ~/.local/share/radiotray/icon -p 170,800 -s 110x110 -f 1}${endif} 
 ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray/noinfo| fold -s -w 45}${color}${image ~/.local/share/radiotray/icon -p 170,776 -s 110x110 -f 1}${endif} 
