@@ -5,13 +5,13 @@ lbc_london='LBC London'
 plan_rock='Planet Rock'
 kfi='KFI'
 twit='TWiT.am'
-ragga='Raggakings'
 fivelive='5live'
 radiofour='Radio 4'
 radiofourextra='Radio 4 Extra'
 radiostoke='Radio Stoke'
 radio_paradise='Radio Paradise' 
 soma='Space Station Soma'
+ragga='Raggakings'
 crl='Classic Rock Lounge'
 pingrad='Pinguin Radio'
 hr80s='Hard Rockin 80s'
@@ -20,10 +20,10 @@ big80s='Big 80s Metal'
 
 station=${st}
 
+qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w80 > ~/.conky/conkyradiotray/artist_title.txt
+
 title=$(head -1 ~/.conky/conkyradiotray/artist_title.txt)
 linkMiniature=$(wget -U'Googlebot-Image/1.0' -qO - "www.google.co.uk/search?q=$title\&tbm=isch" | perl -pe 's!.*?<img .*?src="([^"]*)".*!$1!')
-wget -qO miniatureGoogleImage $linkMiniature
-
 
 case "$station" in 
     "$lbc_uk" )
@@ -53,10 +53,18 @@ case "$station" in
     "$talkradio" )
         cp -f /home/swipe/.local/share/radiotray/talkradio  /home/swipe/.local/share/radiotray/icon
 ;;
+    "$plan_rock" )
+        cp -f /home/swipe/.local/share/radiotray/planrock  /home/swipe/.local/share/radiotray/icon
+;;
+    "$ragga" )
+        cp -f /home/swipe/.local/share/radiotray/ragga  /home/swipe/.local/share/radiotray/icon
+;;
     "$radio_paradise" )
+        exit 0
 ;;
     *)
         #cp -f /home/swipe/.local/share/radiotray/radiotray  /home/swipe/.local/share/radiotray/icon
+        wget -qO miniatureGoogleImage $linkMiniature
         convert ~/miniatureGoogleImage ~/.local/share/radiotray/icon
 ;;
 esac
