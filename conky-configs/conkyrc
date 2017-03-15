@@ -143,9 +143,7 @@ ${voffset 4}${voffset 6}${color aaaaaa}${font Open Sans:size=10:bold}Station:${f
 ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.radiotray.getCurrentRadio} 
 
 ${voffset 2}${color aaaaaa}${font Open Sans:size=10:bold}Artist & Title:${font}${color}
-#${execi 10 qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w80 > ~/.conky/conkyradiotray/artist_title.txt}
 
-#${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w 45}${color}${image ~/.local/share/radiotray/icon -p 170,800 -s 110x110 -f 1}${endif} 
 ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray/noinfo| fold -s -w 45}${color}${image ~/.local/share/radiotray/icon -p 170,776 -s 110x110 -f 1}${endif} 
 $else${voffset 40}${color #696969}${font Open Sans:size=10:bold}${font}$endif
 ${voffset -12}${execi 10 /home/swipe/.conky/conkyradiotray/scriptradioart}
