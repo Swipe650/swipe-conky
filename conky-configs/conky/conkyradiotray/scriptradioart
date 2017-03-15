@@ -1,5 +1,6 @@
 #!/bin/bash 
 st=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.radiotray.getCurrentRadio)
+so=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w150)
 lbc_uk='LBC UK'
 lbc_london='LBC London'
 plan_rock='Planet Rock'
@@ -19,51 +20,65 @@ talkradio='TalkRadio'
 big80s='Big 80s Metal'
 
 station=${st}
+status='Playing'
+rp='Radio Paradise'
+artist=${so: -7}
+cadena=${st: -14} 
+if [ "$artist" = "$status" ]; 
+then
+title='radiotray icon'
+elif [ "$cadena" = "$rp" ]; 
+then 
+station='Radio Paradise'  
+else 
+title=$so 
+fi
 
-qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w80 > ~/.conky/conkyradiotray/artist_title.txt
+
+echo $title | fold -s -w80 > ~/.conky/conkyradiotray/artist_title.txt
 
 title=$(head -1 ~/.conky/conkyradiotray/artist_title.txt)
 linkMiniature=$(wget -U'Googlebot-Image/1.0' -qO - "www.google.co.uk/search?q=$title\&tbm=isch" | perl -pe 's!.*?<img .*?src="([^"]*)".*!$1!')
 
 case "$station" in 
     "$lbc_uk" )
-        cp -f /home/swipe/.local/share/radiotray/lbc  /home/swipe/.local/share/radiotray/icon
+        cp -f ~/.local/share/radiotray/lbc  ~/.local/share/radiotray/icon
 ;;
     "$lbc_london" )
-        cp -f /home/swipe/.local/share/radiotray/lbc2  /home/swipe/.local/share/radiotray/icon
+        cp -f ~/.local/share/radiotray/lbc2  ~/.local/share/radiotray/icon
 ;;
     "$kfi" )
-        cp -f /home/swipe/.local/share/radiotray/kfi  /home/swipe/.local/share/radiotray/icon
+        cp -f ~/.local/share/radiotray/kfi  ~/.local/share/radiotray/icon
 ;;
     "$twit" )
-        cp -f /home/swipe/.local/share/radiotray/twit  /home/swipe/.local/share/radiotray/icon
+        cp -f ~/.local/share/radiotray/twit  ~/.local/share/radiotray/icon
 ;;
     "$fivelive" )
-        cp -f /home/swipe/.local/share/radiotray/5live  /home/swipe/.local/share/radiotray/icon
+        cp -f ~/.local/share/radiotray/5live  ~/.local/share/radiotray/icon
 ;;
     "$radiofour" )
-        cp -f /home/swipe/.local/share/radiotray/radio4  /home/swipe/.local/share/radiotray/icon
+        cp -f ~/.local/share/radiotray/radio4  ~/.local/share/radiotray/icon
 ;;
     "$radiofourextra" )
-        cp -f /home/swipe/.local/share/radiotray/radio4extra  /home/swipe/.local/share/radiotray/icon
+        cp -f ~/.local/share/radiotray/radio4extra  ~/.local/share/radiotray/icon
 ;;
     "$radiostoke" )
-        cp -f /home/swipe/.local/share/radiotray/radiostoke  /home/swipe/.local/share/radiotray/icon
+        cp -f ~/.local/share/radiotray/radiostoke  ~/.local/share/radiotray/icon
 ;;
     "$talkradio" )
-        cp -f /home/swipe/.local/share/radiotray/talkradio  /home/swipe/.local/share/radiotray/icon
+        cp -f ~/.local/share/radiotray/talkradio  ~/.local/share/radiotray/icon
 ;;
     "$plan_rock" )
-        cp -f /home/swipe/.local/share/radiotray/planrock  /home/swipe/.local/share/radiotray/icon
+        cp -f ~/.local/share/radiotray/planrock  ~/.local/share/radiotray/icon
 ;;
     "$ragga" )
-        cp -f /home/swipe/.local/share/radiotray/ragga  /home/swipe/.local/share/radiotray/icon
+        cp -f ~/.local/share/radiotray/ragga  ~/.local/share/radiotray/icon
 ;;
     "$radio_paradise" )
         exit 0
 ;;
     *)
-        #cp -f /home/swipe/.local/share/radiotray/radiotray  /home/swipe/.local/share/radiotray/icon
+        #cp -f ~/.local/share/radiotray/radiotray  ~/.local/share/radiotray/icon
         wget -qO miniatureGoogleImage $linkMiniature
         convert ~/miniatureGoogleImage ~/.local/share/radiotray/icon
 ;;
