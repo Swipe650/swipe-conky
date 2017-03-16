@@ -18,6 +18,7 @@ pingrad='Pinguin Radio'
 hr80s='Hard Rockin 80s'
 talkradio='TalkRadio'
 big80s='Big 80s Metal'
+not_playing='(not playing)'
 
 station=${st}
 status='Playing'
@@ -35,6 +36,12 @@ else
 title=$so 
 fi
 
+busqueda='(not playing)' 
+cadenaextraida=${st: -13}   
+if [ "$cadenaextraida" = "$busqueda" ]; 
+then 
+station='(not playing)'
+fi
 
 echo $title | fold -s -w80 > ~/.conky/conkyradiotray/artist_title.txt
 
@@ -76,6 +83,8 @@ case "$station" in
         cp -f ~/.local/share/radiotray/ragga  ~/.local/share/radiotray/icon
 ;;
     "$radio_paradise" )
+;;
+    "$not_playing" )
 ;;
     *)
         #cp -f ~/.local/share/radiotray/radiotray  ~/.local/share/radiotray/icon
