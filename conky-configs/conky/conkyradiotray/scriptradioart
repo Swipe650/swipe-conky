@@ -26,7 +26,8 @@ artist=${so: -7}
 cadena=${st: -14} 
 if [ "$artist" = "$status" ]; 
 then
-title='radiotray icon'
+#title='radiotray icon'
+title='black'
 elif [ "$cadena" = "$rp" ]; 
 then 
 station='Radio Paradise'  
@@ -75,7 +76,6 @@ case "$station" in
         cp -f ~/.local/share/radiotray/ragga  ~/.local/share/radiotray/icon
 ;;
     "$radio_paradise" )
-        exit 0
 ;;
     *)
         #cp -f ~/.local/share/radiotray/radiotray  ~/.local/share/radiotray/icon
