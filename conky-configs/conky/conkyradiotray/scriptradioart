@@ -36,9 +36,9 @@ else
 title=$so 
 fi
 
-busqueda='(not playing)' 
-cadenaextraida=${st: -13}   
-if [ "$cadenaextraida" = "$busqueda" ]; 
+query='(not playing)' 
+output=${st: -13}   
+if [ "$output" = "$query" ]; 
 then 
 station='(not playing)'
 fi
