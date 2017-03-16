@@ -28,7 +28,8 @@ cadena=${st: -14}
 if [ "$artist" = "$status" ]; 
 then
 #title='radiotray icon'
-title='black'
+title='hashtag/radiotray'
+#title='black'
 elif [ "$cadena" = "$rp" ]; 
 then 
 station='Radio Paradise'  
