@@ -1,7 +1,7 @@
 <bookmarks>
 <group name="root">
     <bookmark name="LBC UK" url="http://media-ice.musicradio.com/LBCUK.m3u"/><bookmark name="Big 80s Metal" url="http://streaming.streamonomy.com/big80smetal?"/><bookmark name="Radio Paradise" url="http://stream-uk1.radioparadise.com/aac-320"/>
-        <bookmark name="LBC London" url="http://media-ice.musicradio.com/LBCLondon.m3u"/><bookmark name="TalkRadio" url="http://radio.talkradio.co.uk/stream?ref=rf"/><bookmark name="Planet Rock" url="http://icy-e-bz-01-gos.sharp-stream.com/planetrock.mp3"/><bookmark name="Classic Rock Lounge" url="http://www.classicrocklounge.com/audio/mp3_192/listen.m3u"/><bookmark name="Hard Rockin 80s" url="http://hardrockin80s.com/80.pls"/><bookmark name="Pinguin Radio" url="http://pr320.pinguinradio.com/listen.pls"/><bookmark name="Space Station Soma" url="http://somafm.com/spacestation.pls"/>
+        <bookmark name="Morow" url="http://www.morow.com/morow.pls"/><bookmark name="LBC London" url="http://media-ice.musicradio.com/LBCLondon.m3u"/><bookmark name="TalkRadio" url="http://radio.talkradio.co.uk/stream?ref=rf"/><bookmark name="Planet Rock" url="http://icy-e-bz-01-gos.sharp-stream.com/planetrock.mp3"/><bookmark name="Pure Rock Radio" url="http://stream.radiojar.com/yy7tkqzkdzwtv.m3u"/><bookmark name="Classic Rock Lounge" url="http://www.classicrocklounge.com/audio/mp3_192/listen.m3u"/><bookmark name="Metal Head Radio" url="http://www.streamlicensing.com/directory/index.cgi/playlist.pls?action=playlist&amp;type=pls&amp;sid=2538&amp;stream_id=7677"/><bookmark name="Hard Rockin 80s" url="http://hardrockin80s.com/80.pls"/><bookmark name="Pinguin Radio" url="http://pr320.pinguinradio.com/listen.pls"/><bookmark name="Space Station Soma" url="http://somafm.com/spacestation.pls"/>
         <bookmark name="TWiT.am" url="http://twit.am/listen.m3u"/><bookmark name="KFI" url="http://kfi-am.akacast.akamaistream.net/7/121/19771/v1/auth.akacast.akamaistream.net/kfi-am"/><bookmark name="Raggakings" url="http://www.raggakings.net/listen.pls"/><bookmark name="[separator-8d12bcb3-1321-47cb-813f-c693ba6a872d]" url="[separator-8d12bcb3-1321-47cb-813f-c693ba6a872d]"/><group name="BBC"><bookmark name="5live" url="http://www.listenlive.eu/bbc5live.m3u"/><bookmark name="Radio 4" url="http://www.listenlive.eu/bbcradio4.m3u"/><bookmark name="Radio 4 Extra" url="http://www.listenlive.eu/bbcradio4extra.m3u"/><bookmark name="Radio Stoke" url="http://open.live.bbc.co.uk/mediaselector/5/select/version/2.0/mediaset/http-icy-mp3-a/vpid/bbc_radio_stoke/format/pls.pls"/></group><group name="Techno / Electronic">
         <bookmark name="Drone Zone" url="http://somafm.com/dronezone.pls"/>
         <bookmark name="cliqhop idm" url="http://somafm.com/cliqhop.pls"/>
@@ -10,16 +10,16 @@
     </group>
     <group name="Chill">
         <bookmark name="Beat Blender" url="http://somafm.com/beatblender.pls"/>
-        <bookmark name="Secret Agent" url="http://somafm.com/secretagent.pls"/>
+        <bookmark name="Soma Black Rock FM" url="https://somafm.com/brfm.pls"/><bookmark name="Secret Agent" url="http://somafm.com/secretagent.pls"/>
         <bookmark name="Groove Salad" url="http://somafm.com/groovesalad.pls"/>
         <bookmark name="Illinois Street Lounge" url="http://somafm.com/illstreet.pls"/>
     </group>
     <group name="Classic Rock">
         <bookmark name=".977 Classic Rock" url="http://www.977music.com/tunein/web/classicrock.asx"/>
         <bookmark name="Covers" url="http://somafm.com/covers.pls"/>
-    </group>
+    <bookmark name="KEXP" url="http://live-mp3-128.kexp.org:8000/listen.pls"/></group>
     <group name="Pop / Rock">
-        <bookmark name="Indie Pop Rocks!" url="http://somafm.com/indiepop.pls"/>
+        <bookmark name="Rip Rock Radio" url="http://s9.viastreaming.net:7160/"/><bookmark name="Indie Pop Rocks!" url="http://somafm.com/indiepop.pls"/>
         <bookmark name="PopTron" url="http://somafm.com/poptron.pls"/>
     </group>
     <group name="Jazz">
