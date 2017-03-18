@@ -11,13 +11,8 @@ radiofour='Radio 4'
 radiofourextra='Radio 4 Extra'
 radiostoke='Radio Stoke'
 radio_paradise='Radio Paradise' 
-soma='Space Station Soma'
 ragga='Raggakings'
-crl='Classic Rock Lounge'
-pingrad='Pinguin Radio'
-hr80s='Hard Rockin 80s'
 talkradio='TalkRadio'
-big80s='Big 80s Metal'
 not_playing='(not playing)'
 
 station=${st}
@@ -44,7 +39,7 @@ then
 station='(not playing)'
 fi
 
-echo $title | fold -s -w80 > ~/.conky/conkyradiotray/artist_title.txt
+echo "$title" | fold -s -w80 > ~/.conky/conkyradiotray/artist_title.txt
 
 title=$(head -1 ~/.conky/conkyradiotray/artist_title.txt)
 linkMiniature=$(wget -U'Googlebot-Image/1.0' -qO - "www.google.co.uk/search?q=$title\&tbm=isch" | perl -pe 's!.*?<img .*?src="([^"]*)".*!$1!')
@@ -89,7 +84,7 @@ case "$station" in
 ;;
     *)
         #cp -f ~/.local/share/radiotray/radiotray  ~/.local/share/radiotray/icon
-        wget -qO miniatureGoogleImage $linkMiniature
+        wget -qO miniatureGoogleImage "$linkMiniature"
         convert ~/miniatureGoogleImage ~/.local/share/radiotray/icon
 ;;
 esac
