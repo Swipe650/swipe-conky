@@ -1,7 +1,7 @@
 #!/bin/bash 
-if pidof -x $(basename radiotray) > /dev/null 
+if pidof -x "$(basename radiotray)" > /dev/null 
 then 
-st=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.radiotray.getCurrentRadio)
+#st=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.radiotray.getCurrentRadio)
 so=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w150) 
 status='Playing' 
 artist=${so: -7}  
@@ -17,5 +17,5 @@ else
 title=$so 
 fi
 fi
-echo $title 
+echo "$title" 
 exit 0
