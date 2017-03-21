@@ -1,4 +1,6 @@
-#!/bin/bash 
+#!/bin/bash
+if pidof -x "$(basename radiotray)" > /dev/null 
+then
 st=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.radiotray.getCurrentRadio)
 so=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w150)
 lbc_uk='LBC UK'
@@ -88,7 +90,7 @@ case "$station" in
         convert ~/miniatureGoogleImage ~/.local/share/radiotray/icon
 ;;
 esac
-
+fi
 exit 0
 
 
