@@ -136,7 +136,7 @@ ${fs_bar 5 /home}
 # RADIOTRAY
 ${if_running radiotray}
 
-${voffset -10}${color}${if_match "${execi 10 /home/swipe/.conky/conkyradiotray/scriptradio}" == "NO"}${else}${voffset -20}${font Open Sans:Bold:size=10}${color dodgerblue3}RADIO ${voffset -1}${hr 6}
+${voffset -14}${color}${if_match "${execi 10 /home/swipe/.conky/conkyradiotray/scriptradio}" == "NO"}${else}${voffset -20}${font Open Sans:Bold:size=10}${color dodgerblue3}RADIO ${voffset -1}${hr 6}
 ${voffset 8}${color #efefef}${font Open Sans:size=10.5:bold}RadioTray is playing:
 ${voffset 4}${voffset 6}${color aaaaaa}${font Open Sans:size=10:bold}Station:${font}${color}  
 
@@ -144,5 +144,5 @@ ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus net.sourceforge.ra
 
 ${voffset 2}${color aaaaaa}${font Open Sans:size=10:bold}Artist & Title:${font}${color}
 
-${font Open Sans:size=9:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray/noinfo | fold -s -w 45}${color}${image ~/.local/share/radiotray/icon -p 170,776 -s 110x110 -f 1}${color #696969}${font Open Sans:size=10:bold}${font}${endif}$endif${if_running radiotray}${execi 10 /home/swipe/.conky/conkyradiotray/scriptradioart}${voffset -12}${else}$endif
+${font Open Sans:size=9:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray/noinfo | fold -s -w 45}${color}${image ~/.local/share/radiotray/icon -p 170,776 -s 110x110 -f 1}${color #696969}${font Open Sans:size=10:bold}${font}${endif}$endif${if_running radiotray}${execi 10 /home/swipe/.conky/conkyradiotray/scriptradioart}${voffset -15}${else}$endif
 ${voffset -195}
