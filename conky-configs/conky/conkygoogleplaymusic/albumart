@@ -1,5 +1,5 @@
 #!/bin/bash
-# Dependencies are: imagemagick, jq and of course Google Play Music Desktop Player
+# Dependencies are: imagemagick, jq and of course, Google Play Music Desktop Player
 
 title='Not Playing'
 convert ~/.conky/conkygoogleplaymusic/GPM ~/.conky/conkygoogleplaymusic/gmdmp_art
@@ -17,8 +17,8 @@ status=$(cat "$HOME/.config/Google Play Music Desktop Player/json_store/playback
 time_cur=$(cat "$HOME/.config/Google Play Music Desktop Player/json_store/playback.json" | jq -r '.time.current')
 time_tot=$(cat "$HOME/.config/Google Play Music Desktop Player/json_store/playback.json" | jq -r '.time.total')
 
-secs_cur=($time_cur/1000)
-time_cur2=$(printf '%02d:%02d\n' $(($secs_cur%3600/60)) $(($secs_cur%60)))
+#secs_cur=($time_cur/1000)
+#time_cur2=$(printf '%02d:%02d\n' $(($secs_cur%3600/60)) $(($secs_cur%60)))
 
 secs_tot=($time_tot/1000)
 time_tot2=$(printf '%02d:%02d\n' $(($secs_tot%3600/60)) $(($secs_tot%60)))
