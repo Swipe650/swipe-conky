@@ -27,7 +27,7 @@ title=$so
 if
 [ "$status" = "false" ];
 then
-title='Paused'
+title=$so echo 'PAUSED'
 fi
 
 curl -o ~/.conky/conkygoogleplaymusic/gmdmp_art "$art"
