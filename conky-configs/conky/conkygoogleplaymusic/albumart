@@ -25,10 +25,15 @@ time_tot2=$(printf '%02d:%02d\n' $(($secs_tot%3600/60)) $(($secs_tot%60)))
 
 title=$so
 
+if [ "$so" = "null - null" ];
+then
+title='Stopped'
+fi
+
 if
 [ "$status" = "false" ];
 then
-title=$so echo 'PAUSED'
+title=$so echo '(Paused)'
 fi
 
 curl -o ~/.conky/conkygoogleplaymusic/gmdmp_art "$art"
