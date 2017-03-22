@@ -44,11 +44,10 @@ TEXT
 
 # GDMP 
 #${voffset -5}${font Open Sans:Bold:size=10}${color dodgerblue3}MUSIC ${voffset -1}${hr 6}
-${voffset -5}${color #efefef}${font Open Sans:size=10.5:bold}Google Music is now playing: 
-${execi 20 ~/.conky/albumart}
-${image ~/gmdmp_art -p 15,40 -s 200x200}
+${voffset -5}${color #efefef}${font Open Sans:size=10.5:bold}Google Play Music Track: 
 
-${voffset 140}
-${font Open Sans:size=9:bold}${color #aaaaaa}${exec cat "$HOME/.config/Google Play Music Desktop Player/json_store/playback.json" | jq -r '.song.artist, .song.title' | sed ':a;N;$!ba;s/\n/ \- /' | fold -s -w 45}
+${voffset 180}
+${font Open Sans:size=9:bold}${color #aaaaaa}${execi 20 ~/.conky/conkygoogleplaymusic/albumart | sed ':a;N;$!ba;s/\n/ \- /' | fold -s -w 45}
+${image ~/.conky/conkygoogleplaymusic/gmdmp_art -p 15,40 -s 200x200}
 
-${voffset -30}
+${voffset -50}

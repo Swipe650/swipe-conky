@@ -1,0 +1,18 @@
+#!/bin/bash
+
+convert ~/.conky/conkygoogleplaymusic/GPM ~/.conky/conkygoogleplaymusic/gmdmp_art
+
+art=$(cat "$HOME/.config/Google Play Music Desktop Player/json_store/playback.json" | jq -r '.song.albumArt')
+so=$(cat "$HOME/.config/Google Play Music Desktop Player/json_store/playback.json" | jq -r '.song.artist, .song.title' | sed ':a;N;$!ba;s/\n/ \- /')
+status='null - null'
+if pidof -x "$(basename 'Google Play Music Desktop Player')" > /dev/null
+then
+title=$so
+curl -o ~/.conky/conkygoogleplaymusic/gmdmp_art $art
+else
+title='Not Playing'
+fi
+
+echo "$title"
+
+ 

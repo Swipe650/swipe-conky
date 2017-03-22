@@ -1,3 +1,0 @@
-#!/bin/bash
-art=$(cat "$HOME/.config/Google Play Music Desktop Player/json_store/playback.json" | jq -r '.song.albumArt')
-curl -o ~/gmdmp_art $art
