@@ -1,5 +1,9 @@
 #!/bin/bash
 
+title='Not Playing'
+convert ~/.conky/conkygoogleplaymusic/GPM ~/.conky/conkygoogleplaymusic/gmdmp_art
+
+
 if pidof -x "$(basename 'Google Play Music Desktop Player')" > /dev/null
 then
 
@@ -7,13 +11,18 @@ art=$(cat "$HOME/.config/Google Play Music Desktop Player/json_store/playback.js
 
 so=$(cat "$HOME/.config/Google Play Music Desktop Player/json_store/playback.json" | jq -r '.song.artist, .song.title' | sed ':a;N;$!ba;s/\n/ \- /')
 
+status=$(cat "$HOME/.config/Google Play Music Desktop Player/json_store/playback.json" | jq -r '.playing')
+
 title=$so
+
+if
+[ "$status" = "false" ];
+then
+title='Paused'
+fi
 
 curl -o ~/.conky/conkygoogleplaymusic/gmdmp_art "$art"
 
-else
-title='Not Playing'
-convert ~/.conky/conkygoogleplaymusic/GPM ~/.conky/conkygoogleplaymusic/gmdmp_art
 fi
 
 echo "$title"
