@@ -32,8 +32,11 @@ fi
 
 curl -o ~/.conky/conkygoogleplaymusic/gmdmp_art "$art"
 
-fi
-
 echo "$title" "-" "(""$time_tot2"")"
 
+else
+
+echo "$title"
+
+fi
  
