@@ -47,7 +47,7 @@ TEXT
 ${voffset -5}${color #efefef}${font Open Sans:size=10.5:bold}Google Play Music Track: 
 
 ${voffset 180}
-${font Open Sans:size=9:bold}${color #aaaaaa}${execi 20 ~/.conky/conkygoogleplaymusic/albumart | sed ':a;N;$!ba;s/\n/ \- /' | fold -s -w 45}
+${font Open Sans:size=9:bold}${color #aaaaaa}${execi 10 ~/.conky/conkygoogleplaymusic/albumart | sed ':a;N;$!ba;s/\n/ \- /' | fold -s -w 35}
 ${image ~/.conky/conkygoogleplaymusic/gmdmp_art -p 15,40 -s 200x200}
 
 ${voffset -50}
