@@ -1,7 +1,7 @@
 #!/bin/bash
 # Dependencies are: imagemagick, jq and of course, Google Play Music Desktop Player
 
-#title='Not Playing'
+title='Not Playing'
 convert ~/.conky/conkygoogleplaymusic/GPM ~/.conky/conkygoogleplaymusic/gmdmp_art
 
 
@@ -20,10 +20,10 @@ time_tot=$(cat "$HOME/.config/Google Play Music Desktop Player/json_store/playba
 #secs_cur=($time_cur/1000)
 #time_cur2=$(printf '%02d:%02d\n' $(($secs_cur%3600/60)) $(($secs_cur%60)))
 
-#secs_tot=($time_tot/1000)
-#time_tot2=$(printf '%02d:%02d\n' $(($secs_tot%3600/60)) $(($secs_tot%60)))
+secs_tot=($time_tot/1000)
+time_tot2=$(printf '%02d:%02d\n' $(($secs_tot%3600/60)) $(($secs_tot%60)))
 
-#title=$so
+title=$so
 
 if [ "$so" = "null - null" ];
 then
@@ -33,16 +33,16 @@ fi
 if
 [ "$status" = "false" ];
 then
-title='(Paused)'
+title=$so echo '(Paused)'
 fi
 
 curl -o ~/.conky/conkygoogleplaymusic/gmdmp_art "$art"
 
-#echo "$title" "-" "(""$time_tot2"")"
-echo $title
+echo "$title" "-" "(""$time_tot2"")"
 
 else
-title='Not Playing'
+
 echo "$title"
 
 fi
+ 
