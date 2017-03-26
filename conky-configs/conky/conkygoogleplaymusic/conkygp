@@ -42,7 +42,7 @@ override_utf8_locale yes
 
 TEXT
 
-# GDMP (if you want it to become invisible when not playing uncomment the line below and last line and comment out the penultimate line. Then set own_window_argb_value 0.
+# GDMP 
 ${if_match "${exec pidof 'Google Play Music Desktop Player' }" != ""}${voffset 0}${color #efefef}${font Open Sans:size=9:bold}${alignr 140}${execi 10 cat "$HOME/.config/Google Play Music Desktop Player/json_store/playback.json" | jq -r '.song.title' | cut -c1-23}
 
 ${voffset -5}${color #FFC433}${font Open Sans:size=8}${alignr 140}${execi 10 cat "$HOME/.config/Google Play Music Desktop Player/json_store/playback.json" | jq -r '.song.artist'}
@@ -53,6 +53,5 @@ ${voffset 10}${font Open Sans:size=9:bold}${color #aaaaaa}${alignr 140}${execi 1
 ${image ~/.conky/conkygoogleplaymusic/gmdmp_art -p 165,5 -s 120x120}
 
 ${voffset -70}${font Open Sans:size=9:bold}${color #aaaaaa}${alignr 140}${exec ~/.conky/conkygoogleplaymusic/time}
-#${voffset -70}#${endif}
 ${voffset -68}$else${font Open Sans:size=10:bold}${alignr 140}Google Play Music ${image ~/.conky/conkygoogleplaymusic/GPM -p 175,5 -s 120x120}
 ${font Open Sans:size=10:bold}${alignc 50}Not Playing ${voffset 83}${endif}
