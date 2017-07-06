@@ -27,9 +27,9 @@ then
 #title='radiotray icon'
 title='hashtag/radiotray'
 #title='black'
-elif [ "$cadena" = "$rp" ]; 
-then 
-station='Radio Paradise'  
+#elif [ "$cadena" = "$rp" ]; 
+#then 
+#station='Radio Paradise'  
 else 
 title=$so 
 fi
@@ -79,8 +79,8 @@ case "$station" in
 ;;
     "$ragga" )
         cp -f ~/.local/share/radiotray/ragga  ~/.local/share/radiotray/icon
-;;
-    "$radio_paradise" )
+#;;
+    #"$radio_paradise" )
 ;;
     "$not_playing" )
 ;;
