@@ -59,7 +59,7 @@ $color${font Open Sans:bold:size=8.5}Used:$font $mem of $memmax$alignr$memperc%
 $color${font Open Sans:bold:size=8.5}Free:$font $memeasyfree
 $color${font Open Sans:bold:size=8.5}Buffers / Cached:$font$alignr$buffers / $cached
 
-${voffset -8}${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}TOP PROCESSES${color}${font}${voffset -1} --------------------- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}RAM${color}${font}${voffset -1} ----- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}CPU${color}${font}${voffset -1} --
+${voffset -8}${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}TOP PROCESSES${color}${font}${voffset -1} --------------------- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}RAM${color}${font}${voffset -1} ----- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -3}CPU${color}${font}${voffset -1} --
 
 ${voffset -8}${top_mem name 1}${alignr}${top_mem cpu 1} %
 ${voffset -13}${alignr}${offset -60}${top_mem mem 1} %
@@ -83,7 +83,7 @@ ${font}Core 2 - ${execi 2 sensors | grep 'Core 0' | cut -c17-18}°C ${alignc 60}
 ${font}Core 3 - ${execi 2 sensors | grep 'Core 1' | cut -c17-18}°C ${alignc 60}${cpubar cpu4}${color}
 ${font}CPU Fan Speed - ${execi 2 sensors | grep 'fan2' | cut -c24-31} ${alignc 60}
 
-${voffset -8}${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}TOP PROCESSES${color}${font}${voffset -1} --------------------- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}RAM${color}${font}${voffset -1} ----- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}CPU${color}${font}${voffset -1} --
+${voffset -8}${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}TOP PROCESSES${color}${font}${voffset -1} --------------------- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}RAM${color}${font}${voffset -1} ----- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -3}CPU${color}${font}${voffset -1} --
 
 ${voffset -8}#${hr 1}
 ${top name 1}${alignr}${top cpu 1} %
@@ -138,11 +138,11 @@ ${if_running radiotray}
 
 ${voffset -14}${color}${if_match "${execi 10 /home/swipe/.conky/conkyradiotray/scriptradio}" == "NO"}${else}${voffset -20}${font Open Sans:Bold:size=10}${color dodgerblue3}RADIO ${voffset -1}${hr 6}
 ${voffset 8}${color #efefef}${font Open Sans:size=10.5:bold}RadioTray is playing:
-${voffset 4}${voffset 6}${color aaaaaa}${font Open Sans:size=10:bold}Station:${font}${color}  
+${voffset 4}${voffset 6}${color FFC433}${font Open Sans:size=10:bold}Station:${font}${color}  
 
 ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.radiotray.getCurrentRadio} 
 
-${voffset 2}${color aaaaaa}${font Open Sans:size=10:bold}Artist & Title:${font}${color}
+${voffset 2}${color FFC433}${font Open Sans:size=10:bold}Artist & Title:${font}${color}
 
-${font Open Sans:size=9:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray/noinfo | fold -s -w 45}${color}${image ~/.local/share/radiotray/icon -p 170,776 -s 110x110 -f 1}${color #696969}${font Open Sans:size=10:bold}${font}${endif}$endif${if_running radiotray}${execi 10 /home/swipe/.conky/conkyradiotray/scriptradioart}${voffset -15}${else}$endif
+${font Open Sans:size=9:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray/noinfo | fold -s -w 45}${color}${image ~/.local/share/radiotray/icon -p 170,805 -f 1}${color #696969}${font Open Sans:size=10:bold}${font}${endif}$endif${if_running radiotray}${execi 10 /home/swipe/.conky/conkyradiotray/scriptradioart}${voffset -15}${else}$endif
 ${voffset -195}

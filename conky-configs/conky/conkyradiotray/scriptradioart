@@ -27,9 +27,9 @@ then
 #title='radiotray icon'
 title='hashtag/radiotray'
 #title='black'
-#elif [ "$cadena" = "$rp" ]; 
-#then 
-#station='Radio Paradise'  
+elif [ "$cadena" = "$rp" ]; 
+then 
+station='Radio Paradise'  
 else 
 title=$so 
 fi
@@ -48,46 +48,50 @@ linkMiniature=$(wget -U'Googlebot-Image/1.0' -qO - "www.google.co.uk/search?q=$t
 
 case "$station" in 
     "$lbc_uk" )
-        cp -f ~/.local/share/radiotray/lbc  ~/.local/share/radiotray/icon
+        convert ~/.local/share/radiotray/lbc -resize 110 ~/.local/share/radiotray/icon
 ;;
     "$lbc_london" )
-        cp -f ~/.local/share/radiotray/lbc2  ~/.local/share/radiotray/icon
+        convert ~/.local/share/radiotray/lbc2 -resize 110 ~/.local/share/radiotray/icon
 ;;
     "$kfi" )
-        cp -f ~/.local/share/radiotray/kfi  ~/.local/share/radiotray/icon
+        convert ~/.local/share/radiotray/kfi -resize 110 ~/.local/share/radiotray/icon
 ;;
     "$twit" )
-        cp -f ~/.local/share/radiotray/twit  ~/.local/share/radiotray/icon
+        convert ~/.local/share/radiotray/twit -resize 110 ~/.local/share/radiotray/icon
 ;;
     "$fivelive" )
-        cp -f ~/.local/share/radiotray/5live  ~/.local/share/radiotray/icon
+        convert ~/.local/share/radiotray/5live -resize 110 ~/.local/share/radiotray/icon
 ;;
     "$radiofour" )
-        cp -f ~/.local/share/radiotray/radio4  ~/.local/share/radiotray/icon
+        convert ~/.local/share/radiotray/radio4 -resize 110 ~/.local/share/radiotray/icon
 ;;
     "$radiofourextra" )
-        cp -f ~/.local/share/radiotray/radio4extra  ~/.local/share/radiotray/icon
+        convert ~/.local/share/radiotray/radio4extra -resize 110 ~/.local/share/radiotray/icon
 ;;
     "$radiostoke" )
-        cp -f ~/.local/share/radiotray/radiostoke  ~/.local/share/radiotray/icon
+        convert ~/.local/share/radiotray/radiostoke -resize 110 ~/.local/share/radiotray/icon
 ;;
     "$talkradio" )
-        cp -f ~/.local/share/radiotray/talkradio  ~/.local/share/radiotray/icon
+        convert ~/.local/share/radiotray/talkradio -resize 110 ~/.local/share/radiotray/icon
 ;;
     "$plan_rock" )
-        cp -f ~/.local/share/radiotray/planrock  ~/.local/share/radiotray/icon
+        convert ~/.local/share/radiotray/planrock -resize 110 ~/.local/share/radiotray/icon
 ;;
     "$ragga" )
-        cp -f ~/.local/share/radiotray/ragga  ~/.local/share/radiotray/icon
-#;;
-    #"$radio_paradise" )
+        convert ~/.local/share/radiotray/ragga -resize 110 ~/.local/share/radiotray/icon
+;;
+    "$radio_paradise" )
+        curl -o ~/.local/share/radiotray/now.xml http://radioparadise.com/xml/now.xml
+        art=$(awk -F '[<>]' '/coverart/{print $3}' ~/.local/share/radiotray/now.xml)
+        wget -O ~/.local/share/radiotray/rp_art "$art"
+        convert ~/.local/share/radiotray/rp_art -resize 110 ~/.local/share/radiotray/icon
 ;;
     "$not_playing" )
 ;;
     *)
         #cp -f ~/.local/share/radiotray/radiotray  ~/.local/share/radiotray/icon
         wget -qO miniatureGoogleImage "$linkMiniature"
-        convert ~/miniatureGoogleImage ~/.local/share/radiotray/icon
+        convert ~/miniatureGoogleImage -resize 110 ~/.local/share/radiotray/icon
 ;;
 esac
 fi
