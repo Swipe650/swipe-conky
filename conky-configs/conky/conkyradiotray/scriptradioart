@@ -1,8 +1,11 @@
 #!/bin/bash
 if pidof -x "$(basename radiotray)" > /dev/null 
 then
+
+#Populate $st with current station, $so with current artist and song and define station name variables
 st=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.radiotray.getCurrentRadio)
 so=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w150)
+
 lbc_uk='LBC UK'
 lbc_london='LBC London'
 plan_rock='Planet Rock'
@@ -17,6 +20,7 @@ ragga='Raggakings'
 talkradio='TalkRadio'
 not_playing='(not playing)'
 
+#Check for Radio Paradise or show radiotray image if status='Playing'
 station=${st}
 status='Playing'
 rp='Radio Paradise'
@@ -34,6 +38,7 @@ else
 title=$so 
 fi
 
+#Check if station='(not playing)
 query='(not playing)' 
 output=${st: -13}   
 if [ "$output" = "$query" ]; 
@@ -41,11 +46,14 @@ then
 station='(not playing)'
 fi
 
+#Populate artist_title.txt with artist & song title
 echo "$title" | fold -s -w80 > ~/.conky/conkyradiotray/artist_title.txt
 
+#Read the first line of artist_title.txt for artist & song title and populate $title
 title=$(head -1 ~/.conky/conkyradiotray/artist_title.txt)
 linkMiniature=$(wget -U'Googlebot-Image/1.0' -qO - "www.google.co.uk/search?q=$title\&tbm=isch" | perl -pe 's!.*?<img .*?src="([^"]*)".*!$1!')
 
+#Check each station variable and use imagemagick convert command to resize image and copy to ~/.local/share/radiotray/icon
 case "$station" in 
     "$lbc_uk" )
         convert ~/.local/share/radiotray/lbc -resize 110 ~/.local/share/radiotray/icon
@@ -81,15 +89,32 @@ case "$station" in
         convert ~/.local/share/radiotray/ragga -resize 110 ~/.local/share/radiotray/icon
 ;;
     "$radio_paradise" )
+        
+        #Populate $chk_art with the coverart url
+        chk_art=$(awk -F '[<>]' '/coverart/{print $3}' ~/.local/share/radiotray/now.xml)
+        
+        #Download now.xml and save local copy
         curl -o ~/.local/share/radiotray/now.xml http://radioparadise.com/xml/now.xml
-        art=$(awk -F '[<>]' '/coverart/{print $3}' ~/.local/share/radiotray/now.xml)
-        wget -O ~/.local/share/radiotray/rp_art "$art"
-        convert ~/.local/share/radiotray/rp_art -resize 110 ~/.local/share/radiotray/icon
+        
+        #Populate $chk_art2 with the coverart url from local copy of now.xml
+        chk_art2=$(awk -F '[<>]' '/coverart/{print $3}' ~/.local/share/radiotray/now.xml)
+        
+            #Check if the coverart urls match and, if not, get new coverart and resize to 130 width
+            if 
+                [ "$chk_art" != "$chk_art2" ]; 
+            then 
+                art=$(awk -F '[<>]' '/coverart/{print $3}' ~/.local/share/radiotray/now.xml)
+                wget -O ~/.local/share/radiotray/rp_art "$art"
+                convert ~/.local/share/radiotray/rp_art -resize 110 ~/.local/share/radiotray/icon
+            fi
+        
+
 ;;
+    #If status = 'not playing' don't do anything
     "$not_playing" )
 ;;
+    #If any other case get albumart using miniatureGoogleImage
     *)
-        #cp -f ~/.local/share/radiotray/radiotray  ~/.local/share/radiotray/icon
         wget -qO miniatureGoogleImage "$linkMiniature"
         convert ~/miniatureGoogleImage -resize 110 ~/.local/share/radiotray/icon
 ;;
