@@ -47,10 +47,10 @@ station='(not playing)'
 fi
 
 #Populate artist_title.txt with artist & song title
-echo "$title" | fold -s -w80 > ~/.conky/conkyradiotray/artist_title.txt
+#echo "$title" | fold -s -w80 > ~/.conky/conkyradiotray/artist_title.txt
 
 #Read the first line of artist_title.txt for artist & song title and populate $title
-title=$(head -1 ~/.conky/conkyradiotray/artist_title.txt)
+title_read=$(head -1 ~/.conky/conkyradiotray/artist_title.txt)
 linkMiniature=$(wget -U'Googlebot-Image/1.0' -qO - "www.google.co.uk/search?q=$title\&tbm=isch" | perl -pe 's!.*?<img .*?src="([^"]*)".*!$1!')
 
 #Check each station variable and use imagemagick convert command to resize image and copy to ~/.local/share/radiotray/icon
@@ -115,11 +115,18 @@ case "$station" in
 ;;
     #If any other case get albumart using miniatureGoogleImage
     *)
+        #Check if albumart is already downloaded, if not, populate artist_title.txt with artist & song title, then download albumart and convert and resize it
+        if
+        [ "$title_read" != "$title" ];
+        then
+        echo "$title" | fold -s -w80 > ~/.conky/conkyradiotray/artist_title.txt
         wget -qO miniatureGoogleImage "$linkMiniature"
         convert ~/miniatureGoogleImage -resize 110 ~/.local/share/radiotray/icon
+        fi
 ;;
 esac
 fi
+
 exit 0
 
 
