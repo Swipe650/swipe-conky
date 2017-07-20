@@ -1,0 +1,127 @@
+#!/bin/bash
+
+#Populate $st with current station, $so with current artist and song and define station name variables
+#st=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.radiotray.getCurrentRadio)
+#so=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w150)
+st=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.station')
+so=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title' | fold -s -w150)
+
+lbc_uk='LBC UK'
+lbc_london='LBC London'
+plan_rock='Planet Rock'
+kfi='KFI'
+twit='TWiT.am'
+fivelive='5live'
+radiofour='Radio 4'
+radiofourextra='Radio 4 Extra'
+radiostoke='Radio Stoke'
+radio_paradise='Radio Paradise' 
+ragga='Raggakings'
+talkradio='TalkRadio'
+not_playing='(not playing)'
+
+#Check for Radio Paradise or show radiotray image if status='Playing'
+station=${st}
+status=''
+rp='Radio Paradise'
+artist=${so: -0}
+cadena=${st: -14} 
+if [ "$artist" = "$status" ]; 
+then
+#title='radiotray icon'
+#title='hashtag/radiotray'
+title='radio tower icon white'
+#title='black'
+elif [ "$cadena" = "$rp" ]; 
+then 
+station='Radio Paradise'  
+else 
+title=$so
+fi
+
+#Check if station='(not playing)
+query='(not playing)' 
+output=${st: -13}   
+if [ "$output" = "$query" ]; 
+then 
+station='(not playing)'
+fi
+
+
+#Read the first line of artist_title.txt for artist & song title and populate $title_read
+title_read=$(head -1 ~/.conky/conkyradiotray-ng/artist_title.txt)
+
+linkMiniature=$(wget -U'Googlebot-Image/1.0' -qO - "www.google.co.uk/search?q=$title\&tbm=isch" | perl -pe 's!.*?<img .*?src="([^"]*)".*!$1!')
+
+#Check each station variable and use imagemagick convert command to resize image and copy to ~/.config/radiotray-ng/bookmark_icons/icon
+case "$station" in 
+    "$lbc_uk" )
+        convert  ~/.config/radiotray-ng/bookmark_icons/lbc -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+;;
+    "$lbc_london" )
+        convert ~/.config/radiotray-ng/bookmark_icons/lbc2 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+;;
+    "$kfi" )
+        convert ~/.config/radiotray-ng/bookmark_icons/kfi -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+;;
+    "$twit" )
+        convert ~/.config/radiotray-ng/bookmark_icons/twit -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+;;
+    "$fivelive" )
+        convert ~/.config/radiotray-ng/bookmark_icons/5live -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+;;
+    "$radiofour" )
+        convert ~/.config/radiotray-ng/bookmark_icons/radio4 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+;;
+    "$radiofourextra" )
+        convert ~/.config/radiotray-ng/bookmark_icons/radio4extra -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+;;
+    "$radiostoke" )
+        convert ~/.config/radiotray-ng/bookmark_icons/radiostoke -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+;;
+    "$talkradio" )
+        convert ~/.config/radiotray-ng/bookmark_icons/talkradio -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+;;
+    "$plan_rock" )
+        convert  ~/.config/radiotray-ng/bookmark_icons/planrock -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+;;
+    "$ragga" )
+        convert ~/.config/radiotray-ng/bookmark_icons/ragga -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+;;
+    "$radio_paradise" )
+    
+        #Populate $chk_art with the coverart url
+        chk_art=$(awk -F '[<>]' '/coverart/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
+        #Download now.xml and save local copy
+        curl -o ~/.config/radiotray-ng/bookmark_icons/now.xml http://radioparadise.com/xml/now.xml
+        #Populate $chk_art2 with the coverart url from local copy of now.xml
+        chk_art2=$(awk -F '[<>]' '/coverart/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
+            
+            #Check if the coverart urls match and, if not, get new coverart and resize to 110 width
+            if 
+                [ "$chk_art" != "$chk_art2" ]; 
+            then 
+                art=$(awk -F '[<>]' '/coverart/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
+                wget -O ~/.config/radiotray-ng/bookmark_icons/rp_art "$art"
+                convert ~/.config/radiotray-ng/bookmark_icons/rp_art -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+            fi
+;;
+    #If status = 'not playing' don't do anything
+    "$not_playing" )
+;;
+    #If any other case get albumart using miniatureGoogleImage
+    *)
+        #Check if albumart is already downloaded, if not, populate artist_title.txt with artist & song title, then download albumart and convert to icon and resize it
+        if
+        [ "$title_read" != "$title" ];
+        then
+        echo "$title" | fold -s -w80 > ~/.conky/conkyradiotray-ng/artist_title.txt
+        wget -qO miniatureGoogleImage "$linkMiniature"
+        convert ~/miniatureGoogleImage -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+        fi
+;;
+esac
+
+exit 0
+
+

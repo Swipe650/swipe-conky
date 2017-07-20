@@ -1,0 +1,24 @@
+#!/bin/bash 
+if pidof -x $(basename radiotray-ng) > /dev/null 
+then 
+#st=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.radiotray.getCurrentRadio)
+#so=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w150) 
+st=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title')
+so=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.station' | fold -s -w150)
+state=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.state')
+
+#busqueda='(not playing)' 
+busqueda='stopped'
+#cadenaextraida=${st: -13}
+cadenaextraida=${state: -7}
+if [ "$cadenaextraida" = "$busqueda" ]; 
+then 
+bandera='NO'   
+else 
+bandera="SI" 
+fi 
+else 
+bandera="NE" 
+fi 
+echo $bandera 
+exit 0
