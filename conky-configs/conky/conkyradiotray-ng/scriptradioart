@@ -18,6 +18,8 @@ radiostoke='Radio Stoke'
 radio_paradise='Radio Paradise' 
 ragga='Raggakings'
 talkradio='TalkRadio'
+talksport="talkSPORT"
+talksport2="talkSPORT 2"
 not_playing='(not playing)'
 
 #Check for Radio Paradise or show radiotray image if status='Playing'
@@ -82,9 +84,15 @@ case "$station" in
     "$talkradio" )
         convert ~/.config/radiotray-ng/bookmark_icons/talkradio -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
 ;;
-    "$plan_rock" )
-        convert  ~/.config/radiotray-ng/bookmark_icons/planrock -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+    "$talksport" )
+        convert ~/.config/radiotray-ng/bookmark_icons/talksport -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
 ;;
+    "$talksport2" )
+        convert ~/.config/radiotray-ng/bookmark_icons/talksport2 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+;;
+#     "$plan_rock" )
+#         convert  ~/.config/radiotray-ng/bookmark_icons/planrock -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+# ;;
     "$ragga" )
         convert ~/.config/radiotray-ng/bookmark_icons/ragga -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
 ;;
