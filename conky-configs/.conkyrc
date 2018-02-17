@@ -100,8 +100,8 @@ ${voffset -13}${alignr}${offset -60}${top mem 4} %
 ${voffset -8}${font Open Sans:Bold:size=10}${color dodgerblue3}NETWORK ${voffset -1}${hr 6}
 #$color${font Open Sans:bold:size=8.5}External IP ${font}${alignr}${execi 60 curl http://ip.tupeux.com --connect-timeout 2 | grep -o "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*"}$font
 #$color${font Open Sans:bold:size=8.5}External IP ${font}${alignr}${execi 360 sh /home/swipe/.conky/IP.sh}$font
-#$color${font Open Sans:bold:size=8.5}External IP ${font}${alignr}${execi 360 curl ifconfig.me}$font
-$color${font Open Sans:bold:size=8.5}External IP ${font}${alignr}${execi 360 curl ipinfo.io/ip}$font
+$color${font Open Sans:bold:size=8.5}External IP ${font}${alignr}${execi 360 curl ifconfig.me}$font
+#$color${font Open Sans:bold:size=8.5}External IP ${font}${alignr}${execi 360 curl ipinfo.io/ip}$font
 
 ${voffset -28}$alignc${execpi 4 echo "\${font Open Sans:bold:size=8.5}\${color #66aaff}$(ping -W 1 -c 1 8.8.8.8 -q | grep rtt | egrep [0-9]+\.[0-9]+ -o | head -n 2 | tail -n 1)\${font}\${color} ms"}
 #${voffset -10}${font Open Sans:bold:size=8.5}Ethernet $font$alignr ${addr enp0s25}
@@ -113,11 +113,11 @@ ${voffset -28}$alignc${execpi 4 echo "\${font Open Sans:bold:size=8.5}\${color #
 ${voffset -10}${font Open Sans:bold:size=8.5}WiFi $font${wireless_bitrate wlp2s0} $alignr ${addr wlp2s0}
 ${voffset -14}$alignc${wireless_essid wlp2s0}
 ${voffset -8}
-Signal: $alignc${wireless_link_bar 5,247 wlp2s0}
+Signal: $alignc${wireless_link_bar 5,217 wlp2s0}$alignr${wireless_link_qual_perc wlp2s0}%
 ${voffset -8}
-↑ ${upspeedf wlp2s0} kb/s $alignr ${totalup wlp2s0}
+${font Noto Sans:Bold:size=10}↑ $font${upspeedf wlp2s0} kb/s $alignr ${totalup wlp2s0}
 ${voffset -14}$alignc${upspeedgraph wlp2s0 10,120 000000 aaddff}
-↓ ${downspeedf wlp2s0} kb/s $alignr ${totaldown wlp2s0}
+${font Noto Sans:Bold:size=10}↑ $font${downspeedf wlp2s0} kb/s $alignr ${totaldown wlp2s0}
 ${voffset -14}$alignc${downspeedgraph wlp2s0 10,120 000000 66aaff}
 
 # HDD
