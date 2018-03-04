@@ -117,7 +117,7 @@ Signal: $alignc${wireless_link_bar 5,217 wlp2s0}$alignr${wireless_link_qual_perc
 ${voffset -8}
 ${font Noto Sans:Bold:size=10}↑ $font${upspeedf wlp2s0} kb/s $alignr ${totalup wlp2s0}
 ${voffset -14}$alignc${upspeedgraph wlp2s0 10,120 000000 aaddff}
-${font Noto Sans:Bold:size=10}↑ $font${downspeedf wlp2s0} kb/s $alignr ${totaldown wlp2s0}
+${font Noto Sans:Bold:size=10}↓ $font${downspeedf wlp2s0} kb/s $alignr ${totaldown wlp2s0}
 ${voffset -14}$alignc${downspeedgraph wlp2s0 10,120 000000 66aaff}
 
 # HDD
@@ -145,4 +145,4 @@ ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus com.github.radiotr
 ${voffset 2}${color FFC433}${font Open Sans:size=10:bold}Artist & Title:${font}${color}
 
 ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray-ng/noinfo | fold -s -w 45}${color}${image ~/.config/radiotray-ng/bookmark_icons/icon -p 170,805 -f 1}${color #696969}${font Open Sans:size=10:bold}${font}${endif}$endif${if_running radiotray-ng}${execi 10 /home/swipe/.conky/conkyradiotray-ng/scriptradioart}${voffset 0}${else}${voffset 10}$endif
-${voffset -210}
+${voffset -215}
