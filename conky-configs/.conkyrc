@@ -146,4 +146,4 @@ ${voffset 2}${color FFC433}${font Open Sans:size=10:bold}Artist & Title:${font}$
 
 ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray-ng/noinfo | fold -s -w 45}${color}${image ~/.config/radiotray-ng/bookmark_icons/icon -p 170,805 -f 1}${color #696969}${font Open Sans:size=10:bold}${font}${endif}$endif${if_running radiotray-ng}${execi 10 /home/swipe/.conky/conkyradiotray-ng/scriptradioart}${voffset 0}${else}${voffset 10}$endif
 ${image ~/.conky/muted.png -p 130,850 -s 30x30 -f 1}
-${voffset -215}
+${voffset -225}
