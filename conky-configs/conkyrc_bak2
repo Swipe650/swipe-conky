@@ -15,7 +15,7 @@ own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 #own_window_hints decorated,below,sticky,skip_taskbar,skip_pager
 double_buffer yes
 #default_bar_size 0 6
-imlib_cache_size 0
+
 #maximum_height 200
 #maximum_width 296
 draw_shades no
@@ -38,9 +38,9 @@ override_utf8_locale yes
 #use_spacer no
  
 TEXT
-${voffset -3}${alignc -10}${font Open Sans:size=20}${color dodgerblue3}Antergos ${color}Linux${if_running openvpn}${image ~/.conky/vpn.png -p 3,5 -s 30x30 -f 1}$else$endif
+${alignc -10}${font Open Sans:size=20}${color dodgerblue3}Antergos ${color}Linux${if_running openvpn1}${image ~/.conky/vpn.png -p 3,5 -s 30x30 -f 1}$else$endif
 #${voffset 4}$color${font}${font Open Sans:size=15}$alignr${voffset -15}${time %H:%M}$font
-${voffset -12}${color dodgerblue3}${font Open Sans:Bold:size=10}DATE ${voffset -1}${hr 6}$color${font}
+${voffset -4}${color dodgerblue3}${font Open Sans:Bold:size=10}DATE ${voffset -1}${hr 6}$color${font}
 ${voffset 4}$color${font Open Sans:size=12}$alignc${time %A}, ${time %d %B %Y}$font$color
 
 # SYSTEM
@@ -100,8 +100,8 @@ ${voffset -13}${alignr}${offset -60}${top mem 4} %
 ${voffset -8}${font Open Sans:Bold:size=10}${color dodgerblue3}NETWORK ${voffset -1}${hr 6}
 #$color${font Open Sans:bold:size=8.5}External IP ${font}${alignr}${execi 60 curl http://ip.tupeux.com --connect-timeout 2 | grep -o "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*"}$font
 #$color${font Open Sans:bold:size=8.5}External IP ${font}${alignr}${execi 360 sh /home/swipe/.conky/IP.sh}$font
-$color${font Open Sans:bold:size=8.5}External IP ${font}${alignr}${execi 360 curl ifconfig.me}$font
-#$color${font Open Sans:bold:size=8.5}External IP ${font}${alignr}${execi 360 curl ipinfo.io/ip}$font
+#$color${font Open Sans:bold:size=8.5}External IP ${font}${alignr}${execi 360 curl ifconfig.me}$font
+$color${font Open Sans:bold:size=8.5}External IP ${font}${alignr}${execi 360 curl ipinfo.io/ip}$font
 
 ${voffset -28}$alignc${execpi 4 echo "\${font Open Sans:bold:size=8.5}\${color #66aaff}$(ping -W 1 -c 1 8.8.8.8 -q | grep rtt | egrep [0-9]+\.[0-9]+ -o | head -n 2 | tail -n 1)\${font}\${color} ms"}
 #${voffset -10}${font Open Sans:bold:size=8.5}Ethernet $font$alignr ${addr enp0s25}
@@ -113,11 +113,11 @@ ${voffset -28}$alignc${execpi 4 echo "\${font Open Sans:bold:size=8.5}\${color #
 ${voffset -10}${font Open Sans:bold:size=8.5}WiFi $font${wireless_bitrate wlp2s0} $alignr ${addr wlp2s0}
 ${voffset -14}$alignc${wireless_essid wlp2s0}
 ${voffset -8}
-Signal: $alignc${wireless_link_bar 5,217 wlp2s0}$alignr${wireless_link_qual_perc wlp2s0}%
+Signal: $alignc${wireless_link_bar 5,247 wlp2s0}
 ${voffset -8}
-${font Noto Sans:Bold:size=10}↑ $font${upspeedf wlp2s0} kb/s $alignr ${totalup wlp2s0}
+↑ ${upspeedf wlp2s0} kb/s $alignr ${totalup wlp2s0}
 ${voffset -14}$alignc${upspeedgraph wlp2s0 10,120 000000 aaddff}
-${font Noto Sans:Bold:size=10}↓ $font${downspeedf wlp2s0} kb/s $alignr ${totaldown wlp2s0}
+↓ ${downspeedf wlp2s0} kb/s $alignr ${totaldown wlp2s0}
 ${voffset -14}$alignc${downspeedgraph wlp2s0 10,120 000000 66aaff}
 
 # HDD
@@ -144,20 +144,5 @@ ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus com.github.radiotr
 
 ${voffset 2}${color FFC433}${font Open Sans:size=10:bold}Artist & Title:${font}${color}
 
-${font Open Sans:size=9:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray-ng/noinfo | fold -s -w 45}${color}${image ~/.config/radiotray-ng/bookmark_icons/icon -p 170,805 -f 1}${color #696969}${font Open Sans:size=10:bold}${font}${endif}$endif${if_running radiotray-ng}${execi 10 /home/swipe/.conky/conkyradiotray-ng/scriptradioart}${voffset 0}${else}${voffset 10}$endif
-${if_existing /home/swipe/.conky/muted.png} ${image ~/.conky/muted.png -p 115,850 -s 40x40 -f 1}$endif
-#
-# GPMDP
-${if_match "${exec pidof 'Google Play Music Desktop Player' }" != ""}${voffset -47}${font Open Sans:Bold:size=10}${color FFC433}Google Play Music ${voffset -1}
-${voffset 20}${color #efefef}${font Open Sans:size=9:bold}${alignr 140}${execi 10 cat "$HOME/.config/Google Play Music Desktop Player/json_store/playback.json" | jq -r '.song.title' | cut -c1-23}
-
-${voffset -5}${color #FFC433}${font Open Sans:size=9:bold}${alignr 140}${execi 10 cat "$HOME/.config/Google Play Music Desktop Player/json_store/playback.json" | jq -r '.song.artist'}
-
-${voffset -7}${color #efefef}${font Open Sans:size=8:italic}${alignr 140}${execi 10 cat "$HOME/.config/Google Play Music Desktop Player/json_store/playback.json" | jq -r '.song.album' | cut -c1-32}
-
-${voffset 10}${font Open Sans:size=9:bold}${color #aaaaaa}${alignr 140}${execi 10 ~/.conky/conkygoogleplaymusic/albumart}
-${image ~/.conky/conkygoogleplaymusic/gmdmp_art -p 165,790 -s 120x120}
-
-${voffset -70}${font Open Sans:size=9:bold}${color #aaaaaa}${alignr 140}${exec ~/.conky/conkygoogleplaymusic/time}
-${voffset -68}$else${endif}
-${voffset -240}
+${font Open Sans:size=9:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray-ng/noinfo | fold -s -w 45}${color}${image ~/.config/radiotray-ng/bookmark_icons/icon -p 170,805 -f 1}${color #696969}${font Open Sans:size=10:bold}${font}${endif}$endif${if_running radiotray}${execi 10 /home/swipe/.conky/conkyradiotray-ng/scriptradioart}${voffset -15}${else}$endif
+${voffset -210}
