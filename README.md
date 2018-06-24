@@ -12,4 +12,4 @@ The conky Radiotray bash scripts are called by .conkyrc
 
 .config/radiotray-ng is the location for the radiotray-ng config files. These include the bookmarks.json and the station bookmark icons for radiotray-ng
 
-DEPRICATED: .local/share/radiotray is the location for the radiotray app config files. These include the bookmarks.xml and the station icon art for radiotray
+DEPRECATED: .local/share/radiotray is the location for the radiotray app config files. These include the bookmarks.xml and the station icon art for radiotray
