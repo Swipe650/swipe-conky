@@ -104,7 +104,7 @@
             "image" : "~/.config/radiotray-ng/bookmark_icons/5live",
             "name" : "5live",
             "notifications" : true,
-            "url" : "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio5live_mfmv_p?s=1529346972&e=1529361372&h=5bc2fbd8db0c01b792f4b16325220f1f"
+            "url" : "http://open.live.bbc.co.uk/mediaselector/5/redir/version/2.0/mediaset/http-icy-mp3-a-stream/proto/http/vpid/bbc_radio_five_live"
          },
          {
             "image" : "~/.config/radiotray-ng/bookmark_icons//radio4",
