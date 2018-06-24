@@ -10,4 +10,6 @@ The conky Radiotray bash scripts are called by .conkyrc
 
 .conky/conkyradiotray/ is the location for the scriptradio, noinfo and scriptradioart bash scripts
 
-.local/share/radiotray is the location for the radiotray app config files. These include the bookmarks.xml and the station icon art for radiotray
+.config/radiotray-ng is the location for the radiotray-ng config files. These include the bookmarks.json and the station bookmark icons for radiotray-ng
+
+DEPRECATED: .local/share/radiotray is the location for the radiotray app config files. These include the bookmarks.xml and the station icon art for radiotray
