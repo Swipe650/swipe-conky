@@ -1,0 +1,345 @@
+[
+   {
+      "group" : "Imported",
+      "image" : "",
+      "stations" : [
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/lbc",
+            "name" : "LBC UK",
+            "url" : "http://media-ice.musicradio.com/LBCUK.m3u"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/rp",
+            "name" : "Radio Paradise",
+            "url" : "http://stream-uk1.radioparadise.com/aac-320"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/planrock",
+            "name" : "Planet Rock",
+            "url" : "https://stream-mz.planetradio.co.uk/planetrock.aac"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/tc",
+            "name" : "The Current",
+            "url" : "http://current.stream.publicradio.org/kcmp.mp3"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/ibr",
+            "name" : "Indie Brew Radio",
+            "url" : "http://stream.indiebrew.net:8000"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/pingrad",
+            "name" : "Pinguin Radio",
+            "url" : "http://pr320.pinguinradio.com/listen.pls"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/morow",
+            "name" : "Morow",
+            "url" : "http://www.morow.com/morow.pls"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/lbc2",
+            "name" : "LBC London",
+            "url" : "http://media-ice.musicradio.com/LBCLondon.m3u"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/talkradio",
+            "name" : "TalkRadio",
+            "url" : "http://radio.talkradio.co.uk/stream?ref=rf"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/prr",
+            "name" : "Pure Rock Radio",
+            "url" : "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://80.76.216.75:9992/listen.pls&t=.m3u"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/crl",
+            "name" : "Classic Rock Lounge",
+            "url" : "http://www.classicrocklounge.com/audio/mp3_192/listen.m3u"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/mhr",
+            "name" : "Metal Head Radio",
+            "url" : "http://www.streamlicensing.com/directory/index.cgi/playlist.pls?action=playlist&type=pls&sid=2538&stream_id=7677"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/hr80s",
+            "name" : "Hard Rockin 80s",
+            "url" : "http://hardrockin80s.com/80.pls"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/soma",
+            "name" : "Space Station Soma",
+            "url" : "http://somafm.com/spacestation.pls"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/twit",
+            "name" : "TWiT.am",
+            "url" : "http://twit.am/listen.m3u"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/kfi",
+            "name" : "KFI",
+            "notifications" : true,
+            "url" : "http://c8icyelb.prod.playlists.ihrhls.com/177_icy"
+         },
+         {
+            "image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/talksport2",
+            "name" : "talkSPORT 2",
+            "url" : "http://radio.talksport.com/stream2?awparams=platform:ts-web&amsparams=playerid:ts-web;"
+         },
+         {
+            "image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/talksport",
+            "name" : "talkSPORT",
+            "url" : "http://radio.talksport.com/stream?aisGetOriginalStream=true"
+         }
+      ]
+   },
+   {
+      "group" : "BBC",
+      "image" : "",
+      "stations" : [
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/5live",
+            "name" : "5live",
+            "notifications" : true,
+            "url" : "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio5live_mfmv_p?s=1529346972&e=1529361372&h=5bc2fbd8db0c01b792f4b16325220f1f"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons//radio4",
+            "name" : "Radio 4",
+            "url" : "http://www.listenlive.eu/bbcradio4.m3u"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/radio4extra",
+            "name" : "Radio 4 Extra",
+            "url" : "http://www.listenlive.eu/bbcradio4extra.m3u"
+         },
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/radiostoke",
+            "name" : "Radio Stoke",
+            "url" : "http://open.live.bbc.co.uk/mediaselector/5/select/version/2.0/mediaset/http-icy-mp3-a/vpid/bbc_radio_stoke/format/pls.pls"
+         }
+      ]
+   },
+   {
+      "group" : "Techno / Electronic",
+      "image" : "",
+      "stations" : [
+         {
+            "image" : "",
+            "name" : "Drone Zone",
+            "url" : "http://somafm.com/dronezone.pls"
+         },
+         {
+            "image" : "",
+            "name" : "cliqhop idm",
+            "url" : "http://somafm.com/cliqhop.pls"
+         },
+         {
+            "image" : "",
+            "name" : "Black Rock FM",
+            "url" : "http://somafm.com/brfm.pls"
+         },
+         {
+            "image" : "",
+            "name" : "New Dance Radio",
+            "url" : "http://jbstream.net/tunein.php/blackoutworm/playlist.asx"
+         }
+      ]
+   },
+   {
+      "group" : "Chill",
+      "image" : "",
+      "stations" : [
+         {
+            "image" : "",
+            "name" : "Beat Blender",
+            "url" : "http://somafm.com/beatblender.pls"
+         },
+         {
+            "image" : "",
+            "name" : "Soma Black Rock FM",
+            "url" : "https://somafm.com/brfm.pls"
+         },
+         {
+            "image" : "",
+            "name" : "Secret Agent",
+            "url" : "http://somafm.com/secretagent.pls"
+         },
+         {
+            "image" : "",
+            "name" : "Groove Salad",
+            "url" : "http://somafm.com/groovesalad.pls"
+         },
+         {
+            "image" : "",
+            "name" : "Illinois Street Lounge",
+            "url" : "http://somafm.com/illstreet.pls"
+         }
+      ]
+   },
+   {
+      "group" : "Classic Rock",
+      "image" : "",
+      "stations" : [
+         {
+            "image" : "",
+            "name" : ".977 Classic Rock",
+            "url" : "http://www.977music.com/tunein/web/classicrock.asx"
+         },
+         {
+            "image" : "",
+            "name" : "Covers",
+            "url" : "http://somafm.com/covers.pls"
+         },
+         {
+            "image" : "",
+            "name" : "KEXP",
+            "url" : "http://live-mp3-128.kexp.org:8000/listen.pls"
+         }
+      ]
+   },
+   {
+      "group" : "Pop / Rock",
+      "image" : "",
+      "stations" : [
+         {
+            "image" : "",
+            "name" : "Rip Rock Radio",
+            "url" : "http://s9.viastreaming.net:7160/"
+         },
+         {
+            "image" : "",
+            "name" : "Indie Pop Rocks!",
+            "url" : "http://somafm.com/indiepop.pls"
+         },
+         {
+            "image" : "",
+            "name" : "PopTron",
+            "url" : "http://somafm.com/poptron.pls"
+         },
+         {
+            "image" : "",
+            "name" : "Raggakings",
+            "url" : "http://www.raggakings.net/listen.pls"
+         }
+      ]
+   },
+   {
+      "group" : "Jazz",
+      "image" : "",
+      "stations" : [
+         {
+            "image" : "",
+            "name" : "Smooth Jazz",
+            "url" : "http://smoothjazz.com/streams/smoothjazz_128.pls"
+         },
+         {
+            "image" : "",
+            "name" : "Sonic Universe",
+            "url" : "http://somafm.com/sonicuniverse.pls"
+         }
+      ]
+   },
+   {
+      "group" : "Latin",
+      "image" : "",
+      "stations" : [
+         {
+            "image" : "",
+            "name" : "Onda Tropical",
+            "url" : "http://yp.shoutcast.com/sbin/tunein-station.pls?id=506392"
+         },
+         {
+            "image" : "",
+            "name" : "Top Latino Radio",
+            "url" : "http://online.radiodifusion.net:8020/listen.pls"
+         }
+      ]
+   },
+   {
+      "group" : "Classical",
+      "image" : "",
+      "stations" : [
+         {
+            "image" : "",
+            "name" : "KDFC",
+            "url" : "http://provisioning.streamtheworld.com/pls/KDFCFM.pls"
+         },
+         {
+            "image" : "",
+            "name" : "Classic FM",
+            "url" : "http://media-ice.musicradio.com/ClassicFMMP3.m3u"
+         },
+         {
+            "image" : "",
+            "name" : "WCPE",
+            "url" : "http://www.ibiblio.org/wcpe/wcpe.pls"
+         },
+         {
+            "image" : "",
+            "name" : "CINEMIX",
+            "url" : "http://cinemix.us/cine.asx"
+         }
+      ]
+   },
+   {
+      "group" : "Oldies",
+      "image" : "",
+      "stations" : [
+         {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/oldtimeradio",
+            "name" : "Old Time Radio",
+            "url" : "http://lin2.ash.fast-serv.com:9022/listen.pls"
+         },
+         {
+            "image" : "",
+            "name" : "AM 1710",
+            "url" : "http://lin2.ash.fast-serv.com:9022/listen.pls"
+         },
+         {
+            "image" : "",
+            "name" : "WNAR",
+            "url" : "http://live.wnar-am.com:8500/listen.pls"
+         }
+      ]
+   },
+   {
+      "group" : "Country",
+      "image" : "",
+      "stations" : [
+         {
+            "image" : "",
+            "name" : "Boot Liquor",
+            "url" : "http://somafm.com/bootliquor.pls"
+         },
+         {
+            "image" : "",
+            "name" : "US 181",
+            "url" : "mmsh://wms-rly.181.fm/181-us181?MSWMExt=.asf"
+         },
+         {
+            "image" : "",
+            "name" : "Real Country",
+            "url" : "mmsh://wms-rly.181.fm/181-realcountry?MSWMExt=.asf"
+         },
+         {
+            "image" : "",
+            "name" : "Highway 181",
+            "url" : "mmsh://wms-rly.181.fm/181-highway?MSWMExt=.asf"
+         },
+         {
+            "image" : "",
+            "name" : "Country 108",
+            "url" : "http://www.country108.com/listen.pls"
+         }
+      ]
+   },
+   {
+      "group" : "root",
+      "image" : "",
+      "stations" : []
+   }
+]
