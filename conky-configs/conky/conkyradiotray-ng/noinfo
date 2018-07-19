@@ -2,17 +2,16 @@
 if pidof -x $(basename radiotray-ng) > /dev/null 
 then 
 #st=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.radiotray.getCurrentRadio)
-st=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r 'station')
+st=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.station')
 #so=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w150) 
 so=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title')
 status='' 
-artist=${so: -7}  
-status2='text' 
-artist2=${so:0:4} 
+artist=${so: -8}  
+artist2=${st:0:3} 
 if [ "$artist" = "$status" ]; 
 then 
 title='No info'   
-elif [ "$artist2" = "$status2" ]; 
+elif [ "$artist2" = "$st" ]; 
 then 
 title='No info'  
 else 
@@ -20,4 +19,4 @@ title=$so
 fi
 fi
 echo $title 
-exit 0
+exit 0 
