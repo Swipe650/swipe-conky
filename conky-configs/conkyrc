@@ -40,7 +40,7 @@ override_utf8_locale yes
 own_window_colour 000000
 minimum_size 10 10
 TEXT
-${voffset -3}${alignc -10}${font Open Sans:size=18}${color dodgerblue3}Antergos ${color}Linux${if_running openvpn}${image ~/.conky/vpn.png -p 3,5 -s 25x25 -f 1}$else$endif
+${voffset -3}${alignc -10}${font Open Sans:size=18}${color dodgerblue3}Antergos ${color}Linux${if_running openvpn}${image ~/.conky/vpn.png -p 3,5 -s 25x25 -f 1}$else$endif${if_existing /home/swipe/.conky/fwon.png} ${image ~/.conky/fwon.png -p 253,5 -s 25x25 -f 1}$endif
 #${voffset 4}$color${font}${font Open Sans:size=15}$alignr${voffset -15}${time %H:%M}$font
 ${voffset -12}${color dodgerblue3}${font Open Sans:Bold:size=10}DATE ${voffset -1}${hr 6}$color${font}
 ${voffset 4}$color${font Open Sans:size=12}$alignc${time %A}, ${time %d %B %Y}$font$color

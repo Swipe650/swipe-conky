@@ -1,6 +1,6 @@
 background yes
 use_xft yes
-xftfont 123:size=8
+xftfont 123:size=7
 xftalpha 0.5
 update_interval 1
 total_run_times 0
@@ -8,9 +8,9 @@ own_window yes
 #own_window_type normal
 own_window_type dock
 own_window_transparent no
-own_window_argb_visual yes 
+own_window_argb_visual yes
 #own_window_argb_value 90
-own_window_argb_value 110
+own_window_argb_value 100
 own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 #own_window_hints decorated,below,sticky,skip_taskbar,skip_pager
 double_buffer yes
@@ -37,8 +37,10 @@ net_avg_samples 2
 override_utf8_locale yes
 #use_spacer no
  
+own_window_colour 000000
+minimum_size 10 10
 TEXT
-${voffset -3}${alignc -10}${font Open Sans:size=20}${color dodgerblue3}Antergos ${color}Linux${if_running openvpn}${image ~/.conky/vpn.png -p 3,5 -s 30x30 -f 1}$else$endif
+${voffset -3}${alignc -10}${font Open Sans:size=18}${color dodgerblue3}Antergos ${color}Linux${if_running openvpn}${image ~/.conky/vpn.png -p 3,5 -s 25x25 -f 1}$else$endif
 #${voffset 4}$color${font}${font Open Sans:size=15}$alignr${voffset -15}${time %H:%M}$font
 ${voffset -12}${color dodgerblue3}${font Open Sans:Bold:size=10}DATE ${voffset -1}${hr 6}$color${font}
 ${voffset 4}$color${font Open Sans:size=12}$alignc${time %A}, ${time %d %B %Y}$font$color
@@ -58,7 +60,7 @@ $color${font Open Sans:bold:size=8.5}Used:$font $mem of $memmax$alignr$memperc%
 $color${font Open Sans:bold:size=8.5}Free:$font $memeasyfree
 $color${font Open Sans:bold:size=8.5}Buffers / Cached:$font$alignr$buffers / $cached
 
-${voffset -8}${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}TOP PROCESSES${color}${font}${voffset -1} --------------------- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}RAM${color}${font}${voffset -1} ----- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -3}CPU${color}${font}${voffset -1} --
+${voffset -8}${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}TOP PROCESSES${color}${font}${voffset -1} --------------------------- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}RAM${color}${font}${voffset -3} -------- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -3}CPU${color}${font}${voffset -3.5} --
 
 ${voffset -8}${top_mem name 1}${alignr}${top_mem cpu 1} %
 ${voffset -13}${alignr}${offset -60}${top_mem mem 1} %
@@ -82,7 +84,7 @@ ${font}Core 2 - ${execi 2 sensors | grep 'Core 0' | cut -c17-18}°C ${alignc 60}
 ${font}Core 3 - ${execi 2 sensors | grep 'Core 1' | cut -c17-18}°C ${alignc 60}${cpubar cpu4}${color}
 ${font}CPU Fan Speed - ${execi 2 sensors | grep 'fan2' | cut -c24-31} ${alignc 60}
 
-${voffset -8}${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}TOP PROCESSES${color}${font}${voffset -1} --------------------- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}RAM${color}${font}${voffset -1} ----- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -3}CPU${color}${font}${voffset -1} --
+${voffset -8}${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}TOP PROCESSES${color}${font}${voffset -1} --------------------------- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -2}RAM${color}${font}${voffset -3} -------- ${font Open Sans:Bold:size=10}${color dodgerblue3}${voffset -3}CPU${color}${font}${voffset -3.5} --
 
 ${voffset -8}#${hr 1}
 ${top name 1}${alignr}${top cpu 1} %
@@ -110,14 +112,14 @@ ${voffset -28}$alignc${execpi 4 echo "\${font Open Sans:bold:size=8.5}\${color #
 #↓ ${downspeedf enp0s25} kb/s $alignr ${totaldown enp0s25}
 #${voffset -14}$alignc${downspeedgraph enp0s25 10,120  000000 66aaff}
 
-${voffset -10}${font Open Sans:bold:size=8.5}WiFi $font${wireless_bitrate wlp2s0} $alignr ${addr wlp2s0}
+${voffset -10}${font Open Sans:bold:size=8.5}WiFi $font${wireless_bitrate enp0s25} $alignr ${addr wlp2s0}
 ${voffset -14}$alignc${wireless_essid wlp2s0}
 ${voffset -8}
 Signal: $alignc${wireless_link_bar 5,217 wlp2s0}$alignr${wireless_link_qual_perc wlp2s0}%
 ${voffset -8}
-${font Noto Sans:Bold:size=10}↑ $font${upspeedf wlp2s0} kb/s $alignr ${totalup wlp2s0}
+${font hack:Bold:size=10}↑ $font${upspeedf wlp2s0} kb/s $alignr ${totalup wlp2s0}
 ${voffset -14}$alignc${upspeedgraph wlp2s0 10,120 000000 aaddff}
-${font Noto Sans:Bold:size=10}↓ $font${downspeedf wlp2s0} kb/s $alignr ${totaldown wlp2s0}
+${font hack:Bold:size=10}↓ $font${downspeedf wlp2s0} kb/s $alignr ${totaldown wlp2s0}
 ${voffset -14}$alignc${downspeedgraph wlp2s0 10,120 000000 66aaff}
 
 # HDD
@@ -136,16 +138,15 @@ ${fs_bar 5 /home}
 ${if_running radiotray-ng}
 
 ${voffset -14}${color}${if_match "${execi 10 /home/swipe/.conky/conkyradiotray-ng/scriptradio}" == "NO"}${else}${voffset -20}${font Open Sans:Bold:size=10}${color dodgerblue3}RADIO ${voffset -1}${hr 6}
-${voffset 8}${color #efefef}${font Open Sans:size=10.5:bold}RadioTray-NG playing:
+${voffset 8}${color #efefef}${font Open Sans:size=10:bold}RadioTray-NG playing:
 ${voffset 4}${voffset 6}${color FFC433}${font Open Sans:size=10:bold}Station:${font}${color}  
 
-#${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.radiotray.getCurrentRadio}
 ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.station'}
 
 ${voffset 2}${color FFC433}${font Open Sans:size=10:bold}Artist & Title:${font}${color}
 
-${font Open Sans:size=9:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray-ng/noinfo | fold -s -w 45}${color}${image ~/.config/radiotray-ng/bookmark_icons/icon -p 170,805 -f 1}${color #696969}${font Open Sans:size=10:bold}${font}${endif}$endif${if_running radiotray-ng}${execi 10 /home/swipe/.conky/conkyradiotray-ng/scriptradioart}${voffset 0}${else}${voffset 10}$endif
-${if_existing /home/swipe/.conky/muted.png} ${image ~/.conky/muted.png -p 115,850 -s 40x40 -f 1}$endif
+${font Open Sans:size=9:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray-ng/noinfo | fold -s -w 45}${color}${image ~/.config/radiotray-ng/bookmark_icons/icon -p 165,745 -f 1}${color #696969}${font Open Sans:size=10:bold}${font}${endif}$endif${if_running radiotray-ng}${execi 10 /home/swipe/.conky/conkyradiotray-ng/scriptradioart}${voffset 0}${else}${voffset 10}$endif
+${if_existing /home/swipe/.conky/muted.png} ${image ~/.conky/muted.png -p 95,800 -s 40x40 -f 1}$endif
 #
 # GPMDP
 ${if_match "${exec pidof 'Google Play Music Desktop Player' }" != ""}${voffset -47}${font Open Sans:Bold:size=10}${color FFC433}Google Play Music ${voffset -1}
@@ -156,8 +157,8 @@ ${voffset -5}${color #FFC433}${font Open Sans:size=9:bold}${alignr 140}${execi 1
 ${voffset -7}${color #efefef}${font Open Sans:size=8:italic}${alignr 140}${execi 10 cat "$HOME/.config/Google Play Music Desktop Player/json_store/playback.json" | jq -r '.song.album' | cut -c1-32}
 
 ${voffset 10}${font Open Sans:size=9:bold}${color #aaaaaa}${alignr 140}${execi 10 ~/.conky/conkygoogleplaymusic/albumart}
-${image ~/.conky/conkygoogleplaymusic/gmdmp_art -p 165,790 -s 120x120}
+${image ~/.conky/conkygoogleplaymusic/gmdmp_art -p 165,770 -s 100x100}
 
 ${voffset -70}${font Open Sans:size=9:bold}${color #aaaaaa}${alignr 140}${exec ~/.conky/conkygoogleplaymusic/time}
 ${voffset -68}$else${endif}
-${voffset -240}
+${voffset -235}
