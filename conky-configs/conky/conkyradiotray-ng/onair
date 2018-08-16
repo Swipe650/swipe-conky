@@ -1,0 +1,8 @@
+ #!/bin/bash
+
+onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/span/a[1]/text()' - | tail -c 25) 
+echo $onair > onair.txt
+onairtime=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/p/span/text()' -) 
+#| tail -c 25)
+echo "-    " >> onair.txt
+echo $onairtime >> onair.txt
