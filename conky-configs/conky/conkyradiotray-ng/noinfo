@@ -10,7 +10,7 @@ artist=${so: -8}
 artist2=${st:0:3} 
 if [ "$artist" = "$status" ]; 
 then 
-title='No info'   
+title=$(cat ~/.conky/conkyradiotray-ng/onair.txt)
 elif [ "$artist2" = "$st" ]; 
 then 
 title='No info'  
