@@ -10,7 +10,8 @@ rtngtitle=''
 rtngsong=${so}
 #lbcuk={st:0:6}
 lbcuk='LBC UK'
-kfi=${st:0:3}
+#kfi=${st:0:3}
+kfi='KFI'
 
 if [ "$lbcuk" = "$st" ];
     then
