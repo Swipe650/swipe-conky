@@ -1,4 +1,7 @@
- #!/bin/bash
+#!/bin/bash
+
+if pidof -x $(basename radiotray-ng) > /dev/null 
+then 
 
 onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/span/a[1]/text()' - | tail -c 25) 
 
@@ -8,3 +11,6 @@ truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
 echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
 truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
 echo $onairtime >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+
+fi
+exit 0
