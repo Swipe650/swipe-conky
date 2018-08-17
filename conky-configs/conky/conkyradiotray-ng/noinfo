@@ -1,22 +1,32 @@
 #!/bin/bash 
 if pidof -x $(basename radiotray-ng) > /dev/null 
 then 
-#st=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.radiotray.getCurrentRadio)
+
 st=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.station')
-#so=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w150) 
+ 
 so=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title')
-status='' 
-artist=${so: -8}  
-artist2=${st:0:3} 
-if [ "$artist" = "$status" ]; 
-then 
-title=$(cat ~/.conky/conkyradiotray-ng/onair.txt)
-elif [ "$artist2" = "$st" ]; 
-then 
-title='No info'  
+rtngtitle='' 
+#rtngstation=${so: -8}
+rtngsong=${so}
+#lbcuk={st:0:6}
+lbcuk='LBC UK'
+kfi=${st:0:3}
+
+if [ "$lbcuk" = "$st" ];
+    then
+    conkytitle=$(cat ~/.conky/conkyradiotray-ng/onair.txt)
+    
+# if [ "$rtngsong" = "$rtngtitle" ]; 
+#     then
+#     conkytitle='No info'
+
+elif [ "$kfi" = "$st" ]; 
+    then 
+    conkytitle='No info'
+    
 else 
-title=$so 
+    conkytitle=$so 
 fi
 fi
-echo $title 
+echo "$conkytitle"
 exit 0 

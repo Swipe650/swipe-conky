@@ -1,8 +1,10 @@
  #!/bin/bash
 
 onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/span/a[1]/text()' - | tail -c 25) 
+
+onairtime=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/p/span/text()' - | tail -c 25)
 echo $onair > /home/swipe/.conky/conkyradiotray-ng/onair.txt
-onairtime=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/p/span/text()' -) 
-#| tail -c 25)
-echo "-    " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
 echo $onairtime >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
