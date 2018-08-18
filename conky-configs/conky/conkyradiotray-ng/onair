@@ -3,7 +3,7 @@
 if pidof -x $(basename radiotray-ng) > /dev/null 
 then 
 
-onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/span/a[1]/text()' - | tail -c 25) 
+onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/span/a[1]/text()' - | tail -c 27) 
 
 onairtime=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/p/span/text()' - | tail -c 25)
 echo $onair > /home/swipe/.conky/conkyradiotray-ng/onair.txt
