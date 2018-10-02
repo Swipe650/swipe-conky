@@ -18,8 +18,9 @@ radiostoke='Radio Stoke'
 radio_paradise='Radio Paradise' 
 ragga='Raggakings'
 talkradio='TalkRadio'
-talksport="talkSPORT"
-talksport2="talkSPORT 2"
+talksport='talkSPORT'
+talksport2='talkSPORT 2'
+signal2='Signal 2'
 not_playing='(not playing)'
 
 #Check for Radio Paradise or show radiotray image if status='Playing'
@@ -90,6 +91,9 @@ case "$station" in
     "$talksport2" )
         convert ~/.config/radiotray-ng/bookmark_icons/talksport2 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
 ;;
+    "$signal2" )
+        convert ~/.config/radiotray-ng/bookmark_icons/signal2 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon        
+;;
 #     "$plan_rock" )
 #         convert  ~/.config/radiotray-ng/bookmark_icons/planrock -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
 # ;;
@@ -105,7 +109,7 @@ case "$station" in
         #Populate $chk_art2 with the coverart url from local copy of now.xml
         chk_art2=$(awk -F '[<>]' '/coverart/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
             
-            #Check if the coverart urls match and, if not, get new coverart and resize to 110 width
+            #Check if the coverart urls match and, if not, get new coverart and resize to 115 width
             if 
                 [ "$chk_art" != "$chk_art2" ]; 
             then 
@@ -125,7 +129,7 @@ case "$station" in
         then
         echo "$title" | fold -s -w80 > ~/.conky/conkyradiotray-ng/artist_title.txt
         wget -qO miniatureGoogleImage "$linkMiniature"
-        convert ~/miniatureGoogleImage -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+        convert ~/miniatureGoogleImage -resize 115 ~/.config/radiotray-ng/bookmark_icons/icon
         fi
 ;;
 esac
