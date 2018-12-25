@@ -64,6 +64,12 @@
             "url" : "http://twit.am/listen.m3u"
          },
          {
+            "image" : "~/.config/radiotray-ng/bookmark_icons/ragga",
+            "name" : "Raggakings",
+            "notifications" : true,
+            "url" : "http://www.raggakings.net/listen.pls"
+         },
+         {
             "image" : "~/.config/radiotray-ng/bookmark_icons/kfi",
             "name" : "KFI",
             "notifications" : false,
@@ -80,7 +86,7 @@
             "url" : "http://radio.talksport.com/stream?aisGetOriginalStream=true"
          },
          {
-            "image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/signal2.png",
+            "image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/signal2",
             "name" : "Signal 2",
             "notifications" : true,
             "url" : "http://wg.cdn.tibus.net/STKSig2"
@@ -111,6 +117,18 @@
             "image" : "~/.config/radiotray-ng/bookmark_icons/radiostoke",
             "name" : "Radio Stoke",
             "url" : "http://open.live.bbc.co.uk/mediaselector/5/select/version/2.0/mediaset/http-icy-mp3-a/vpid/bbc_radio_stoke/format/pls.pls"
+         },
+         {
+            "image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/radiokent",
+            "name" : "Radio Kent",
+            "notifications" : true,
+            "url" : "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_lrkent_mf_p"
+         },
+         {
+            "image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/radio3",
+            "name" : "Radio 3",
+            "notifications" : true,
+            "url" : "http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/uk/sbr_high/ak/bbc_radio_three.m3u8"
          }
       ]
    },
@@ -217,11 +235,6 @@
             "image" : "",
             "name" : "PopTron",
             "url" : "http://somafm.com/poptron.pls"
-         },
-         {
-            "image" : "",
-            "name" : "Raggakings",
-            "url" : "http://www.raggakings.net/listen.pls"
          }
       ]
    },

@@ -13,8 +13,10 @@ kfi='KFI'
 twit='TWiT.am'
 fivelive='5live'
 radiofour='Radio 4'
+radiothree='Radio 3'
 radiofourextra='Radio 4 Extra'
 radiostoke='Radio Stoke'
+radiokent='Radio Kent'
 radio_paradise='Radio Paradise' 
 ragga='Raggakings'
 talkradio='TalkRadio'
@@ -76,11 +78,17 @@ case "$station" in
     "$radiofour" )
         convert ~/.config/radiotray-ng/bookmark_icons/radio4 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
 ;;
+    "$radiothree" )
+        convert ~/.config/radiotray-ng/bookmark_icons/radio3 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+;;
     "$radiofourextra" )
         convert ~/.config/radiotray-ng/bookmark_icons/radio4extra -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
 ;;
     "$radiostoke" )
         convert ~/.config/radiotray-ng/bookmark_icons/radiostoke -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+;;
+    "$radiokent" )
+        convert ~/.config/radiotray-ng/bookmark_icons/radiokent -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
 ;;
     "$talkradio" )
         convert ~/.config/radiotray-ng/bookmark_icons/talkradio -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
