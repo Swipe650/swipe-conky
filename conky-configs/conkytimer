@@ -1,0 +1,25 @@
+ 
+#!/usr/bin/env bash
+
+# Add to ~/.conkyrc:
+# {$if_running conkytimer}${execpi 30 ~/.conkytimer}$endif
+# Start a task: conkytimer "<task description>" <sec>
+
+# Clean ~/.conkytimer on SIGINT
+trap "rm ~/.conkytimer" INT
+
+sec=$1
+millisecondsToseonds=$(( $1/1000 ))
+
+#notify-send -t $millisecondsTosecinds -i warning "Starting Timer" "$task" --icon=appointment-soon
+
+for (( i = 0; i < $sec; i++ )); do
+        # write remaining sec to file
+        timer=$((sec-i))
+        display="                                ${timer}"
+        echo "$display" > ~/.conkytimer
+        # wait 1sec
+        sleep 1
+done
+
+rm ~/.conkytimer
