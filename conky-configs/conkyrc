@@ -146,7 +146,7 @@ ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus com.github.radiotr
 ${voffset 4}${color FFC433}${font Open Sans:size=10:bold}Artist & Title:${font}${color}${execi 300 /home/swipe/.conky/conkyradiotray-ng/onair}
 
 ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray-ng/noinfo | fold -s -w 45}${color}${image ~/.config/radiotray-ng/bookmark_icons/icon -p 165,745 -f 1}${color #696969}${font Open Sans:size=10:bold}${font}${endif}$endif${if_running radiotray-ng}${execi 10 /home/swipe/.conky/conkyradiotray-ng/scriptradioart}${voffset 0}${else}${voffset 10}$endif
-${if_existing /home/swipe/.conky/muted.png} ${image ~/.conky/muted.png -p 92,790 -s 40x40 -f 1}$endif${voffset -87}${font Open Sans:size=12:bold}${color}${if_match "${exec pidof -x toggle_mute3_rtng}" != ""}${execpi 1 cat ~/.conkytimer}${else}$endif
+${if_existing /home/swipe/.conky/muted.png} ${image ~/.conky/muted.png -p 108,790 -s 40x40 -f 1}$endif${voffset -67}${font Open Sans:size=12:bold}${color}${if_match "${exec pidof -x toggle_mute3_rtng}" != ""}${execpi 1 cat ~/.conkytimer}${else}$endif
 #
 # GPMDP
 
