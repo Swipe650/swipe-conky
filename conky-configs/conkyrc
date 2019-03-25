@@ -143,10 +143,10 @@ ${voffset 4}${voffset 6}${color FFC433}${font Open Sans:size=10:bold}Station:${f
 
 ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.station'}
 
-${voffset 2}${color FFC433}${font Open Sans:size=10:bold}Artist & Title:${font}${color}${execi 300 /home/swipe/.conky/conkyradiotray-ng/onair}
+${voffset 4}${color FFC433}${font Open Sans:size=10:bold}Artist & Title:${font}${color}${execi 300 /home/swipe/.conky/conkyradiotray-ng/onair}
 
 ${font Open Sans:size=9:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray-ng/noinfo | fold -s -w 45}${color}${image ~/.config/radiotray-ng/bookmark_icons/icon -p 165,745 -f 1}${color #696969}${font Open Sans:size=10:bold}${font}${endif}$endif${if_running radiotray-ng}${execi 10 /home/swipe/.conky/conkyradiotray-ng/scriptradioart}${voffset 0}${else}${voffset 10}$endif
-${if_existing /home/swipe/.conky/muted.png} ${image ~/.conky/muted.png -p 95,800 -s 40x40 -f 1}$endif
+${if_existing /home/swipe/.conky/muted.png} ${image ~/.conky/muted.png -p 92,790 -s 40x40 -f 1}$endif${voffset -87}${font Open Sans:size=12:bold}${color}${execpi 1 cat ~/.conkytimer}
 #
 # GPMDP
 
@@ -162,4 +162,4 @@ ${image ~/.conky/conkygoogleplaymusic/gmdmp_art -p 160,728 -s 117x117}
 
 ${voffset -70}${font Open Sans:size=9:bold}${color #aaaaaa}${alignr 140}${exec ~/.conky/conkygoogleplaymusic/time}
 ${voffset -62}$else${endif}
-${voffset -250}
+${voffset -295}
