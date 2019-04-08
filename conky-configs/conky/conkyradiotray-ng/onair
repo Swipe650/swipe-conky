@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Get lbc artist and title info
 lbc()
 {
 onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/span//text()' - | tail -c 61)
@@ -18,7 +19,7 @@ echo $onairtime >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
 exit 0
 }
 
-
+# Get radio artist and title info
 radio3()
 {
 
@@ -40,6 +41,7 @@ echo $progname >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
 exit 0
 }
 
+# Check if LBC or Radio 3 is playing then call appropriate function
 if pidof -x $(basename radiotray-ng) > /dev/null 
 then 
 
