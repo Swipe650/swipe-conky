@@ -1,23 +1,12 @@
 #!/bin/bash
 
-if pidof -x $(basename radiotray-ng) > /dev/null 
-then 
+lbc()
+{
+onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/span//text()' - | tail -c 61)
 
-#onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/span/a[1]/text()' - | tail -c 28) 
-
-onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/span//text()' - | tail -c 45)
-
-#onairtemp=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/span//text()' - | tail -c 40)
 
 onairtime=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/p/span/text()' - | tail -c 25)
 
-#if [ -z "$onair" ]; 
-# if [ "$onair" == "" ];
-#     then
-#         echo $onairtemp > /home/swipe/.conky/conkyradiotray-ng/onair.txt
-#     else
-#         echo $onair > /home/swipe/.conky/conkyradiotray-ng/onair.txt
-# fi
 
 echo $onair > /home/swipe/.conky/conkyradiotray-ng/onair.txt
 
@@ -26,5 +15,52 @@ echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
 truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
 echo $onairtime >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
 
-fi
 exit 0
+}
+
+
+radio3()
+{
+
+timeslot=$(curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//text()' - | tail -c -220 | sed '/^$/d' | sed '2,5d' | sed '5,9d' | sed '$d' | sed '/^$/d' )
+
+
+prog=$(curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//text()' - | tail -c -220 | sed '/^$/d' | sed '2,6d' | sed '7,9d' | sed '$d' | sed '/^$/d' )
+
+progname=$(curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//text()' - | tail -c -220 | sed '/^$/d' | sed '1,9d' | sed '$d' | sed '/^$/d' )
+
+echo $timeslot > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+
+truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+echo $prog >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+echo $progname >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+
+exit 0
+}
+
+if pidof -x $(basename radiotray-ng) > /dev/null 
+then 
+
+st=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.station')
+ 
+so=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title')
+rtngtitle='' 
+#playing=${so: -7}
+playing=''
+rtngsong=${so}
+#lbcuk={st:0:6}
+lbcuk='LBC UK'
+radio3='Radio 3'
+#kfi=${st:0:3}
+kfi='KFI'
+
+if [ "$lbcuk" = "$st" ] ;
+    then
+    lbc
+elif [ "$radio3" = "$st" ] ;
+    then
+    radio3
+fi
+fi
