@@ -5,19 +5,20 @@ then
 st=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.station')
  
 so=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title')
-rtngtitle='' 
+#rtngtitle='' 
 #playing=${so: -7}
 playing=''
-rtngsong=${so}
+#rtngsong=${so}
 #lbcuk={st:0:6}
 lbcuk='LBC UK'
+radio3='Radio 3'
 #kfi=${st:0:3}
 kfi='KFI'
 
-if [ "$lbcuk" = "$st" ];
+if [ "$lbcuk" = "$st" ] || [ "$radio3" = "$st" ];
     then
     conkytitle=$(cat ~/.conky/conkyradiotray-ng/onair.txt)
-    
+ 
 elif [ "$kfi" = "$st" ] || [ "$playing" = "$so" ]
     then 
     conkytitle='No info'
@@ -26,5 +27,6 @@ else
     conkytitle=$so 
 fi
 fi
+
 echo "$conkytitle"
 exit 0 
