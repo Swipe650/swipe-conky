@@ -23,28 +23,10 @@ exit 0
 radio3()
 {
 
-# timeslot=$(curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//text()' - | tail -c -210 | sed '/^$/d' | sed '3,5d' | sed '5,9d' | sed '$d' | sed '/^$/d' )
-# 
-# 
-# prog=$(curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//text()' - | tail -c -210 | sed '/^$/d' | sed '2,6d' | sed '7,9d' | sed '$d' | sed '/^$/d' )
-# 
-# progname=$(curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//text()' - | tail -c -210 | sed '/^$/d' | sed '1,9d' | sed '$d' | sed '/^$/d' )
-# 
-# echo $timeslot > /home/swipe/.conky/conkyradiotray-ng/onair.txt
-# 
-# truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-# echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
-# truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-# echo $prog >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
-# echo $progname >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
-
 curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//text()' - | tail -c -320 | sed '/^$/d' | sed '1,10d' | sed '1,2d'| sed '5d' | sed '2,3d' | sed '4,5d' | sed '$d' | sed '/^$/d' > /home/swipe/.conky/conkyradiotray-ng/onair.txt
 
+# Wrap 3rd line to end of second line
 sed -i ':a;N;$!ba;s/\n/ - /2g' /home/swipe/.conky/conkyradiotray-ng/onair.txt
-
-#curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//text()' - | sed '/^$/d'| sed '$d' | sed '/^$/d' > /home/swipe/.conky/conkyradiotray-ng/onair.txt
-#sed -i -e '20d' -e '17,18d' -e '1,15d' /home/swipe/.conky/conkyradiotray-ng/onair.txt
-
 
 exit 0
 }
@@ -56,14 +38,9 @@ then
 st=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.station')
  
 so=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title')
-rtngtitle='' 
-#playing=${so: -7}
-playing=''
-rtngsong=${so}
-#lbcuk={st:0:6}
+
 lbcuk='LBC UK'
 radio3='Radio 3'
-#kfi=${st:0:3}
 kfi='KFI'
 
 if [ "$lbcuk" = "$st" ] ;
