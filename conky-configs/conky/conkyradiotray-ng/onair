@@ -23,10 +23,24 @@ exit 0
 radio3()
 {
 
-curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//text()' - | tail -c -320 | sed '/^$/d' | sed '1,10d' | sed '1,2d'| sed '5d' | sed '2,3d' | sed '4,5d' | sed '$d' | sed '/^$/d' > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+#curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//text()' - | tail -c -320 | sed '/^$/d' | sed '1,10d' | sed '1,2d'| sed '5d' | sed '2,3d' | sed '4,5d' | sed '$d' | sed '/^$/d' > /home/swipe/.conky/conkyradiotray-ng/onair.txt
 
 # Wrap 3rd line to end of second line
-sed -i ':a;N;$!ba;s/\n/ - /2g' /home/swipe/.conky/conkyradiotray-ng/onair.txt
+#sed -i ':a;N;$!ba;s/\n/ - /2g' /home/swipe/.conky/conkyradiotray-ng/onair.txt
+
+timeslot=$(curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//time/text()' - )
+
+prog=$(curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//h3/text()' - )
+
+progname=$(curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//p/text()' - )
+
+echo $timeslot > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+ 
+truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+echo $prog >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+echo $progname >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
 
 exit 0
 }
