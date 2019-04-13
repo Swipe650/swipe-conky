@@ -126,9 +126,15 @@
          },
          {
             "image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/radio3",
-            "name" : "Radio 3",
+            "name" : "Radio 3 HQ",
             "notifications" : true,
             "url" : "http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/uk/sbr_high/ak/bbc_radio_three.m3u8"
+         },
+         {
+            "image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/radio3",
+            "name" : "Radio 3",
+            "notifications" : true,
+            "url" : "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio3_mf_p"
          }
       ]
    },
@@ -280,8 +286,9 @@
             "url" : "http://provisioning.streamtheworld.com/pls/KDFCFM.pls"
          },
          {
-            "image" : "",
+            "image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/classicfm",
             "name" : "Classic FM",
+            "notifications" : true,
             "url" : "http://media-ice.musicradio.com/ClassicFMMP3.m3u"
          },
          {
