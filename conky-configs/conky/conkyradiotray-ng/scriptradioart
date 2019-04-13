@@ -23,6 +23,7 @@ talkradio='TalkRadio'
 talksport='talkSPORT'
 talksport2='talkSPORT 2'
 signal2='Signal 2'
+classicfm='Classic FM'
 not_playing='(not playing)'
 
 #Check for Radio Paradise or show radiotray image if status='Playing'
@@ -102,7 +103,10 @@ case "$station" in
         convert ~/.config/radiotray-ng/bookmark_icons/talksport2 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
 ;;
     "$signal2" )
-        convert ~/.config/radiotray-ng/bookmark_icons/signal2 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon        
+        convert ~/.config/radiotray-ng/bookmark_icons/signal2 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon    
+;;
+    "$classicfm" )
+        convert ~/.config/radiotray-ng/bookmark_icons/classicfm -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon 
 ;;
 #     "$plan_rock" )
 #         convert  ~/.config/radiotray-ng/bookmark_icons/planrock -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
