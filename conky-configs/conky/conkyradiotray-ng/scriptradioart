@@ -64,7 +64,7 @@ linkMiniature=$(wget -U 'Googlebot-Image/1.0' -qO - "www.google.co.uk/search?q=$
 #Check each station variable and use imagemagick convert command to resize image and copy to ~/.config/radiotray-ng/bookmark_icons/icon
 case "$station" in 
     "$lbc_uk" )
-        convert  ~/.config/radiotray-ng/bookmark_icons/lbc_round -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+        convert  ~/.config/radiotray-ng/bookmark_icons/lbc_round -resize 115 ~/.config/radiotray-ng/bookmark_icons/icon
 ;;
     "$lbc_london" )
         convert ~/.config/radiotray-ng/bookmark_icons/lbc2 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
@@ -106,7 +106,7 @@ case "$station" in
         convert ~/.config/radiotray-ng/bookmark_icons/signal2 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon    
 ;;
     "$classicfm" )
-        convert ~/.config/radiotray-ng/bookmark_icons/classicfm -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon 
+        convert ~/.config/radiotray-ng/bookmark_icons/classicfm_round -resize 115 ~/.config/radiotray-ng/bookmark_icons/icon 
 ;;
 #     "$plan_rock" )
 #         convert  ~/.config/radiotray-ng/bookmark_icons/planrock -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
