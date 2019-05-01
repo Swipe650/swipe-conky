@@ -55,7 +55,8 @@
          },
          {
             "image" : "~/.config/radiotray-ng/bookmark_icons/soma",
-            "name" : "Space Station Soma",
+            "name" : "Space Station",
+            "notifications" : false,
             "url" : "http://somafm.com/spacestation.pls"
          },
          {
@@ -261,22 +262,6 @@
       ]
    },
    {
-      "group" : "Latin",
-      "image" : "",
-      "stations" : [
-         {
-            "image" : "",
-            "name" : "Onda Tropical",
-            "url" : "http://yp.shoutcast.com/sbin/tunein-station.pls?id=506392"
-         },
-         {
-            "image" : "",
-            "name" : "Top Latino Radio",
-            "url" : "http://online.radiodifusion.net:8020/listen.pls"
-         }
-      ]
-   },
-   {
       "group" : "Classical",
       "image" : "",
       "stations" : [
@@ -288,7 +273,7 @@
          {
             "image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/classicfm",
             "name" : "Classic FM",
-            "notifications" : true,
+            "notifications" : false,
             "url" : "http://media-ice.musicradio.com/ClassicFMMP3.m3u"
          },
          {
