@@ -45,6 +45,20 @@ echo $progname >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
 exit 0
 }
 
+radioparadise()
+{
+rpartist=$(awk -F '[<>]' '/artist/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
+
+rpsongtitle=$(awk -F '[<>]' '/title/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
+
+echo $rpartist > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+
+truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+echo $rpsongtitle >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+}
+
 # Check if LBC or Radio 3 is playing then call appropriate function
 if pidof -x $(basename radiotray-ng) > /dev/null 
 then 
@@ -53,9 +67,11 @@ st=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray
  
 so=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title')
 
+
 lbcuk='LBC UK'
 radio3='Radio 3'
 kfi='KFI'
+rp='Radio Paradise'
 
 if [ "$lbcuk" = "$st" ] ;
     then
@@ -63,5 +79,8 @@ if [ "$lbcuk" = "$st" ] ;
 elif [ "$radio3" = "$st" ] ;
     then
     radio3
+elif [ "$rp" = "$st" ] ;
+    then
+    radioparadise   
 fi
 fi
