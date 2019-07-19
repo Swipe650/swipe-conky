@@ -41,15 +41,15 @@ TEXT
 # RADIOTRAY
 ${if_running radiotray-ng}
 
-#${voffset -35}${color}${if_match "${execi 60 /home/swipe/.conky/conkyradiotray-ng/scriptradio}" == "NO"}${color #efefef}${font Ubuntu:pixelsize=14:bold}Radiotray-NG inactive${else}${color #efefef}${font Ubuntu:pixelsize=14:bold}Radiotray-NG now playing:
+#${voffset -45}${color}${if_match "${execi 60 /home/swipe/.conky/conkyradiotray-ng/scriptradio}" == "NO"}${color #efefef}${font Ubuntu:pixelsize=14:bold}Radiotray-NG inactive${else}${color #efefef}${font Ubuntu:pixelsize=14:bold}Radiotray-NG now playing:
 ${voffset -35}${color}${if_match "${execi 10 /home/swipe/.conky/conkyradiotray-ng/scriptradio}" == "NO"}${color #efefef}${font Ubuntu:pixelsize=14:bold}${else}${color #efefef}${font Ubuntu:pixelsize=14:bold}Radiotray-NG now playing:
 
-${voffset 10}${color #FFC433}${font Ubuntu:pixelsize=13:bold}Station:${font}${color}  
+${voffset 0}${color #FFC433}${font Ubuntu:pixelsize=13:bold}Station:${font}${color}  
 
 ${font Ubuntu:pixelsize=13:bold}${color #ffffff}${execi 10 qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.station'}
 
-${if_existing /home/swipe/.conky/muted.png} ${image ~/.conky/muted.png -p 77,84 -s 35x35 -f 1}$endif${voffset 0}${if_match "${exec pidof -x toggle_mute3_rtng}" != ""}${font Ubuntu:pixelsize=14:bold} ${execpi 1 cat ~/.conkytimer}${else}$endif
-${voffset 10}${color FFC433}${font Ubuntu:pixelsize=13:bold}Artist & Title:${font}${color}${execi 300 /home/swipe/.conky/conkyradiotray-ng/onair}
+${voffset 7}${if_existing /home/swipe/.conky/muted.png} ${image ~/.conky/muted.png -p 77,80 -s 35x35 -f 1}$endif${voffset 0}${if_match "${exec pidof -x toggle_mute3_rtng}" != ""}${font Ubuntu:pixelsize=14:bold} ${execpi 1 cat ~/.conkytimer}${else}$endif
+${voffset 5}${color FFC433}${font Ubuntu:pixelsize=13:bold}Artist & Title:${font}${color}${execi 300 /home/swipe/.conky/conkyradiotray-ng/onair}
 #${voffset 26}${color #FFC433}${font Ubuntu:pixelsize=13:bold}Artist & Title:${font}${color}
 
 ${font Ubuntu:pixelsize=12:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray-ng/noinfo| fold -s -w 40}${color}${image ~/.config/radiotray-ng/bookmark_icons/icon -p 125,35 -f 1}${endif}
