@@ -38,9 +38,12 @@ use_spacer yes
 
 minimum_size 0 0
 TEXT
-${voffset 20}${color EAEAEA}${font GE Inspira:pixelsize=110}${time %H:%M}${font}${voffset -84}${offset 10}${color FFA300}${font GE Inspira:pixelsize=42}${time %d} ${voffset -15}${color EAEAEA}${font GE Inspira:pixelsize=22}${time  %B} ${time %Y}${font}${voffset 24}${font GE Inspira:pixelsize=58}${offset -148}${time %A}${font}${if_existing /home/swipe/.conky/muted.png} ${image ~/.conky/muted.png -p 510,80 -s 35x35 -f 1}$endif${offset 13}${if_match "${exec pidof -x toggle_mute3_rtng}" != ""}${font Ubuntu:pixelsize=14:bold} ${execpi 1 cat ~/.conkytimer}${else}$endif
-${voffset 12}${offset 12}${font Ubuntu:pixelsize=12}${color FFA300}HD ${offset 5}$color${fs_free /} / ${fs_size /}${offset 5}$color${fs_free /home} /home ${fs_size /home}${offset 10}${color FFA300}RAM ${offset 5}$color$mem / $memmax${offset 10}${color FFA300}CPU ${offset 5}$color${cpu cpu0}%${offset 5}${color FFA300}NET${offset 5}$color U ${upspeedf wlp2s0} KB/s  $color D ${downspeedf wlp2s0} KB/s
+${voffset 20}${color EAEAEA}${font GE Inspira:pixelsize=110}${time %H:%M}${font}${voffset -84}${offset 10}${color FFA300}${font GE Inspira:pixelsize=42}${time %d} ${voffset -15}${color EAEAEA}${font GE Inspira:pixelsize=22}${time  %B} ${time %Y}${font}${voffset 24}${font GE Inspira:pixelsize=58}${offset -148}${time %A}${font}${if_running openvpn}${image ~/.conky/vpn.png -p 433,100 -s 25x25 -f 1}$else$endif${if_existing /home/swipe/.conky/fwon.png} ${image ~/.conky/fwon.png -p 463,100 -s 25x25 -f 1}$endif
+${voffset 12}${offset 12}${font Ubuntu:pixelsize=12}${color FFA300}HD ${offset 5}$color${fs_free /} / ${fs_size /}${offset 5}$color${fs_free /home} /home ${fs_size /home}${offset 10}${color FFA300}RAM ${offset 5}$color${mem} / ${memmax}${offset 10}${color FFA300}CPU ${offset 5}$color${cpu cpu0}%${offset 10}${color FFA300}NET${offset 5}$color U ${upspeedf wlp2s0} KB/s  $color D ${downspeedf wlp2s0} KB/s
 
 
 
+# If required, put at end of line 41:   ${if_existing /home/swipe/.conky/muted.png} ${image ~/.conky/muted.png -p 510,80 -s 35x35 -f 1}$endif${offset 13}${if_match "${exec pidof -x toggle_mute3_rtng}" != ""}${font Ubuntu:pixelsize=14:bold} ${execpi 1 cat ~/.conkytimer}${else}$endif
 
+
+${voffset -25}
