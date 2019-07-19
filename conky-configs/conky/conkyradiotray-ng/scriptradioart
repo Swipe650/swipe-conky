@@ -31,7 +31,9 @@ station=${st}
 status=''
 rp='Radio Paradise'
 artist=${so: -0}
-cadena=${st: -14} 
+cadena=${st: -14}
+rpartist=$(awk -F '[<>]' '/artist/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
+rpsongtitle=$(awk -F '[<>]' '/title/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
 if [ "$artist" = "$status" ]; 
 then
 #title='radiotray icon'
@@ -131,6 +133,13 @@ case "$station" in
                 wget -O ~/.config/radiotray-ng/bookmark_icons/rp_art "$art"
                 convert ~/.config/radiotray-ng/bookmark_icons/rp_art -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
             fi
+        
+        # echo artist and song to 
+        echo $rpartist > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo $rpsongtitle >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
 ;;
     #If status = 'not playing' don't do anything
     "$not_playing" )
