@@ -9,11 +9,11 @@ On_LBC()
 # Get what's on LBC
         onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/span//text()' - | tail -c 61)
         onairtime=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/p/span/text()' - | tail -c 25)
-        echo "$onair" > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo $onair > /home/swipe/.conky/conkyradiotray-ng/onair.txt
         truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
         echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
         truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo "$onairtime" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo $onairtime >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
 }
 
 On_radiothree()
