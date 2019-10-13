@@ -1,10 +1,67 @@
 #!/bin/bash
 
 #Populate $st with current station, $so with current artist and song and define station name variables
-#st=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray net.sourceforge.radiotray.getCurrentRadio)
-#so=$(qdbus net.sourceforge.radiotray /net/sourceforge/radiotray getCurrentMetaData| fold -s -w150)
 st=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.station')
 so=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title' | fold -s -w150)
+
+On_LBC()
+{
+# Get what's on LBC
+        onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/span//text()' - | tail -c 61)
+        onairtime=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/p/span/text()' - | tail -c 25)
+        echo $onair > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo $onairtime >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+}
+
+On_radiothree()
+#Get what's on Radio 3
+{
+        timeslot=$(curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//time/text()' - )
+
+        prog=$(curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//h3/text()' - )
+
+        progname=$(curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//p/text()' - )
+
+        echo $timeslot > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+ 
+        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo $prog >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo $progname >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+}
+
+On_radioparadise()
+#Get what's on radio paradise and download cover artist
+{
+        #Populate $chk_art with the coverart url
+        chk_art=$(awk -F '[<>]' '/coverart/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
+        #Download now.xml and save local copy
+        curl -o ~/.config/radiotray-ng/bookmark_icons/now.xml http://legacy.radioparadise.com/xml/now.xml
+        #Populate $chk_art2 with the coverart url from local copy of now.xml
+        chk_art2=$(awk -F '[<>]' '/coverart/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
+            
+            #Check if the coverart urls match and, if not, get new coverart and resize to 115 width
+            if 
+                [ "$chk_art" != "$chk_art2" ]; 
+            then 
+                art=$(awk -F '[<>]' '/coverart/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
+                wget -O ~/.config/radiotray-ng/bookmark_icons/rp_art "$art"
+                convert ~/.config/radiotray-ng/bookmark_icons/rp_art -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+            fi
+        
+        rpartist=$(awk -F '[<>]' '/artist/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
+        rpsongtitle=$(awk -F '[<>]' '/title/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
+        # echo artist and song to 
+        echo $rpartist > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo $rpsongtitle >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+}
 
 lbc_uk='LBC UK'
 lbc_london='LBC London'
@@ -67,9 +124,11 @@ linkMiniature=$(wget -U 'Googlebot-Image/1.0' -qO - "www.google.co.uk/search?q=$
 case "$station" in 
     "$lbc_uk" )
         convert  ~/.config/radiotray-ng/bookmark_icons/lbc_round -resize 115 ~/.config/radiotray-ng/bookmark_icons/icon
+        On_LBC
 ;;
     "$lbc_london" )
         convert ~/.config/radiotray-ng/bookmark_icons/lbc2 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+        On_LBC
 ;;
     "$kfi" )
         convert ~/.config/radiotray-ng/bookmark_icons/kfi -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
@@ -85,6 +144,7 @@ case "$station" in
 ;;
     "$radiothree" )
         convert ~/.config/radiotray-ng/bookmark_icons/radio3 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+        On_radiothree
 ;;
     "$radiofourextra" )
         convert ~/.config/radiotray-ng/bookmark_icons/radio4extra -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
@@ -117,29 +177,7 @@ case "$station" in
         convert ~/.config/radiotray-ng/bookmark_icons/ragga -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
 ;;
     "$radio_paradise" )
-    
-        #Populate $chk_art with the coverart url
-        chk_art=$(awk -F '[<>]' '/coverart/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
-        #Download now.xml and save local copy
-        curl -o ~/.config/radiotray-ng/bookmark_icons/now.xml http://legacy.radioparadise.com/xml/now.xml
-        #Populate $chk_art2 with the coverart url from local copy of now.xml
-        chk_art2=$(awk -F '[<>]' '/coverart/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
-            
-            #Check if the coverart urls match and, if not, get new coverart and resize to 115 width
-            if 
-                [ "$chk_art" != "$chk_art2" ]; 
-            then 
-                art=$(awk -F '[<>]' '/coverart/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
-                wget -O ~/.config/radiotray-ng/bookmark_icons/rp_art "$art"
-                convert ~/.config/radiotray-ng/bookmark_icons/rp_art -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
-            fi
-        
-        # echo artist and song to 
-        echo $rpartist > /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo $rpsongtitle >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        On_radioparadise
 ;;
     #If status = 'not playing' don't do anything
     "$not_playing" )

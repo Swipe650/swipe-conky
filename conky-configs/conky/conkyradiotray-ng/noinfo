@@ -11,12 +11,13 @@ playing=''
 #rtngsong=${so}
 #lbcuk={st:0:6}
 lbcuk='LBC UK'
+lbc_london='LBC London'
 radio3='Radio 3'
 rp='Radio Paradise'
 #kfi=${st:0:3}
 kfi='KFI'
 
-if [ "$lbcuk" = "$st" ] || [ "$radio3" = "$st" ] || [ "$rp" = "$st" ];
+if [ "$lbcuk" = "$st" ] || [ "$lbc_london" = "$st" ] ||[ "$radio3" = "$st" ] || [ "$rp" = "$st" ];
     then
     conkytitle=$(cat ~/.conky/conkyradiotray-ng/onair.txt)
  
