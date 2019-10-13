@@ -71,6 +71,7 @@ twit='TWiT.am'
 fivelive='5live'
 radiofour='Radio 4'
 radiothree='Radio 3'
+radiothreehq='Radio 3 HQ'
 radiofourextra='Radio 4 Extra'
 radiostoke='Radio Stoke'
 radiokent='Radio Kent'
@@ -143,6 +144,10 @@ case "$station" in
         convert ~/.config/radiotray-ng/bookmark_icons/radio4 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
 ;;
     "$radiothree" )
+        convert ~/.config/radiotray-ng/bookmark_icons/radio3 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+        On_radiothree
+;;
+    "$radiothreehq" )
         convert ~/.config/radiotray-ng/bookmark_icons/radio3 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
         On_radiothree
 ;;
