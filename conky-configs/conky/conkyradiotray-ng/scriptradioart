@@ -9,11 +9,11 @@ On_LBC()
 # Get what's on LBC
         onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/span//text()' - | tail -c 61)
         onairtime=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/p/span/text()' - | tail -c 25)
-        echo $onair > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo "$onair" > /home/swipe/.conky/conkyradiotray-ng/onair.txt
         truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
         echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
         truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo $onairtime >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo "$onairtime" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
 }
 
 On_radiothree()
@@ -25,13 +25,13 @@ On_radiothree()
 
         progname=$(curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//p/text()' - )
 
-        echo $timeslot > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo "$timeslot" > /home/swipe/.conky/conkyradiotray-ng/onair.txt
  
         truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
         echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
         truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo $prog >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo $progname >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo "$prog" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo "$progname" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
 }
 
 On_radioparadise()
@@ -56,16 +56,16 @@ On_radioparadise()
         rpartist=$(awk -F '[<>]' '/artist/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
         rpsongtitle=$(awk -F '[<>]' '/title/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
         # echo artist and song to 
-        echo $rpartist > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo "$rpartist" > /home/swipe/.conky/conkyradiotray-ng/onair.txt
         truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
         echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
         truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo $rpsongtitle >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo "$rpsongtitle" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
 }
 
 lbc_uk='LBC UK'
 lbc_london='LBC London'
-plan_rock='Planet Rock'
+#plan_rock='Planet Rock'
 kfi='KFI'
 twit='TWiT.am'
 fivelive='5live'
@@ -196,5 +196,3 @@ case "$station" in
 esac
 
 exit 0
-
-
