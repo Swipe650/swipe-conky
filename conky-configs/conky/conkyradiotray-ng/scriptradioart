@@ -70,6 +70,24 @@ On_radiofourextra()
         echo "$progname" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
 }
 
+On_fivelive()
+#Get what's on 5live
+{
+        timeslot=$(curl -s https://www.bbc.co.uk/5live | xmllint --html --nowarning --xpath '//div[2]/a//time/text()' - )
+
+        prog=$(curl -s https://www.bbc.co.uk/5live | xmllint --html --nowarning --xpath '//div[2]/a//h3/text()' - )
+
+        progname=$(curl -s https://www.bbc.co.uk/5live | xmllint --html --nowarning --xpath '//div[2]/a//p/text()' - )
+
+        echo "$timeslot" > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+ 
+        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo "$prog" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo "$progname" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+}
+
 On_radioparadise()
 #Get what's on radio paradise and download cover artist
 {
@@ -175,6 +193,7 @@ case "$station" in
 ;;
     "$fivelive" )
         convert ~/.config/radiotray-ng/bookmark_icons/5live -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+        On_fivelive
 ;;
     "$radiofour" )
         convert ~/.config/radiotray-ng/bookmark_icons/radio4 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
@@ -239,7 +258,7 @@ case "$station" in
 esac
 
 # Show artist and title info or "No Info"
-if [ "$lbc_uk" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$radiothree" = "$st" ] || [ "$radiothreehq" = "$st" ] || [ "$radiofour" = "$st" ] || [ "$radiofourextra" = "$st" ]|| [ "$radio_paradise" = "$st" ];
+if [ "$lbc_uk" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$radiothree" = "$st" ] || [ "$radiothreehq" = "$st" ] || [ "$radiofour" = "$st" ] || [ "$radiofourextra" = "$st" ]  || [ "$fivelive" = "$st" ] || [ "$radio_paradise" = "$st" ];
     then
     conkytitle=$(cat ~/.conky/conkyradiotray-ng/onair.txt)
  
