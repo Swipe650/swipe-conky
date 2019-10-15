@@ -34,6 +34,42 @@ On_radiothree()
         echo "$progname" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
 }
 
+On_radiofour()
+#Get what's on Radio 4
+{
+        timeslot=$(curl -s https://www.bbc.co.uk/radio4 | xmllint --html --nowarning --xpath '//div[2]/a//time/text()' - )
+
+        prog=$(curl -s https://www.bbc.co.uk/radio4 | xmllint --html --nowarning --xpath '//div[2]/a//h3/text()' - )
+
+        progname=$(curl -s https://www.bbc.co.uk/radio4 | xmllint --html --nowarning --xpath '//div[2]/a//p/text()' - )
+
+        echo "$timeslot" > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+ 
+        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo "$prog" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo "$progname" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+}
+
+On_radiofourextra()
+#Get what's on Radio 4
+{
+        timeslot=$(curl -s https://www.bbc.co.uk/radio4extra | xmllint --html --nowarning --xpath '//div[2]/a//time/text()' - )
+
+        prog=$(curl -s https://www.bbc.co.uk/radio4extra | xmllint --html --nowarning --xpath '//div[2]/a//h3/text()' - )
+
+        progname=$(curl -s https://www.bbc.co.uk/radio4extra | xmllint --html --nowarning --xpath '//div[2]/a//p/text()' - )
+
+        echo "$timeslot" > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+ 
+        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo "$prog" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo "$progname" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+}
+
 On_radioparadise()
 #Get what's on radio paradise and download cover artist
 {
@@ -142,6 +178,7 @@ case "$station" in
 ;;
     "$radiofour" )
         convert ~/.config/radiotray-ng/bookmark_icons/radio4 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+        On_radiofour
 ;;
     "$radiothree" )
         convert ~/.config/radiotray-ng/bookmark_icons/radio3 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
@@ -153,6 +190,7 @@ case "$station" in
 ;;
     "$radiofourextra" )
         convert ~/.config/radiotray-ng/bookmark_icons/radio4extra -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+        On_radiofourextra
 ;;
     "$radiostoke" )
         convert ~/.config/radiotray-ng/bookmark_icons/radiostoke -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
@@ -199,5 +237,21 @@ case "$station" in
         fi
 ;;
 esac
+
+# Show artist and title info or "No Info"
+if [ "$lbc_uk" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$radiothree" = "$st" ] || [ "$radiothreehq" = "$st" ] || [ "$radiofour" = "$st" ] || [ "$radiofourextra" = "$st" ]|| [ "$radio_paradise" = "$st" ];
+    then
+    conkytitle=$(cat ~/.conky/conkyradiotray-ng/onair.txt)
+ 
+elif [ "$kfi" = "$st" ] || [ "$playing" = "$so" ]
+    then 
+    conkytitle='No info'
+    
+else 
+    conkytitle=$so 
+fi
+
+
+echo "$conkytitle"
 
 exit 0
