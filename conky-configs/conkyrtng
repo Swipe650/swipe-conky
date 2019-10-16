@@ -55,5 +55,5 @@ ${voffset 5}${color FFC433}${font Ubuntu:pixelsize=13:bold}Artist & Title:${font
 
 ${font Ubuntu:pixelsize=12:bold}${color #ffffff}${execi 10 /home/swipe/.conky/conkyradiotray-ng/scriptradioart | fold -s -w 40}${color}${image ~/.config/radiotray-ng/bookmark_icons/icon -p 125,35 -f 1}${endif}
 $else${color #696969}${font Ubuntu:pixelsize=13:bold}No activity${font}$endif
-#${voffset 150}${execi 10 /home/swipe/.conky/conkyradiotray-ng/scriptradioart}
+#${voffset 150}${execi 30 /home/swipe/.conky/conkyradiotray-ng/scriptradioart}
 ${voffset -65}
