@@ -16,6 +16,13 @@ On_LBC()
         echo $onairtime >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
 }
 
+On_chilloutzone()
+{
+# Get what's on Chillout Zone Plus
+        onair=$(curl -s 'https://chillout.zone:8080/api/v2/history/?format=json&limit=20&offset=0&server=2&t=' | jq -r .results[0].metadata)
+        echo $onair > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+}
+
 On_radiothree()
 #Get what's on Radio 3
 {
@@ -136,6 +143,7 @@ talksport='talkSPORT'
 talksport2='talkSPORT 2'
 signal2='Signal 2'
 classicfm='Classic FM'
+chilloutplus='Chillout Zone Plus'
 not_playing='(not playing)'
 
 #Check for Radio Paradise or show radiotray image if status='Playing'
@@ -231,12 +239,17 @@ case "$station" in
 ;;
     "$classicfm" )
         convert ~/.config/radiotray-ng/bookmark_icons/classicfm_round -resize 115 ~/.config/radiotray-ng/bookmark_icons/icon 
-;;
+#;;
 #     "$plan_rock" )
 #         convert  ~/.config/radiotray-ng/bookmark_icons/planrock -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
-# ;;
+;;
     "$ragga" )
         convert ~/.config/radiotray-ng/bookmark_icons/ragga -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+;;
+    "$chilloutplus" )
+        #convert ~/.config/radiotray-ng/bookmark_icons/chilloutplus -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+        convert $(curl 'https://chillout.zone:8080/api/v2/history/?format=json&limit=20&offset=0&server=2&t=' | jq -r .results[0].img_medium_url) -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+        On_chilloutzone
 ;;
     "$radio_paradise" )
         On_radioparadise
@@ -258,7 +271,7 @@ case "$station" in
 esac
 
 # Show artist and title info or "No Info"
-if [ "$lbc_uk" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$radiothree" = "$st" ] || [ "$radiothreehq" = "$st" ] || [ "$radiofour" = "$st" ] || [ "$radiofourextra" = "$st" ]  || [ "$fivelive" = "$st" ] || [ "$radio_paradise" = "$st" ];
+if [ "$lbc_uk" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$radiothree" = "$st" ] || [ "$radiothreehq" = "$st" ] || [ "$radiofour" = "$st" ] || [ "$radiofourextra" = "$st" ]  || [ "$fivelive" = "$st" ] || [ "$radio_paradise" = "$st" ] || [ "$chilloutplus" = "$st" ];
     then
     conkytitle=$(cat ~/.conky/conkyradiotray-ng/onair.txt)
  
