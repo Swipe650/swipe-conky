@@ -50,6 +50,6 @@ ${font Ubuntu:pixelsize=13:bold}${color #ffffff}${execi 10 qdbus com.github.radi
 ${voffset 7}${if_existing /home/swipe/.conky/muted.png} ${image ~/.conky/muted.png -p 77,80 -s 35x35 -f 1}$endif${voffset 0}${if_match "${exec pidof -x toggle_mute3_rtng}" != ""}${font Ubuntu:pixelsize=14:bold} ${execpi 1 cat ~/.conkytimer}${else}$endif
 ${voffset 5}${color FFC433}${font Ubuntu:pixelsize=13:bold}Artist & Title:${font}${color}
 
-${font Ubuntu:pixelsize=12:bold}${color #ffffff}${execi 15 /home/swipe/.conky/conkyradiotray-ng/scriptradioart | fold -s -w 40}${color}${image ~/.config/radiotray-ng/bookmark_icons/icon -p 125,35 -f 1}${endif}
+${font Ubuntu:pixelsize=12:bold}${color #ffffff}${execi 20 /home/swipe/.conky/conkyradiotray-ng/scriptradioart | fold -s -w 40}${color}${image ~/.config/radiotray-ng/bookmark_icons/icon -p 125,35 -f 1}${endif}
 $else${color #696969}${font Ubuntu:pixelsize=13:bold}No activity${font}$endif
 ${voffset -65}

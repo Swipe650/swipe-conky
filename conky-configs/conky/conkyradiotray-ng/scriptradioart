@@ -11,7 +11,19 @@ On_LBC()
         onairtime=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/p/span/text()' - | tail -c 25)
         echo $onair > /home/swipe/.conky/conkyradiotray-ng/onair.txt
         truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo "   " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo $onairtime >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+}
+
+On_LBC_News()
+{
+# Get what's on LBC News
+        onair=$(curl -s https://www.lbcnews.co.uk/ | xmllint --html --nowarning --xpath '//section/div/p/span/a//text()' - | tail -c 61)
+        onairtime=$(curl -s https://www.lbcnews.co.uk/ | xmllint --html --nowarning --xpath '//section/div/p/span/text()' - | tail -c 25)
+        echo $onair > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo "   " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
         truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
         echo $onairtime >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
 }
@@ -21,6 +33,15 @@ On_chilloutzone()
 # Get what's on Chillout Zone Plus
         onair=$(curl -s 'https://chillout.zone:8080/api/v2/history/?format=json&limit=20&offset=0&server=2&t=' | jq -r .results[0].metadata)
         echo $onair > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        #Get image url
+        img=$(curl 'https://chillout.zone:8080/api/v2/history/?format=json&limit=20&offset=0&server=2&t=' | jq -r .results[0].img_medium_url)
+        if 
+            [ "$img" = "null" ];
+        then
+            convert ~/.config/radiotray-ng/bookmark_icons/chilloutplus -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+        else
+            convert $(curl 'https://chillout.zone:8080/api/v2/history/?format=json&limit=20&offset=0&server=2&t=' | jq -r .results[0].img_medium_url) -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+        fi
 }
 
 On_radiothree()
@@ -110,7 +131,7 @@ On_radioparadise()
                 [ "$chk_art" != "$chk_art2" ]; 
             then 
                 art=$(awk -F '[<>]' '/coverart/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
-                wget -O ~/.config/radiotray-ng/bookmark_icons/rp_art "$art"
+                curl -o ~/.config/radiotray-ng/bookmark_icons/rp_art "$art"
                 convert ~/.config/radiotray-ng/bookmark_icons/rp_art -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
             fi
         
@@ -126,6 +147,7 @@ On_radioparadise()
 
 lbc_uk='LBC UK'
 lbc_london='LBC London'
+lbc_news='LBC News'
 #plan_rock='Planet Rock'
 kfi='KFI'
 twit='TWiT.am'
@@ -143,7 +165,7 @@ talksport='talkSPORT'
 talksport2='talkSPORT 2'
 signal2='Signal 2'
 classicfm='Classic FM'
-chilloutplus='Chillout Zone Plus'
+chilloutplus='Chillout Zone'
 not_playing='(not playing)'
 
 #Check for Radio Paradise or show radiotray image if status='Playing'
@@ -188,6 +210,10 @@ case "$station" in
     "$lbc_uk" )
         convert  ~/.config/radiotray-ng/bookmark_icons/lbc_round -resize 115 ~/.config/radiotray-ng/bookmark_icons/icon
         On_LBC
+;;
+    "$lbc_news" )
+        convert  ~/.config/radiotray-ng/bookmark_icons/lbc_news -resize 115 ~/.config/radiotray-ng/bookmark_icons/icon
+        On_LBC_News
 ;;
     "$lbc_london" )
         convert ~/.config/radiotray-ng/bookmark_icons/lbc2 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
@@ -247,8 +273,6 @@ case "$station" in
         convert ~/.config/radiotray-ng/bookmark_icons/ragga -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
 ;;
     "$chilloutplus" )
-        #convert ~/.config/radiotray-ng/bookmark_icons/chilloutplus -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
-        convert $(curl 'https://chillout.zone:8080/api/v2/history/?format=json&limit=20&offset=0&server=2&t=' | jq -r .results[0].img_medium_url) -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
         On_chilloutzone
 ;;
     "$radio_paradise" )
@@ -271,7 +295,7 @@ case "$station" in
 esac
 
 # Show artist and title info or "No Info"
-if [ "$lbc_uk" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$radiothree" = "$st" ] || [ "$radiothreehq" = "$st" ] || [ "$radiofour" = "$st" ] || [ "$radiofourextra" = "$st" ]  || [ "$fivelive" = "$st" ] || [ "$radio_paradise" = "$st" ] || [ "$chilloutplus" = "$st" ];
+if [ "$lbc_uk" = "$st" ] || [ "$lbc_news" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$radiothree" = "$st" ] || [ "$radiothreehq" = "$st" ] || [ "$radiofour" = "$st" ] || [ "$radiofourextra" = "$st" ]  || [ "$fivelive" = "$st" ] || [ "$radio_paradise" = "$st" ] || [ "$chilloutplus" = "$st" ];
     then
     conkytitle=$(cat ~/.conky/conkyradiotray-ng/onair.txt)
  
