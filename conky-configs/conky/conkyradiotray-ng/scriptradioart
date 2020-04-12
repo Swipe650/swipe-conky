@@ -79,6 +79,11 @@ On_Talkradio()
                                 onairtime="7pm - 10pm"
                         ;;
                         esac
+                        case "22:00" in
+                            $onairtime )
+                                onairtime="10pm - 1am"
+                        ;;
+                        esac
         fi
         
         Onair_txt
