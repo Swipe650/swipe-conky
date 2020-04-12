@@ -4,35 +4,91 @@
 st=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.station')
 so=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title' | fold -s -w150)
 
+Onair_txt()
+{
+        echo "$onair" > ~/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 ~/.conky/conkyradiotray-ng/onair.txt
+        echo "   " >> ~/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 ~/.conky/conkyradiotray-ng/onair.txt
+        echo "$onair"time >> ~/.conky/conkyradiotray-ng/onair.txt
+        }
+
 On_LBC()
 {
 # Get what's on LBC
         onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/span//text()' - | tail -c 61)
         onairtime=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/p/span/text()' - | tail -c 25)
-        echo $onair > /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo "   " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo $onairtime >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        Onair_txt
 }
 
 On_LBC_News()
 {
 # Get what's on LBC News
-        onair=$(curl -s https://www.lbcnews.co.uk/ | xmllint --html --nowarning --xpath '//section/div/p/span/a//text()' - | tail -c 61)
+        #onair=$(curl -s https://www.lbcnews.co.uk/ | xmllint --html --nowarning --xpath '//section/div/p/span/a//text()' - | tail -c 61)
+        onair=$(curl -s https://www.lbcnews.co.uk/ | xmllint --html --nowarning --xpath '//section/div/p/span//text()' - | head -c 67)
         onairtime=$(curl -s https://www.lbcnews.co.uk/ | xmllint --html --nowarning --xpath '//section/div/p/span/text()' - | tail -c 25)
-        echo $onair > /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo "   " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo $onairtime >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        Onair_txt
+}
+
+On_Talkradio()
+{
+# Get what's on Talkradio
+        onair=$(curl -s https://talkradio.co.uk/radio/schedule | grep "On Air now" | awk '$0=$2' FS=\> RS=\< | awk 'FNR == 3 {print}')
+        onairtime=$(curl -s https://talkradio.co.uk/radio/schedule | grep "On Air now" | awk '$0=$2' FS=\> RS=\< | awk 'FNR == 1 {print}')
+        #check for Weekend and adjust the morning schedule times 
+        if [ date '+%u' = "6" ] || [ date '+%u' = "7" ]
+            then
+                case "05:00" in
+                    $onairtime )
+                        onairtime="5am - 7am"
+                ;;
+                esac
+                    else
+                        case "01:00" in
+                            $onairtime )
+                                onairtime="1am - 5am"
+                        ;;
+                        esac
+                        case "05:00" in
+                            $onairtime )
+                                onairtime="5am - 6:30am"
+                        ;;
+                        esac
+                        case "06:30" in
+                            $onairtime )
+                                onairtime="6:30am - 10am"
+                        ;;
+                        esac
+                        case "10:00" in
+                            $onairtime )
+                                onairtime="10am - 1pm"
+                        ;;
+                        esac
+                        case "13:00" in
+                            $onairtime )
+                                onairtime="1pm - 4pm"
+                        ;;
+                        esac
+                        case "16:00" in
+                            $onairtime )
+                                onairtime="4pm - 7pm"
+                        ;;
+                        esac
+                        case "19:00" in
+                            $onairtime )
+                                onairtime="7pm - 10pm"
+                        ;;
+                        esac
+        fi
+        
+        Onair_txt
 }
 
 On_chilloutzone()
 {
 # Get what's on Chillout Zone Plus
         onair=$(curl -s 'https://chillout.zone:8080/api/v2/history/?format=json&limit=20&offset=0&server=2&t=' | jq -r .results[0].metadata)
-        echo $onair > /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo "$onair" > ~/.conky/conkyradiotray-ng/onair.txt
         #Get image url
         img=$(curl 'https://chillout.zone:8080/api/v2/history/?format=json&limit=20&offset=0&server=2&t=' | jq -r .results[0].img_medium_url)
         if 
@@ -45,76 +101,40 @@ On_chilloutzone()
 }
 
 On_radiothree()
-#Get what's on Radio 3
+# Get what's on Radio 3
 {
-        timeslot=$(curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//time/text()' - )
-
-        prog=$(curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//h3/text()' - )
-
-        progname=$(curl -s https://www.bbc.co.uk/radio3 | xmllint --html --nowarning --xpath '//div[2]/a//p/text()' - )
-
-        echo "$timeslot" > /home/swipe/.conky/conkyradiotray-ng/onair.txt
- 
-        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo "$prog" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo "$progname" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+# Get on air now data, remove white spaces from the times and add extra spaces after times
+onair=$(curl -s https://www.bbc.co.uk/sounds/play/live:bbc_radio_three | xmllint --html --nowarning --xpath '//body//div[2]//text()' - | awk '/On Air/,/Next/' | awk 'NR==3, NR==7' | awk '{print}' ORS=' ' | sed "s/^ *//;s/ *$//;s/ \{1,\}/ /g" | sed 's/./&   /14')
+echo "$onair" > ~/.conky/conkyradiotray-ng/onair.txt
 }
+
 
 On_radiofour()
-#Get what's on Radio 4
+# Get what's on Radio 4
 {
-        timeslot=$(curl -s https://www.bbc.co.uk/radio4 | xmllint --html --nowarning --xpath '//div[2]/a//time/text()' - )
-
-        prog=$(curl -s https://www.bbc.co.uk/radio4 | xmllint --html --nowarning --xpath '//div[2]/a//h3/text()' - )
-
-        progname=$(curl -s https://www.bbc.co.uk/radio4 | xmllint --html --nowarning --xpath '//div[2]/a//p/text()' - )
-
-        echo "$timeslot" > /home/swipe/.conky/conkyradiotray-ng/onair.txt
- 
-        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo "$prog" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo "$progname" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+# Get on air now data, remove white spaces from the times and add extra spaces after times
+onair=$(curl -s https://www.bbc.co.uk/sounds/play/live:bbc_radio_fourfm | xmllint --html --nowarning --xpath '//body//div[2]//text()' - | awk '/On Air/,/Next/' | awk 'NR==3, NR==7' | awk '{print}' ORS=' ' | sed "s/^ *//;s/ *$//;s/ \{1,\}/ /g" | sed 's/./&   /14')
+echo "$onair" > ~/.conky/conkyradiotray-ng/onair.txt
 }
 
-On_radiofourextra()
-#Get what's on Radio 4
+
+ On_radiofourextra()
+# Get what's on Radio 4
 {
-        timeslot=$(curl -s https://www.bbc.co.uk/radio4extra | xmllint --html --nowarning --xpath '//div[2]/a//time/text()' - )
-
-        prog=$(curl -s https://www.bbc.co.uk/radio4extra | xmllint --html --nowarning --xpath '//div[2]/a//h3/text()' - )
-
-        progname=$(curl -s https://www.bbc.co.uk/radio4extra | xmllint --html --nowarning --xpath '//div[2]/a//p/text()' - )
-
-        echo "$timeslot" > /home/swipe/.conky/conkyradiotray-ng/onair.txt
- 
-        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo "$prog" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo "$progname" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+# Get on air now data, remove white spaces from the times and add extra spaces after times
+onair=$(curl -s  https://www.bbc.co.uk/sounds/play/live:bbc_radio_four_extra | xmllint --html --nowarning --xpath '//body//div[2]//text()' - | awk '/On Air/,/Next/' | awk 'NR==3, NR==7' | awk '{print}' ORS=' ' | sed "s/^ *//;s/ *$//;s/ \{1,\}/ /g" | sed 's/./&   /14')
+echo "$onair" > ~/.conky/conkyradiotray-ng/onair.txt
 }
+
 
 On_fivelive()
-#Get what's on 5live
+# Get what's on 5live
 {
-        timeslot=$(curl -s https://www.bbc.co.uk/5live | xmllint --html --nowarning --xpath '//div[2]/a//time/text()' - )
-
-        prog=$(curl -s https://www.bbc.co.uk/5live | xmllint --html --nowarning --xpath '//div[2]/a//h3/text()' - )
-
-        progname=$(curl -s https://www.bbc.co.uk/5live | xmllint --html --nowarning --xpath '//div[2]/a//p/text()' - )
-
-        echo "$timeslot" > /home/swipe/.conky/conkyradiotray-ng/onair.txt
- 
-        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo "$prog" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo "$progname" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+# Get on air now data, remove white spaces from the times and add extra spaces after times
+onair=$(curl -s https://www.bbc.co.uk/sounds/play/live:bbc_radio_five_live | xmllint --html --nowarning --xpath '//body//div[2]//text()' - | awk '/On Air/,/Next/' | awk 'NR==3, NR==7' | awk '{print}' ORS=' ' | sed "s/^ *//;s/ *$//;s/ \{1,\}/ /g" | sed 's/./&   /14')
+echo ""$onair"" > ~/.conky/conkyradiotray-ng/onair.txt
 }
+
 
 On_radioparadise()
 #Get what's on radio paradise and download cover artist
@@ -138,11 +158,11 @@ On_radioparadise()
         rpartist=$(awk -F '[<>]' '/artist/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
         rpsongtitle=$(awk -F '[<>]' '/title/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
         # echo artist and song to 
-        echo "$rpartist" > /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo " - " >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        truncate --size -1 /home/swipe/.conky/conkyradiotray-ng/onair.txt
-        echo "$rpsongtitle" >> /home/swipe/.conky/conkyradiotray-ng/onair.txt
+        echo "$rpartist" > ~/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 ~/.conky/conkyradiotray-ng/onair.txt
+        echo " - " >> ~/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 ~/.conky/conkyradiotray-ng/onair.txt
+        echo "$rpsongtitle" >> ~/.conky/conkyradiotray-ng/onair.txt
 }
 
 lbc_uk='LBC UK'
@@ -256,6 +276,7 @@ case "$station" in
 ;;
     "$talkradio" )
         convert ~/.config/radiotray-ng/bookmark_icons/talkradio -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+        On_Talkradio
 ;;
     "$talksport" )
         convert ~/.config/radiotray-ng/bookmark_icons/talksport -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
@@ -298,7 +319,7 @@ case "$station" in
 esac
 
 # Show artist and title info or "No Info"
-if [ "$lbc_uk" = "$st" ] || [ "$lbc_news" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$radiothree" = "$st" ] || [ "$radiothreehq" = "$st" ] || [ "$radiofour" = "$st" ] || [ "$radiofourextra" = "$st" ]  || [ "$fivelive" = "$st" ] || [ "$radio_paradise" = "$st" ] || [ "$chilloutplus" = "$st" ];
+if [ "$lbc_uk" = "$st" ] || [ "$lbc_news" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$talkradio" = "$st" ] || [ "$radio_paradise" = "$st" ] || [ "$chilloutplus" = "$st" ] || [ "$radiofour" = "$st" ] || [ "$radiofourextra" = "$st" ] || [ "$radiothree" = "$st" ] || [ "$radiothreehq" = "$st" ]|| [ "$fivelive" = "$st" ];
     then
     conkytitle=$(cat ~/.conky/conkyradiotray-ng/onair.txt)
  
