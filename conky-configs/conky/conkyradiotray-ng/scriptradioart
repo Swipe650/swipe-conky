@@ -136,6 +136,14 @@ echo "$onair" > ~/.conky/conkyradiotray-ng/onair.txt
 }
 
 
+On_radiostoke()
+# Get what's on Radio stoke
+{
+# Get on air now data, remove white spaces from the times and add extra spaces after times
+onair=$(curl -s https://www.bbc.co.uk/sounds/play/live:bbc_radio_stoke | xmllint --html --nowarning --xpath '//body//div[2]//text()' - | awk '/On Air/,/Next/' | awk 'NR==3, NR==7' | awk '{print}' ORS=' ' | sed "s/^ *//;s/ *$//;s/ \{1,\}/ /g" | sed 's/./&   /14')
+echo "$onair" > ~/.conky/conkyradiotray-ng/onair.txt
+}
+
 On_radioparadise()
 #Get what's on radio paradise and download cover artist
 {
@@ -270,6 +278,7 @@ case "$station" in
 ;;
     "$radiostoke" )
         convert ~/.config/radiotray-ng/bookmark_icons/radiostoke -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+        On_radiostoke
 ;;
     "$radiokent" )
         convert ~/.config/radiotray-ng/bookmark_icons/radiokent -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
@@ -319,7 +328,7 @@ case "$station" in
 esac
 
 # Show artist and title info or "No Info"
-if [ "$lbc_uk" = "$st" ] || [ "$lbc_news" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$talkradio" = "$st" ] || [ "$radio_paradise" = "$st" ] || [ "$chilloutplus" = "$st" ] || [ "$radiofour" = "$st" ] || [ "$radiofourextra" = "$st" ] || [ "$radiothree" = "$st" ] || [ "$radiothreehq" = "$st" ]|| [ "$fivelive" = "$st" ];
+if [ "$lbc_uk" = "$st" ] || [ "$lbc_news" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$talkradio" = "$st" ] || [ "$radio_paradise" = "$st" ] || [ "$chilloutplus" = "$st" ] || [ "$radiofour" = "$st" ] || [ "$radiofourextra" = "$st" ] || [ "$radiothree" = "$st" ] || [ "$radiothreehq" = "$st" ] || [ "$fivelive" = "$st" ] || [ "$radiostoke" = "$st" ] ;
     then
     conkytitle=$(cat ~/.conky/conkyradiotray-ng/onair.txt)
  
