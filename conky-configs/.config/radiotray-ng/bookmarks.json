@@ -7,13 +7,20 @@
 			{
 				"image" : "~/.config/radiotray-ng/bookmark_icons/lbc",
 				"name" : "LBC UK",
-				"notifications" : true,
+				"notifications" : false,
 				"url" : "http://media-ice.musicradio.com:80/LBCUK"
 			},
 			{
 				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/lbc_news",
 				"name" : "LBC News",
-				"url" : "http://media-ice.musicradio.com/LBC1152"
+				"notifications" : false,
+				"url" : "https://media-ssl.musicradio.com/LBCNewsUK?"
+			},
+			{
+				"image" : "~/.config/radiotray-ng/bookmark_icons/talkradio",
+				"name" : "TalkRadio",
+				"notifications" : false,
+				"url" : "http://radio.talkradio.co.uk/stream?ref=rf"
 			},
 			{
 				"image" : "~/.config/radiotray-ng/bookmark_icons/rp",
@@ -57,11 +64,6 @@
 				"url" : "http://media-ice.musicradio.com/LBCLondon.m3u"
 			},
 			{
-				"image" : "~/.config/radiotray-ng/bookmark_icons/talkradio",
-				"name" : "TalkRadio",
-				"url" : "http://radio.talkradio.co.uk/stream?ref=rf"
-			},
-			{
 				"image" : "~/.config/radiotray-ng/bookmark_icons/hr80s",
 				"name" : "Hard Rockin 80s",
 				"url" : "http://hardrockin80s.com/80.pls"
@@ -76,12 +78,6 @@
 				"image" : "~/.config/radiotray-ng/bookmark_icons/twit",
 				"name" : "TWiT.am",
 				"url" : "http://twit.am/listen.m3u"
-			},
-			{
-				"image" : "~/.config/radiotray-ng/bookmark_icons/ragga",
-				"name" : "Raggakings",
-				"notifications" : true,
-				"url" : "http://www.raggakings.net/listen.pls"
 			},
 			{
 				"image" : "~/.config/radiotray-ng/bookmark_icons/kfi",
@@ -134,12 +130,6 @@
 				"url" : "http://open.live.bbc.co.uk/mediaselector/5/select/version/2.0/mediaset/http-icy-mp3-a/vpid/bbc_radio_stoke/format/pls.pls"
 			},
 			{
-				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/radiokent",
-				"name" : "Radio Kent",
-				"notifications" : true,
-				"url" : "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_lrkent_mf_p"
-			},
-			{
 				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/radio3",
 				"name" : "Radio 3 HQ",
 				"notifications" : true,
@@ -150,6 +140,53 @@
 				"name" : "Radio 3",
 				"notifications" : true,
 				"url" : "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio3_mf_p"
+			}
+		]
+	},
+	{
+		"group" : "Classical",
+		"image" : "",
+		"stations" : 
+		[
+			{
+				"image" : "",
+				"name" : "KDFC",
+				"url" : "http://provisioning.streamtheworld.com/pls/KDFCFM.pls"
+			},
+			{
+				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/classicfm",
+				"name" : "Classic FM",
+				"url" : "http://media-ice.musicradio.com/ClassicFMMP3.m3u"
+			},
+			{
+				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/radio3",
+				"name" : "Radio 3 HQ",
+				"notifications" : true,
+				"url" : "http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/uk/sbr_high/ak/bbc_radio_three.m3u8"
+			},
+			{
+				"image" : "",
+				"name" : "WCPE",
+				"url" : "http://www.ibiblio.org/wcpe/wcpe.pls"
+			},
+			{
+				"image" : "",
+				"name" : "CINEMIX",
+				"url" : "http://cinemix.us/cine.asx"
+			},
+			{
+				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/1FM",
+				"name" : "1.FM",
+				"url" : "http://185.33.22.15:11077/"
+			},
+			{
+				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/Audiophile_Classical",
+				"name" : "Audiophile Classical",
+				"url" : "http://94.23.201.38:8010"
+			},
+			{
+				"name" : "Classical",
+				"url" : "http://strm112.1.fm/classical_mobile_mp3"
 			}
 		]
 	},
@@ -277,34 +314,6 @@
 				"image" : "",
 				"name" : "Sonic Universe",
 				"url" : "http://somafm.com/sonicuniverse.pls"
-			}
-		]
-	},
-	{
-		"group" : "Classical",
-		"image" : "",
-		"stations" : 
-		[
-			{
-				"image" : "",
-				"name" : "KDFC",
-				"url" : "http://provisioning.streamtheworld.com/pls/KDFCFM.pls"
-			},
-			{
-				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/classicfm",
-				"name" : "Classic FM",
-				"notifications" : false,
-				"url" : "http://media-ice.musicradio.com/ClassicFMMP3.m3u"
-			},
-			{
-				"image" : "",
-				"name" : "WCPE",
-				"url" : "http://www.ibiblio.org/wcpe/wcpe.pls"
-			},
-			{
-				"image" : "",
-				"name" : "CINEMIX",
-				"url" : "http://cinemix.us/cine.asx"
 			}
 		]
 	},

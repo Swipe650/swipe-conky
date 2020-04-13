@@ -235,7 +235,7 @@ fi
 title_read=$(head -1 ~/.conky/conkyradiotray-ng/artist_title.txt)
 
 #Read $title and substitute white spaces for '+' and '&' for '%26' and '#' for '%23' and ':' for '%3A'so google image search works on the whole string
-title_search=$(echo $title | sed 's/ /+/g' | sed 's/&/%26/g' | sed 's/#/%23/g' | sed 's/:/%3A/g')
+title_search=$(echo $title | sed 's/ /+/g' | sed 's/&/%26/g' | sed 's/#/%23/g' | sed 's/:/%3A/g' | sed 's/,/%C2/g')
 
 #Get the URL of $title, define awk record seperator as "src", select the second record with NR==2, cut up to the 6th character, then remove the last 11 characters with sed
 linkMiniature=$(wget -U 'Googlebot-Image/1.0' -qO - "www.google.co.uk/search?q=$title_search\&tbm=isch" | awk -v RS='[[:blank:]]' '/^src=/' | awk 'NR==2' | cut -c6- | sed 's/.\{11\}$//')
