@@ -176,7 +176,7 @@
 			},
 			{
 				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/1FM",
-				"name" : "1.FM",
+				"name" : "1.FM Classical",
 				"url" : "http://185.33.22.15:11077/"
 			},
 			{
@@ -185,8 +185,9 @@
 				"url" : "http://94.23.201.38:8010"
 			},
 			{
-				"name" : "Classical",
-				"url" : "http://strm112.1.fm/classical_mobile_mp3"
+                "image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/audiophile_baroque",
+				"name" : "Audiophile Baroque",
+				"url" : "http://94.23.201.38:8000"
 			}
 		]
 	},
