@@ -176,8 +176,8 @@ On_radioparadise()
                 convert ~/.config/radiotray-ng/bookmark_icons/rp_art -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
             fi
         
-        rpartist=$(awk -F '[<>]' '/artist/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
-        rpsongtitle=$(awk -F '[<>]' '/title/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
+        rpartist=$(awk -F '[<>]' '/artist/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml | sed 's/amp;//')
+        rpsongtitle=$(awk -F '[<>]' '/title/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml | sed 's/amp;//')
         # echo artist and song to 
         echo "$rpartist" > ~/.conky/conkyradiotray-ng/onair.txt
         truncate --size -1 ~/.conky/conkyradiotray-ng/onair.txt
@@ -310,15 +310,15 @@ case "$station" in
     "$signal2" )
         convert ~/.config/radiotray-ng/bookmark_icons/signal2 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon    
 ;;
-    "$classicfm" )
-        convert ~/.config/radiotray-ng/bookmark_icons/classicfm_round -resize 115 ~/.config/radiotray-ng/bookmark_icons/icon 
+#     "$classicfm" )
+#         convert ~/.config/radiotray-ng/bookmark_icons/classicfm_round -resize 115 ~/.config/radiotray-ng/bookmark_icons/icon 
 #;;
 #     "$plan_rock" )
 #         convert  ~/.config/radiotray-ng/bookmark_icons/planrock -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
-;;
-    "$audiophile" )
-        convert ~/.config/radiotray-ng/bookmark_icons/Audiophile_Classical -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
-;;
+# ;;
+#     "$audiophile" )
+#         convert ~/.config/radiotray-ng/bookmark_icons/Audiophile_Classical -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+#;;
     "$chilloutplus" )
         On_chilloutzone
 ;;
