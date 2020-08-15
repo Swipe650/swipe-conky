@@ -117,12 +117,12 @@
 			{
 				"image" : "~/.config/radiotray-ng/bookmark_icons//radio4",
 				"name" : "Radio 4",
-				"url" : "http://www.radio-browser.info/webservice/pls/url/107069"
+				"url" : "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio4fm_mf_p"
 			},
 			{
 				"image" : "~/.config/radiotray-ng/bookmark_icons/radio4extra",
 				"name" : "Radio 4 Extra",
-				"url" : "http://www.radio-browser.info/webservice/pls/url/126452"
+				"url" : "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio4extra_mf_p"
 			},
 			{
 				"image" : "~/.config/radiotray-ng/bookmark_icons/radiostoke",
@@ -185,7 +185,7 @@
 				"url" : "http://94.23.201.38:8010"
 			},
 			{
-                "image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/audiophile_baroque",
+				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/audiophile_baroque",
 				"name" : "Audiophile Baroque",
 				"url" : "http://94.23.201.38:8000"
 			}
