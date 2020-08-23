@@ -67,6 +67,11 @@ On_Talkradio()
                 onairtime="4pm - 7pm"
         ;;
         esac
+        case "17:00" in
+            $onairtime )
+                onairtime="5pm - 7pm"
+        ;;
+        esac
         case "19:00" in
             $onairtime )
                 onairtime="7pm - 10pm"
@@ -178,6 +183,8 @@ On_radioparadise()
         
         rpartist=$(awk -F '[<>]' '/artist/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml | sed 's/amp;//')
         rpsongtitle=$(awk -F '[<>]' '/title/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml | sed 's/amp;//')
+        #rpartist=$(awk -F '[<>]' '/artist/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml | sed 's/amp;//')
+        #rpsongtitle=$(awk -F '[<>]' '/title/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml | sed 's/amp;//')
         # echo artist and song to 
         echo "$rpartist" > ~/.conky/conkyradiotray-ng/onair.txt
         truncate --size -1 ~/.conky/conkyradiotray-ng/onair.txt
