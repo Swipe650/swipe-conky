@@ -16,8 +16,11 @@ Onair_txt()
 On_LBC()
 {
 # Get what's on LBC
-        #onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/span//text()' - | tail -c 61)
-        onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/p/span/a//text()' - | tail -c 61)
+        #toggle comment on line below for guest presenter schedule
+        onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/span//text()' - | tail -c 61) 
+        
+        #toggle comment on line below for normal presenter schedule
+        #onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/p/span/a//text()' - | tail -c 61)
         onairtime=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/p/span/text()' - | tail -c 25)
         Onair_txt
 }
@@ -81,6 +84,11 @@ On_Talkradio()
         case "20:00" in
             $onairtime )
                 onairtime="8pm - 10pm"
+        ;;
+        esac
+        case "20:30" in
+            $onairtime )
+                onairtime="8:30 - 10pm"
         ;;
         esac
         case "22:00" in
@@ -202,6 +210,7 @@ On_radioparadise()
 lbc_uk='LBC UK'
 lbc_london='LBC London'
 lbc_news='LBC News'
+times_radio='Times Radio'
 #plan_rock='Planet Rock'
 kfi='KFI'
 twit='TWiT.am'
@@ -235,7 +244,8 @@ if [ "$artist" = "$status" ];
 then
 #title='radiotray icon'
 #title='hashtag/radiotray'
-title='radio tower icon white'
+#title='radio tower icon white'
+title='Radiotray-NG Alternatives in 2021 - community voted on SaaSHub'
 #title='black'
 elif [ "$cadena" = "$rp" ]; 
 then 
@@ -276,6 +286,10 @@ case "$station" in
     "$lbc_london" )
         convert ~/.config/radiotray-ng/bookmark_icons/lbc2 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
         On_LBC
+;;
+    "$times_radio" )
+        convert ~/.config/radiotray-ng/bookmark_icons/timesradio -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+        #On_LBC
 ;;
     "$kfi" )
         convert ~/.config/radiotray-ng/bookmark_icons/kfi -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
