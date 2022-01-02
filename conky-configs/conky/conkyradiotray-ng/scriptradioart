@@ -16,11 +16,12 @@ Onair_txt()
 On_LBC()
 {
 # Get what's on LBC
-        #toggle comment on line below for guest presenter schedule
+        #Query if guest presenter schedule is empty
         onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/span//text()' - | tail -c 61) 
-        
-        #toggle comment on line below for normal presenter schedule
-        #onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/p/span/a//text()' - | tail -c 61)
+        if [[ -z "$onair" ]]; then
+        #Query normal presenter schedule
+        onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/p/span/a//text()' - | tail -c 61)
+        fi
         onairtime=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '//section/div/p/span/text()' - | tail -c 25)
         Onair_txt
 }
