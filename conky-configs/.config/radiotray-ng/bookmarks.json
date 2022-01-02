@@ -11,16 +11,21 @@
 				"url" : "http://media-ice.musicradio.com:80/LBCUK"
 			},
 			{
-				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/lbc_news",
-				"name" : "LBC News",
-				"notifications" : false,
-				"url" : "https://media-ssl.musicradio.com/LBCNewsUK?"
-			},
-			{
 				"image" : "~/.config/radiotray-ng/bookmark_icons/talkradio",
 				"name" : "TalkRadio",
 				"notifications" : false,
 				"url" : "http://radio.talkradio.co.uk/stream?ref=rf"
+			},
+			{
+				"image" : "~/.config/radiotray-ng/bookmark_icons/timesradio",
+				"name" : "Times Radio",
+				"url" : "http://timesradio.wireless.radio/stream?ref=rf"
+			},
+			{
+				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/lbc_news",
+				"name" : "LBC News",
+				"notifications" : false,
+				"url" : "https://media-ssl.musicradio.com/LBCNewsUK?"
 			},
 			{
 				"image" : "~/.config/radiotray-ng/bookmark_icons/rp",
@@ -36,6 +41,7 @@
 			{
 				"image" : "~/.config/radiotray-ng/bookmark_icons/planrock",
 				"name" : "Planet Rock",
+				"notifications" : false,
 				"url" : "https://stream-mz.planetradio.co.uk/planetrock.aac"
 			},
 			{
