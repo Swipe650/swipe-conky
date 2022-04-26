@@ -35,84 +35,92 @@ On_LBC_News()
         Onair_txt
 }
 
+# On_Talkradio()
+# {
+# # Get what's on Talkradio
+#         onair=$(curl -s https://talkradio.co.uk/radio/schedule | grep "On Air now" | awk '$0=$2' FS=\> RS=\< | awk 'FNR == 3 {print}')
+#         onairtime=$(curl -s https://talkradio.co.uk/radio/schedule | grep "On Air now" | awk '$0=$2' FS=\> RS=\< | awk 'FNR == 1 {print}')
+#     
+#         case "01:00" in
+#             $onairtime )
+#                 onairtime="1am - 5am"
+#         ;;
+#         esac
+#         case "05:00" in
+#             $onairtime )
+#                 onairtime="5am - 6:30am"
+#         ;;
+#         esac
+#         
+#         case "06:30" in
+#             $onairtime )
+#                 onairtime="6:30am - 10am"
+#         ;;
+#         esac
+#         case "10:00" in
+#             $onairtime )
+#                 onairtime="10am - 1pm"
+#         ;;
+#         esac
+#         case "13:00" in
+#             $onairtime )
+#                 onairtime="1pm - 4pm"
+#         ;;
+#         esac
+#         case "16:00" in
+#             $onairtime )
+#                 onairtime="4pm - 7pm"
+#         ;;
+#         esac
+#         case "17:00" in
+#             $onairtime )
+#                 onairtime="5pm - 7pm"
+#         ;;
+#         esac
+#         case "19:00" in
+#             $onairtime )
+#                 onairtime="7pm - 10pm"
+#         ;;
+#         esac
+#         case "20:00" in
+#             $onairtime )
+#                 onairtime="8pm - 10pm"
+#         ;;
+#         esac
+#         case "20:30" in
+#             $onairtime )
+#                 onairtime="8:30 - 10pm"
+#         ;;
+#         esac
+#         case "22:00" in
+#             $onairtime )
+#                 onairtime="10pm - 1am"
+#         ;;
+#         esac
+#                     
+# #check for Weekend and adjust the morning schedule times
+# 
+#         if [ $(date '+%u') = "6" ] || [ $(date '+%u') = "7" ]
+#             then
+#                 case "05:00" in
+#                     $onairtime )
+#                         onairtime="5am - 7am"
+#                 ;;
+#                 esac
+#                 case "07:00" in
+#                     $onairtime )
+#                         onairtime="7am - 10am"
+#                 ;;
+#                 esac
+#         fi
+#         
+#         Onair_txt
+# }
+
 On_Talkradio()
 {
-# Get what's on Talkradio
-        onair=$(curl -s https://talkradio.co.uk/radio/schedule | grep "On Air now" | awk '$0=$2' FS=\> RS=\< | awk 'FNR == 3 {print}')
-        onairtime=$(curl -s https://talkradio.co.uk/radio/schedule | grep "On Air now" | awk '$0=$2' FS=\> RS=\< | awk 'FNR == 1 {print}')
-    
-        case "01:00" in
-            $onairtime )
-                onairtime="1am - 5am"
-        ;;
-        esac
-        case "05:00" in
-            $onairtime )
-                onairtime="5am - 6:30am"
-        ;;
-        esac
-        
-        case "06:30" in
-            $onairtime )
-                onairtime="6:30am - 10am"
-        ;;
-        esac
-        case "10:00" in
-            $onairtime )
-                onairtime="10am - 1pm"
-        ;;
-        esac
-        case "13:00" in
-            $onairtime )
-                onairtime="1pm - 4pm"
-        ;;
-        esac
-        case "16:00" in
-            $onairtime )
-                onairtime="4pm - 7pm"
-        ;;
-        esac
-        case "17:00" in
-            $onairtime )
-                onairtime="5pm - 7pm"
-        ;;
-        esac
-        case "19:00" in
-            $onairtime )
-                onairtime="7pm - 10pm"
-        ;;
-        esac
-        case "20:00" in
-            $onairtime )
-                onairtime="8pm - 10pm"
-        ;;
-        esac
-        case "20:30" in
-            $onairtime )
-                onairtime="8:30 - 10pm"
-        ;;
-        esac
-        case "22:00" in
-            $onairtime )
-                onairtime="10pm - 1am"
-        ;;
-        esac
-                    
-#check for Weekend and adjust the morning schedule times
-
-        if [ $(date '+%u') = "6" ] || [ $(date '+%u') = "7" ]
-            then
-                case "05:00" in
-                    $onairtime )
-                        onairtime="5am - 7am"
-                ;;
-                esac
-                case "07:00" in
-                    $onairtime )
-                        onairtime="7am - 10am"
-                ;;
-                esac
-        fi
+# # Get what's on Talkradio
+        onair=$(curl -s https://beta.talk.tv/popout-player?selectedStation=talkradio | xmllint --html --nowarning --xpath '/html/body/div/div/div/div[4]/div/div/div/div[2]/div[2]/p/text()' -)
         
         Onair_txt
 }
@@ -326,7 +334,7 @@ case "$station" in
         convert ~/.config/radiotray-ng/bookmark_icons/radiokent -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
 ;;
     "$talkradio" )
-        convert ~/.config/radiotray-ng/bookmark_icons/talkradio -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+        convert ~/.config/radiotray-ng/bookmark_icons/TalkRadio -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
         On_Talkradio
 ;;
     "$talksport" )
