@@ -41,7 +41,7 @@ On_Talkradio()
 {
 # # Get what's on Talkradio
         onair=$(curl -s https://beta.talk.tv/popout-player?selectedStation=talkradio | xmllint --html --nowarning --xpath '/html/body/div/div/div/div[4]/div/div/div/div[2]/div[2]/p/text()' - | sed 's/amp;//')
-        
+        onairtime=$(curl -s https://beta.talk.tv/popout-player?selectedStation=talkradio | xmllint --html --nowarning --xpath '/html/body/div/div/div/div[4]/div/div/div/div[2]/div[1]/div/div[2]/p/text()'  - | tail -c 15)
         Onair_txt
 }
 
