@@ -40,8 +40,8 @@ On_LBC_News()
 On_Talkradio()
 {
 # # Get what's on Talkradio
-        onair=$(curl -s https://beta.talk.tv/popout-player?selectedStation=talkradio | xmllint --html --nowarning --xpath '/html/body/div/div/div/div[4]/div/div/div/div[2]/div[2]/p/text()' - | sed 's/amp;//')
-        onairtime=$(curl -s https://beta.talk.tv/popout-player?selectedStation=talkradio | xmllint --html --nowarning --xpath '/html/body/div/div/div/div[4]/div/div/div/div[2]/div[1]/div/div[2]/p/text()'  - | tail -c 12)
+        onair=$(curl -s https://talk.tv/popout-player?selectedStation=talkradio | xmllint --html --nowarning --xpath '/html/body/div[1]/div/div/div/div/div/div/div[2]/div/div/div/div/div[3]/div/span/text()' - | sed 's/amp;//')
+        onairtime=$(curl -s https://talk.tv/popout-player?selectedStation=talkradio | xmllint --html --nowarning --xpath '/html/body/div[1]/div/div/div/div/div/div/div[2]/div/div/div/div/div[2]/div/div/div[2]/div/span/text()'  - | tail -c 12)
         Onair_txt
 }
 
@@ -163,7 +163,7 @@ ragga='Raggakings'
 talkradio='TalkRadio'
 talksport='talkSPORT'
 talksport2='talkSPORT 2'
-signal2='Signal 2'
+bloomr='Bloomberg Radio'
 #classicfm='Classic FM'
 chilloutplus='Chillout Zone'
 #audiophile='Audiophile Classical'
@@ -271,8 +271,8 @@ case "$station" in
     "$talksport2" )
         convert ~/.config/radiotray-ng/bookmark_icons/talksport2 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
 ;;
-    "$signal2" )
-        convert ~/.config/radiotray-ng/bookmark_icons/signal2 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon    
+    "$bloomr" )
+        convert ~/.config/radiotray-ng/bookmark_icons/br -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon    
 ;;
 #     "$classicfm" )
 #         convert ~/.config/radiotray-ng/bookmark_icons/classicfm_round -resize 115 ~/.config/radiotray-ng/bookmark_icons/icon 
