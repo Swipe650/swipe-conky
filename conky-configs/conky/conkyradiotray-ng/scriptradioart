@@ -149,8 +149,7 @@ lbc_uk='LBC UK'
 lbc_london='LBC London'
 lbc_news='LBC News'
 times_radio='Times Radio'
-#plan_rock='Planet Rock'
-kfi='KFI'
+plan_rock='Planet Rock'
 twit='TWiT.am'
 fivelive='5live'
 radiofour='Radio 4'
@@ -183,7 +182,7 @@ then
 #title='radiotray icon'
 #title='hashtag/radiotray'
 #title='radio tower icon white'
-title='Radiotray-NG Alternatives in 2021 - community voted on SaaSHub'
+title='free white radio tower icon-18'
 #title='black'
 elif [ "$cadena" = "$rp" ]; 
 then 
@@ -229,9 +228,9 @@ case "$station" in
     "$times_radio" )
         convert ~/.config/radiotray-ng/bookmark_icons/timesradio -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
         On_Timesradio
-;;
-    "$kfi" )
-        convert ~/.config/radiotray-ng/bookmark_icons/kfi -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+# ;;
+#     "$kfi" )
+#         convert ~/.config/radiotray-ng/bookmark_icons/kfi -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
 ;;
     "$twit" )
         convert ~/.config/radiotray-ng/bookmark_icons/twit -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
@@ -312,17 +311,22 @@ if [ "$lbc_uk" = "$st" ] || [ "$lbc_news" = "$st" ] || [ "$lbc_london" = "$st" ]
     then
     conkytitle=$(cat ~/.conky/conkyradiotray-ng/onair.txt)
  
-elif [ "$kfi" = "$st" ] || [ "$playing" = "$so" ]
+elif [ "$plan_rock" = "$st" ] 
+    then
+    conkytitle=$ar
+    conkyartist=$so
+    conkyspacer=" - "
+     
+elif [ "$playing" = "$so" ]
     then 
     conkytitle='No info'
     
 else 
     conkytitle=$so
     conkyartist=$ar
-    conkyspacer="-"
+    conkyspacer=" - "
 fi
 
-
-echo "$conkytitle" "$conkyspacer" "$conkyartist"
+echo "$conkyartist""$conkyspacer""$conkytitle"
 
 exit 0
