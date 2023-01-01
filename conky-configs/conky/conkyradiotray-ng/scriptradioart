@@ -3,6 +3,7 @@
 #Populate $st with current station, $so with current artist and song and define station name variables
 st=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.station')
 so=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title' | fold -s -w150)
+ar=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.artist' | fold -s -w150)
 
 Onair_txt()
 {
@@ -189,6 +190,7 @@ then
 station='Radio Paradise'  
 else 
 title=$so
+artist=$ar
 fi
 
 #Check if station='(not playing)
@@ -315,10 +317,12 @@ elif [ "$kfi" = "$st" ] || [ "$playing" = "$so" ]
     conkytitle='No info'
     
 else 
-    conkytitle=$so 
+    conkytitle=$so
+    conkyartist=$ar
+    conkyspacer="-"
 fi
 
 
-echo "$conkytitle"
+echo "$conkytitle" "$conkyspacer" "$conkyartist"
 
 exit 0
