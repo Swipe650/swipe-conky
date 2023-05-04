@@ -17,7 +17,7 @@ first_cover=""
 	if [ "$new_cover" != "$first_cover" ]
 	then
 		first_cover="$new_cover"
-		wget -O ~/.conkycolors/spotify/last_album_pic.png $new_cover
+		wget -O ~/.conky/conkyspotify/last_album_pic.png $new_cover
 	fi
 	sleep 1
 #done
