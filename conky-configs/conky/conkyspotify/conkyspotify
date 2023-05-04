@@ -41,14 +41,14 @@ TEXT
 
 ${if_running spotify}${voffset -5}${font Liberation Sans:style=Bold:size=8}
 ${voffset -6}${goto 73}Title: 
-${voffset -13}${goto 73}${color2}            ${exec ~/.conkycolors/spotify/spotify_info_title}${color}
+${voffset -13}${goto 73}${color2}            ${exec ~/.conky/conkyspotify/spotify_info_title}${color}
 ${voffset 12}${goto 73}Artist: 
-${voffset -13}${goto 73}${color2}             ${exec ~/.conkycolors/spotify/spotify_info_artist}${color}
+${voffset -13}${goto 73}${color2}             ${exec ~/.conky/conkyspotify/spotify_info_artist}${color}
 ${voffset 12}${goto 73}Album: 
-${voffset -13}${goto 73}${color2}              ${exec ~/.conkycolors/spotify/spotify_info_album | fold -s -w 28}${color} 
+${voffset -13}${goto 73}${color2}              ${exec ~/.conky/conkyspotify/spotify_info_album | fold -s -w 28}${color} 
 ${voffset -160}
-${exec ~/.conkycolors/spotify/spotify_album_cover}
-${image ~/.conkycolors/spotify/last_album_pic.png -p 0,20 -s 60x60}
+${exec ~/.conky/conkyspotify/spotify_album_cover}
+${image ~/.conky/conkyspotify/last_album_pic.png -p 0,20 -s 60x60}
 
 ${else}#${voffset -5}${color0}${font ConkyColors:size=16}G${font}${color}${voffset -10}${goto 32}Spotify: ${color2}off${color}${voffset 7}
 ${endif}
