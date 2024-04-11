@@ -1,0 +1,56 @@
+background yes
+use_xft yes
+xftfont 123:size=8
+xftalpha 0.5
+update_interval 1
+total_run_times 0
+own_window yes
+own_window_type normal
+#own_window_type dock
+#own_window_transparent yes
+own_window_argb_visual yes
+own_window_argb_value 20
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+#own_window_hints decorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+#default_bar_size 0 6
+
+maximum_height 200
+maximum_width 271
+minimum_size 250
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders yes
+default_color white
+default_shade_color red
+default_outline_color green
+#alignment top_left
+alignment bottom_right
+gap_x 7
+gap_y 18
+no_buffers yes
+uppercase no
+cpu_avg_samples 2
+net_avg_samples 2
+override_utf8_locale yes
+#use_spacer no
+imlib_cache_size 0 
+
+TEXT
+
+${if_running tidal-hifi}${voffset -5}${font Liberation Sans:style=Bold:size=8}
+${voffset -6}${goto 73}Title: 
+${voffset -13}${goto 73}${color2}            ${exec ~/.conky/conkytidal/tidal_info_title}${color}
+${voffset 12}${goto 73}Artist: 
+${voffset -13}${goto 73}${color2}             ${exec ~/.conky/conkytidal/tidal_info_artist}${color}
+${voffset 12}${goto 73}Album: 
+${voffset -13}${goto 73}${color2}              ${exec ~/.conky/conkytidal/tidal_info_album | fold -s -w 28}${color} 
+${voffset -160}
+${exec ~/.conky/conkytidal/tidal_album_cover}
+${image ~/.conky/conkytidal/last_album_pic.png -p 0,20 -s 60x60}
+
+${else}#${voffset -5}${color0}${font ConkyColors:size=16}G${font}${color}${voffset -10}${goto 32}Spotify: ${color2}off${color}${voffset 7}
+${endif}
+${voffset 110}
+#${voffset -70}
