@@ -22,7 +22,7 @@ draw_shades no
 draw_outline no
 draw_borders no
 draw_graph_borders yes
-default_color white
+default_color FFFFFF
 default_shade_color red
 default_outline_color green
 #alignment top_left
