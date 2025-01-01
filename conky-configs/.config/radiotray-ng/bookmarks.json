@@ -11,7 +11,7 @@
 				"url" : "http://media-ice.musicradio.com:80/LBCUK"
 			},
 			{
-				"image" : "~/.config/radiotray-ng/bookmark_icons/talkradio",
+				"image" : "~/.config/radiotray-ng/bookmark_icons/TalkRadio",
 				"name" : "TalkRadio",
 				"notifications" : false,
 				"url" : "http://radio.talkradio.co.uk/stream?ref=rf"
@@ -22,16 +22,31 @@
 				"url" : "http://timesradio.wireless.radio/stream?ref=rf"
 			},
 			{
-				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/lbc_news",
-				"name" : "LBC News",
+				"image" : "~/.config/radiotray-ng/bookmark_icons/planrock",
+				"name" : "Planet Rock",
 				"notifications" : false,
-				"url" : "https://media-ssl.musicradio.com/LBCNewsUK?"
+				"url" : "https://stream.on.revma.com/6wa52xb1pg0uv?direct=false"
 			},
 			{
 				"image" : "~/.config/radiotray-ng/bookmark_icons/rp",
 				"name" : "Radio Paradise",
-				"notifications" : true,
-				"url" : "http://stream.radioparadise.com/flac"
+				"url" : "https://stream.radioparadise.com/flacm"
+			},
+			{
+				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/rp",
+				"name" : "Radio Paradise Rock Mix",
+				"url" : "https://stream.radioparadise.com/rock-flacm"
+			},
+			{
+				"image" : "~/.config/radiotray-ng/bookmark_icons/pingrad",
+				"name" : "Pinguin Radio",
+				"url" : "http://pr320.pinguinradio.com/listen.pls"
+			},
+			{
+				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/lbc_news",
+				"name" : "LBC News",
+				"notifications" : false,
+				"url" : "https://media-ssl.musicradio.com/LBCNewsUK?"
 			},
 			{
 				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/chilloutplus",
@@ -39,25 +54,9 @@
 				"url" : "https://chillout.zone/chillout_plus"
 			},
 			{
-				"image" : "~/.config/radiotray-ng/bookmark_icons/planrock",
-				"name" : "Planet Rock",
-				"notifications" : false,
-				"url" : "https://stream-mz.planetradio.co.uk/planetrock.aac"
-			},
-			{
 				"image" : "~/.config/radiotray-ng/bookmark_icons/tc",
 				"name" : "The Current",
 				"url" : "http://current.stream.publicradio.org/kcmp.mp3"
-			},
-			{
-				"image" : "~/.config/radiotray-ng/bookmark_icons/ibr",
-				"name" : "Indie Brew Radio",
-				"url" : "http://stream.indiebrew.net:8000"
-			},
-			{
-				"image" : "~/.config/radiotray-ng/bookmark_icons/pingrad",
-				"name" : "Pinguin Radio",
-				"url" : "http://pr320.pinguinradio.com/listen.pls"
 			},
 			{
 				"image" : "~/.config/radiotray-ng/bookmark_icons/morow",
@@ -86,15 +85,9 @@
 				"url" : "http://twit.am/listen.m3u"
 			},
 			{
-				"image" : "~/.config/radiotray-ng/bookmark_icons/kfi",
-				"name" : "KFI",
-				"notifications" : false,
-				"url" : "http://c8icyelb.prod.playlists.ihrhls.com/177_icy"
-			},
-			{
-				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/talksport2",
-				"name" : "talkSPORT 2",
-				"url" : "http://radio.talksport.com/stream2?awparams=platform:ts-web&amsparams=playerid:ts-web;"
+				"image" : "~/.config/radiotray-ng/bookmark_icons/br",
+				"name" : "Bloomberg Radio",
+				"url" : "http://provisioning.streamtheworld.com/pls/WBBRAMaac.pls"
 			},
 			{
 				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/talksport",
@@ -102,10 +95,17 @@
 				"url" : "http://radio.talksport.com/stream?aisGetOriginalStream=true"
 			},
 			{
-				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/signal2",
-				"name" : "Signal 2",
-				"notifications" : true,
-				"url" : "http://wg.cdn.tibus.net/STKSig2"
+				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/talksport2",
+				"name" : "talkSPORT 2",
+				"url" : "http://radio.talksport.com/stream2?awparams=platform:ts-web&amsparams=playerid:ts-web;"
+			},
+			{
+				"name" : "KOZT",
+				"url" : "http://stream.abacast.net/playlist/caradio-koztfmaac-ibc3.m3u"
+			},
+			{
+				"name" : "Greatest Hits Radio",
+				"url" : "http://edge-bauerall-01-gos2.sharp-stream.com/net2london.mp3"
 			}
 		]
 	},
@@ -117,13 +117,17 @@
 			{
 				"image" : "~/.config/radiotray-ng/bookmark_icons/5live",
 				"name" : "5live",
-				"notifications" : true,
-				"url" : "http://open.live.bbc.co.uk/mediaselector/5/redir/version/2.0/mediaset/http-icy-mp3-a-stream/proto/http/vpid/bbc_radio_five_live"
+				"url" : "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_five_live/bbc_radio_five_live.isml/bbc_radio_five_live-audio=320000.m3u8"
+			},
+			{
+				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/5livesportsextra",
+				"name" : "5 Live Sports Extra",
+				"url" : "http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/uk/sbr_high/ak/bbc_radio_five_live_sports_extra.m3u8"
 			},
 			{
 				"image" : "~/.config/radiotray-ng/bookmark_icons//radio4",
 				"name" : "Radio 4",
-				"url" : "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio4fm_mf_p"
+				"url" : "http://stream.live.vc.bbcmedia.co.uk/bbc_radio_fourfm"
 			},
 			{
 				"image" : "~/.config/radiotray-ng/bookmark_icons/radio4extra",
@@ -146,6 +150,12 @@
 				"name" : "Radio 3",
 				"notifications" : true,
 				"url" : "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio3_mf_p"
+			},
+			{
+				"image" : "/home/swipe/.config/radiotray-ng/bookmark_icons/bbcws",
+				"name" : "BBC World Service",
+				"notifications" : false,
+				"url" : "http://stream.live.vc.bbcmedia.co.uk/bbc_world_service"
 			}
 		]
 	},
