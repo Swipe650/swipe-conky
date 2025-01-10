@@ -52,9 +52,9 @@ On_Talkradio()
          else ST=0
          fi
          
-         onairtime1=$(curl -s https://talk.tv/play/talkradio | xmllint --html --nowarning --xpath '/html/body/main/div[1]/div[2]/div[2]/div[2]/div[2]/time[1]' - | tail -c 31 | cut -c 16-23)
+         onairtime1=$(curl -s https://talk.tv/play/talkradio | xmllint --html --nowarning --xpath '/html/body/main/div[1]/div[2]/div[2]/div[2]/div[2]/time[1]' - | sed -r 's/[>]+/ /g' | tail -c 31 | cut -c 16-23) 
          #onairtime1=$(curl -s https://talk.tv/play/talkradio | xmllint --html --nowarning --xpath '/html/body/main/div[1]/div[2]/div[2]/div[2]/div[2]/text()' - | tail -c 31 | cut -c 1-8)
-         onairtime2=$(curl -s https://talk.tv/play/talkradio | xmllint --html --nowarning --xpath '/html/body/main/div[1]/div[2]/div[2]/div[2]/div[2]/time[2]' - | tail -c 31 | cut -c 17-23)
+         onairtime2=$(curl -s https://talk.tv/play/talkradio | xmllint --html --nowarning --xpath '/html/body/main/div[1]/div[2]/div[2]/div[2]/div[2]/time[2]' - | sed -r 's/[>]+/ /g' | tail -c 31 | cut -c 16-23)
          #onairtime2=$(curl -s https://talk.tv/play/talkradio | xmllint --html --nowarning --xpath '/html/body/main/div[1]/div[2]/div[2]/div[2]/div[2]/text()' - | tail -c 31 | cut -c 11-20)
 
          #onairtime3=$(date -d "$onairtime1 +$ST hour" "+%l:%M%P")
