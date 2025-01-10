@@ -3,7 +3,7 @@
 #Populate $st with current station, $so with current artist and song and define station name variables
 st=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.station')
 so=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title' | fold -s -w150)
-ar=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.artist' | fold -s -w150)
+ar=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.artist')
 
 Onair_txt()
 {
@@ -40,17 +40,34 @@ On_LBC_News()
 
 On_Talkradio()
 {
-# # Get what's on Talkradio
-        onair=$(curl -s https://talk.tv/popout-player?selectedStation=talkradio | xmllint --html --nowarning --xpath '/html/body/div[1]/div/div/div/div/div/div/div[2]/div/div/div/div/div[3]/div/span/text()' - | sed 's/amp;//')
-        onairtime=$(curl -s https://talk.tv/popout-player?selectedStation=talkradio | xmllint --html --nowarning --xpath '/html/body/div[1]/div/div/div/div/div/div/div[2]/div/div/div/div/div[2]/div/div/div[2]/div/span/text()'  - | tail -c 12)
-        Onair_txt
+# # # Get what's on Talkradio
+         
+         onair=$(curl -s https://talk.tv/play/talkradio | xmllint --html --nowarning --xpath '/html/body/main/div[1]/div[2]/div[2]/h2' - | sed 's/amp;//' | awk -F[\>] '{print $2}' | head -c -5)
+         #onair=$(curl -s https://talk.tv/play/talkradio | xmllint --html --nowarning --xpath '/html/body/main/div[1]/div[2]/div[2]/div[3]/text()' - | sed 's/amp;//')
+         #onairtime=$(curl -s https://talk.tv/play/talkradio | xmllint --html --nowarning --xpath '/html/body/main/div[1]/div[2]/div[2]/div[2]/div[2]/text()' - | tail -c 31 | cut -c 1-19) 
+         
+         # Check for BST or GMT
+         if [ $(date +%Z) = "BST" ]
+         then ST=1
+         else ST=0
+         fi
+         
+         onairtime1=$(curl -s https://talk.tv/play/talkradio | xmllint --html --nowarning --xpath '/html/body/main/div[1]/div[2]/div[2]/div[2]/div[2]/time[1]' - | tail -c 31 | cut -c 17-20)
+         #onairtime1=$(curl -s https://talk.tv/play/talkradio | xmllint --html --nowarning --xpath '/html/body/main/div[1]/div[2]/div[2]/div[2]/div[2]/text()' - | tail -c 31 | cut -c 1-8)
+         onairtime2=$(curl -s https://talk.tv/play/talkradio | xmllint --html --nowarning --xpath '/html/body/main/div[1]/div[2]/div[2]/div[2]/div[2]/time[2]' - | tail -c 31 | cut -c 16-20)
+         #onairtime2=$(curl -s https://talk.tv/play/talkradio | xmllint --html --nowarning --xpath '/html/body/main/div[1]/div[2]/div[2]/div[2]/div[2]/text()' - | tail -c 31 | cut -c 11-20)
+
+         onairtime3=$(date -d "$onairtime1" "+%l:%M%P")
+         onairtime4=$(date -d "$onairtime2" "+%l:%M%P") 
+         onairtime="$onairtime3 "-" $onairtime4"
+         Onair_txt
 }
 
 On_Timesradio()
 {
 # # Get what's on Timesradio - grep characters between > and </h1> and between > and </p>
-        onair=$(curl -s https://www.thetimes.co.uk/radio/live | xmllint --html --nowarning --xpath '/html/body/section/div/div/div[2]/div[1]/div[1]/main/h1' - | grep -o -P '(?<=>).*(?=</h1>)')
-        onairtime=$(curl -s https://www.thetimes.co.uk/radio/live | xmllint --html --nowarning --xpath '/html/body/section/div/div/div[2]/div[1]/div[1]/main/div/div/p' - | grep -o -P '(?<=>).*(?=</p>)')
+        onair=$(curl -s https://www.thetimes.com/radio/live-player | xmllint --html --nowarning --xpath '/html/body/section/div/div/div[2]/div[1]/div[1]/main/h1' - | grep -o -P '(?<=>).*(?=</h1>)')
+        onairtime=$(curl -s https://www.thetimes.com/radio/live-player | xmllint --html --nowarning --xpath '/html/body/section/div/div/div[2]/div[1]/div[1]/main/div/div/p' - | grep -o -P '(?<=>).*(?=</p>)')
         Onair_txt
 }
 
@@ -105,14 +122,6 @@ onair=$(curl -s https://www.bbc.co.uk/sounds/play/live:bbc_radio_five_live | xml
 echo "$onair" > ~/.conky/conkyradiotray-ng/onair.txt
 }
 
-On_fivelivesportsextra()
-# Get what's on 5live
-{
-# Get on air now data, remove white spaces from the times and add extra spaces after times
-onair=$(curl -s https://www.bbc.co.uk/sounds/play/live:bbc_radio_five_live_sports_extra | xmllint --html --nowarning --xpath '//body//div[2]//text()' - | awk '/On Air/,/Next/' | awk 'NR==3, NR==7' | awk '{print}' ORS=' ' | sed "s/^ *//;s/ *$//;s/ \{1,\}/ /g" | sed 's/./&   /14')
-echo "$onair" > ~/.conky/conkyradiotray-ng/onair.txt
-}
-
 
 On_radiostoke()
 # Get what's on Radio stoke
@@ -121,6 +130,19 @@ On_radiostoke()
 onair=$(curl -s https://www.bbc.co.uk/sounds/play/live:bbc_radio_stoke | xmllint --html --nowarning --xpath '//body//div[2]//text()' - | awk '/On Air/,/Next/' | awk 'NR==3, NR==7' | awk '{print}' ORS=' ' | sed "s/^ *//;s/ *$//;s/ \{1,\}/ /g" | sed 's/./&   /14')
 echo "$onair" > ~/.conky/conkyradiotray-ng/onair.txt
 }
+
+On_morow()
+{
+        echo "$ar" > ~/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 ~/.conky/conkyradiotray-ng/onair.txt
+        echo " - " >> ~/.conky/conkyradiotray-ng/onair.txt
+        truncate --size -1 ~/.conky/conkyradiotray-ng/onair.txt
+        echo "$so" >> ~/.conky/conkyradiotray-ng/onair.txt
+        echo "$title" | fold -s -w80 > ~/.conky/conkyradiotray-ng/artist_title.txt
+        wget -qO miniatureGoogleImage "$linkMiniature"
+        convert ~/miniatureGoogleImage -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+}
+
 
 On_radioparadise()
 #Get what's on radio paradise and download cover artist
@@ -157,10 +179,10 @@ lbc_uk='LBC UK'
 lbc_london='LBC London'
 lbc_news='LBC News'
 times_radio='Times Radio'
-plan_rock='Planet Rock'
+#plan_rock='Planet Rock'
+kfi='KFI'
 twit='TWiT.am'
 fivelive='5live'
-fivelivesportsextra='5 Live Sports Extra'
 radiofour='Radio 4'
 radiothree='Radio 3'
 radiothreehq='Radio 3 HQ'
@@ -175,6 +197,7 @@ talksport2='talkSPORT 2'
 bloomr='Bloomberg Radio'
 #classicfm='Classic FM'
 chilloutplus='Chillout Zone'
+morow='Morow'
 #audiophile='Audiophile Classical'
 not_playing='(not playing)'
 
@@ -198,7 +221,6 @@ then
 station='Radio Paradise'  
 else 
 title=$so
-artist=$ar
 fi
 
 #Check if station='(not playing)
@@ -223,7 +245,7 @@ linkMiniature=$(wget -U 'Googlebot-Image/1.0' -qO - "www.google.co.uk/search?q=$
 #Check each station variable and use imagemagick convert command to resize image and copy to ~/.config/radiotray-ng/bookmark_icons/icon
 case "$station" in 
     "$lbc_uk" )
-        convert  ~/.config/radiotray-ng/bookmark_icons/lbc_round -resize 115 ~/.config/radiotray-ng/bookmark_icons/icon
+        convert  ~/.config/radiotray-ng/bookmark_icons/lbc_round -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
         On_LBC
 ;;
     "$lbc_news" )
@@ -237,9 +259,9 @@ case "$station" in
     "$times_radio" )
         convert ~/.config/radiotray-ng/bookmark_icons/timesradio -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
         On_Timesradio
-# ;;
-#     "$kfi" )
-#         convert ~/.config/radiotray-ng/bookmark_icons/kfi -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+;;
+    "$kfi" )
+        convert ~/.config/radiotray-ng/bookmark_icons/kfi -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
 ;;
     "$twit" )
         convert ~/.config/radiotray-ng/bookmark_icons/twit -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
@@ -247,10 +269,6 @@ case "$station" in
     "$fivelive" )
         convert ~/.config/radiotray-ng/bookmark_icons/5live -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
         On_fivelive
-;;
-    "$fivelivesportsextra" )
-        convert ~/.config/radiotray-ng/bookmark_icons/5livesportsextra -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
-        On_fivelivesportsextra
 ;;
     "$radiofour" )
         convert ~/.config/radiotray-ng/bookmark_icons/radio4 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
@@ -300,6 +318,9 @@ case "$station" in
     "$chilloutplus" )
         On_chilloutzone
 ;;
+    "$morow" )
+        On_morow
+;;
     "$radio_paradise" )
         On_radioparadise
 ;;
@@ -320,17 +341,11 @@ case "$station" in
 esac
 
 # Show artist and title info or "No Info"
-if [ "$lbc_uk" = "$st" ] || [ "$lbc_news" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$talkradio" = "$st" ] || [ "$radio_paradise" = "$st" ] || [ "$chilloutplus" = "$st" ] || [ "$radiofour" = "$st" ] || [ "$radiofourextra" = "$st" ] || [ "$radiothree" = "$st" ] || [ "$radiothreehq" = "$st" ] || [ "$fivelive" = "$st" ] || [ "$fivelivesportsextra" = "$st" ] || [ "$radiostoke" = "$st" ] || [ "$times_radio" = "$st" ];
+if [ "$lbc_uk" = "$st" ] || [ "$lbc_news" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$talkradio" = "$st" ] || [ "$radio_paradise" = "$st" ] || [ "$chilloutplus" = "$st" ] || [ "$radiofour" = "$st" ] || [ "$radiofourextra" = "$st" ] || [ "$radiothree" = "$st" ] || [ "$radiothreehq" = "$st" ] || [ "$fivelive" = "$st" ] || [ "$radiostoke" = "$st" ] || [ "$times_radio" = "$st" ]  || [ "$morow" = "$st" ];
     then
     conkytitle=$(cat ~/.conky/conkyradiotray-ng/onair.txt)
  
-elif [ "$plan_rock" = "$st" ] 
-    then
-    conkytitle=$ar
-    conkyartist=$so
-    conkyspacer=" - "
-     
-elif [ "$playing" = "$so" ]
+elif [ "$kfi" = "$st" ] || [ "$playing" = "$so" ]
     then 
     conkytitle='No info'
     
@@ -339,6 +354,7 @@ else
     conkyartist=$ar
     conkyspacer=" - "
 fi
+
 
 echo "$conkyartist""$conkyspacer""$conkytitle"
 
