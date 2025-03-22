@@ -2,10 +2,10 @@
 
 first_cover=""
 
-	new_cover=`playerctl metadata --format '{{ mpris:artUrl }}'`
+	new_cover=`playerctl -i plasma-browser-integration metadata --format '{{ mpris:artUrl }}'`
 	if [ "$new_cover" != "$first_cover" ]
 	then
 		first_cover="$new_cover"
-		convert $new_cover ~/.conky/conkytidal/last_album_pic.png
+		magick $new_cover ~/.conky/conkytidal/last_album_pic.png
 	fi
 	sleep 1

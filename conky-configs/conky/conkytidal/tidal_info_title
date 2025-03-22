@@ -3,7 +3,7 @@
 first_title=""
 
 	#new_title=`playerctl metadata --format '{{ title }}'`
-	new_title=`playerctl metadata --format '{{ trunc(title, 27) }}'`
+	new_title=`playerctl -i plasma-browser-integration metadata --format '{{ trunc(title, 27) }}'`
 	if [ "$new_title" != "$first_title" ] 
 	then
 		first_title="$new_title"

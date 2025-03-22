@@ -2,7 +2,7 @@
 
 first_artist=""
 
-	new_artist=`playerctl metadata --format '{{ artist }}'`
+	new_artist=`playerctl -i plasma-browser-integration metadata --format '{{ artist }}'`
 	if [ "$new_artist" != "$first_artist" ] 
 	then
 		first_artist="$new_artist"

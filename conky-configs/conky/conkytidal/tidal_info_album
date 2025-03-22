@@ -2,7 +2,7 @@
 
 first_album=""
 
-	new_album=`playerctl metadata --format '{{ album }}'`
+	new_album=`playerctl -i plasma-browser-integration metadata --format '{{ album }}'`
 	if [ "$new_album" != "$first_album" ]
 	then
 		first_album="$new_album"
