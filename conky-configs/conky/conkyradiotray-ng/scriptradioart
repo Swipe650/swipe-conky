@@ -18,7 +18,8 @@ On_LBC()
 {
 # Get what's on LBC
         #Query if guest presenter schedule is empty
-        onair=$(curl -s https://ukradiolive.com/lbc-97-3 | xmllint --html --nowarning --xpath '/html/body/div[1]/div[3]/div/div[2]/div[2]/div[3]/div[1]/div[6]/div[4]/div[2]/a' - | tail -c 61 | awk -F'[><]' '{print $2}') 
+        #onair=$(curl -s https://ukradiolive.com/lbc-97-3 | xmllint --html --nowarning --xpath '/html/body/div[1]/div[3]/div/div[2]/div[2]/div[3]/div[1]/div[6]/div[4]/div[2]/a' - | tail -c 61 | awk -F'[><]' '{print $2}')
+        onair=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title')
         #if [[ -z "$onair" ]]; then
         #Query normal presenter schedule
         #onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '/html/body/div[1]/div/div[1]/div[2]/p' - | tail -c 25 | awk -F'[><]' '{print $2}')
@@ -173,9 +174,9 @@ if [ "$artist" = "$status" ];
 then
 title='antenna tower icon white'
 #title='free white radio tower icon-18'
-elif [ "$cadena" = "$rp" ]; 
-then 
-station='Radio Paradise'  
+# elif [ "$cadena" = "$rp" ]; 
+# then 
+# station='Radio Paradise'  
 else 
 title=$so
 #title=""$ar" "-" "$so""
@@ -244,9 +245,9 @@ case "$station" in
 ;;
     "$bloomr" )
         convert ~/.config/radiotray-ng/bookmark_icons/br -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon    
-;;
-    "$radio_paradise" )
-        On_radioparadise
+# ;;
+#     "$radio_paradise" )
+#         On_radioparadise
 ;;
     #If status = 'not playing' don't do anything
     "$not_playing" )
@@ -266,7 +267,7 @@ case "$station" in
 esac
 
 # Show artist and title info or "No Info"
-if [ "$lbc_uk" = "$st" ] || [ "$lbc_news" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$radio_paradise" = "$st" ] || [ "$talksport" = "$st" ] || [ "$times_radio" = "$st" ] || [ "$talkradio" = "$st" ]; #|| [ "$talksport2" = "$st" ] 
+if [ "$lbc_uk" = "$st" ] || [ "$lbc_news" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$talksport" = "$st" ] || [ "$times_radio" = "$st" ] || [ "$talkradio" = "$st" ]; #|| [ "$talksport2" = "$st" ] || [ "$radio_paradise" = "$st" ]
     then
     conkytitle=$(cat ~/.conky/conkyradiotray-ng/onair.txt)
  
