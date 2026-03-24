@@ -1,5 +1,6 @@
 #!/bin/bash
-
+if pidof -x $(basename radiotray-ng) > /dev/null 
+then
 #Populate $st with current station, $so with current artist and song and define station name variables
 st=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.station')
 so=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title' | fold -s -w150)
@@ -29,12 +30,13 @@ On_LBC()
         Onair_txt
 }
 
-On_LBC_News()
+On_GB_News()
 {
-# Get what's on LBC News
+# Get what's on GB News
         #onair=$(curl -s https://www.lbcnews.co.uk/ | xmllint --html --nowarning --xpath '//section/div/p/span/a//text()' - | tail -c 61)
-        onair=$(curl -s https://www.lbcnews.co.uk/ | xmllint --html --nowarning --xpath '//section/div/p/span//text()' - | head -c 67)
-        onairtime=$(curl -s https://www.lbcnews.co.uk/ | xmllint --html --nowarning --xpath '//section/div/p/span/text()' - | tail -c 25)
+        #onair=$(curl -s https://www.lbcnews.co.uk/ | xmllint --html --nowarning --xpath '//section/div/p/span//text()' - | head -c 67)
+        #onairtime=$(curl -s https://www.lbcnews.co.uk/ | xmllint --html --nowarning --xpath '//section/div/p/span/text()' - | tail -c 25)
+        onair=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title')
         Onair_txt
 }
 
@@ -213,7 +215,7 @@ case "$station" in
 ;;
     "$gb_news" )
         convert  ~/.config/radiotray-ng/bookmark_icons/GBN.png -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
-        On_LBC_News
+        On_GB_News
 ;;
     "$lbc_london" )
         convert ~/.config/radiotray-ng/bookmark_icons/lbc2 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
@@ -267,7 +269,7 @@ case "$station" in
 esac
 
 # Show artist and title info or "No Info"
-if [ "$lbc_uk" = "$st" ] || [ "$lbc_news" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$talksport" = "$st" ] || [ "$times_radio" = "$st" ] || [ "$talkradio" = "$st" ]; #|| [ "$talksport2" = "$st" ] || [ "$radio_paradise" = "$st" ]
+if [ "$lbc_uk" = "$st" ] || [ "$gb_news" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$talksport" = "$st" ] || [ "$times_radio" = "$st" ] || [ "$talkradio" = "$st" ]; #|| [ "$talksport2" = "$st" ] || [ "$radio_paradise" = "$st" ]
     then
     conkytitle=$(cat ~/.conky/conkyradiotray-ng/onair.txt)
  
@@ -285,3 +287,4 @@ fi
 echo "$conkyartist""$conkyspacer""$conkytitle"
 
 exit 0
+fi
