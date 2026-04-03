@@ -1,6 +1,5 @@
 #!/bin/bash
-if pidof -x $(basename radiotray-ng) > /dev/null 
-then
+
 #Populate $st with current station, $so with current artist and song and define station name variables
 st=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.station')
 so=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title' | fold -s -w150)
@@ -19,8 +18,7 @@ On_LBC()
 {
 # Get what's on LBC
         #Query if guest presenter schedule is empty
-        #onair=$(curl -s https://ukradiolive.com/lbc-97-3 | xmllint --html --nowarning --xpath '/html/body/div[1]/div[3]/div/div[2]/div[2]/div[3]/div[1]/div[6]/div[4]/div[2]/a' - | tail -c 61 | awk -F'[><]' '{print $2}')
-        onair=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title')
+        onair=$(curl -s https://ukradiolive.com/lbc-97-3 | xmllint --html --nowarning --xpath '/html/body/div[1]/div[3]/div/div[2]/div[2]/div[3]/div[1]/div[6]/div[4]/div[2]/a' - | tail -c 61 | awk -F'[><]' '{print $2}') 
         #if [[ -z "$onair" ]]; then
         #Query normal presenter schedule
         #onair=$(curl -s https://www.lbc.co.uk | xmllint --html --nowarning --xpath '/html/body/div[1]/div/div[1]/div[2]/p' - | tail -c 25 | awk -F'[><]' '{print $2}')
@@ -30,13 +28,12 @@ On_LBC()
         Onair_txt
 }
 
-On_GB_News()
+On_LBC_News()
 {
-# Get what's on GB News
+# Get what's on LBC News
         #onair=$(curl -s https://www.lbcnews.co.uk/ | xmllint --html --nowarning --xpath '//section/div/p/span/a//text()' - | tail -c 61)
-        #onair=$(curl -s https://www.lbcnews.co.uk/ | xmllint --html --nowarning --xpath '//section/div/p/span//text()' - | head -c 67)
-        #onairtime=$(curl -s https://www.lbcnews.co.uk/ | xmllint --html --nowarning --xpath '//section/div/p/span/text()' - | tail -c 25)
-        onair=$(qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.title')
+        onair=$(curl -s https://www.lbcnews.co.uk/ | xmllint --html --nowarning --xpath '//section/div/p/span//text()' - | head -c 67)
+        onairtime=$(curl -s https://www.lbcnews.co.uk/ | xmllint --html --nowarning --xpath '//section/div/p/span/text()' - | tail -c 25)
         Onair_txt
 }
 
@@ -112,31 +109,33 @@ On_Timesradio()
         Onair_txt
 }
 
-
 On_radioparadise()
 #Get what's on radio paradise and download cover artist
 {
-        #Populate $chk_art with the coverart url
-        chk_art=$(awk -F '[<>]' '/coverart/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
-        #Download now.xml and save local copy
-        curl -o ~/.config/radiotray-ng/bookmark_icons/now.xml http://legacy.radioparadise.com/xml/now.xml
-        #Populate $chk_art2 with the coverart url from local copy of now.xml
-        chk_art2=$(awk -F '[<>]' '/coverart/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
-            
-            #Check if the coverart urls match and, if not, get new coverart and resize to 115 width
-            if 
-                [ "$chk_art" != "$chk_art2" ]; 
-            then 
-                art=$(awk -F '[<>]' '/coverart/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
-                curl -o ~/.config/radiotray-ng/bookmark_icons/rp_art "$art"
-                convert ~/.config/radiotray-ng/bookmark_icons/rp_art -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
-            fi
+        # Fetch JSON data from new API and save local copy
+        curl -o ~/.config/radiotray-ng/bookmark_icons/now.json "https://api.radioparadise.com/api/now_playing?"
         
-        rpartist=$(awk -F '[<>]' '/artist/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml | sed 's/amp;//')
-        rpsongtitle=$(awk -F '[<>]' '/title/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml | sed 's/amp;//')
-        #rpartist=$(awk -F '[<>]' '/artist/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml | sed 's/amp;//')
-        #rpsongtitle=$(awk -F '[<>]' '/title/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml | sed 's/amp;//')
-        # echo artist and song to 
+        # Extract cover_small URL from JSON
+        chk_art=$(jq -r '.cover_small' ~/.config/radiotray-ng/bookmark_icons/now.json 2>/dev/null)
+        # Store previous coverart for comparison (if exists)
+        if [ -f ~/.config/radiotray-ng/bookmark_icons/prev_coverart.txt ]; then
+            prev_art=$(cat ~/.config/radiotray-ng/bookmark_icons/prev_coverart.txt)
+        else
+            prev_art=""
+        fi
+            
+        # Check if the coverart urls match and, if not, get new coverart and resize to 110 width
+        if [ "$prev_art" != "$chk_art" ] && [ -n "$chk_art" ] && [ "$chk_art" != "null" ]; then 
+            curl -o ~/.config/radiotray-ng/bookmark_icons/rp_art "$chk_art"
+            convert ~/.config/radiotray-ng/bookmark_icons/rp_art -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
+            echo "$chk_art" > ~/.config/radiotray-ng/bookmark_icons/prev_coverart.txt
+        fi
+        
+        # Extract artist and song title from JSON
+        rpartist=$(jq -r '.artist' ~/.config/radiotray-ng/bookmark_icons/now.json 2>/dev/null | sed 's/amp;//g')
+        rpsongtitle=$(jq -r '.title' ~/.config/radiotray-ng/bookmark_icons/now.json 2>/dev/null | sed 's/amp;//g')
+        
+        # echo artist and song to conky file
         echo "$rpartist" > ~/.conky/conkyradiotray-ng/onair.txt
         truncate --size -1 ~/.conky/conkyradiotray-ng/onair.txt
         echo " - " >> ~/.conky/conkyradiotray-ng/onair.txt
@@ -176,9 +175,9 @@ if [ "$artist" = "$status" ];
 then
 title='antenna tower icon white'
 #title='free white radio tower icon-18'
-# elif [ "$cadena" = "$rp" ]; 
-# then 
-# station='Radio Paradise'  
+elif [ "$cadena" = "$rp" ]; 
+then 
+station='Radio Paradise'  
 else 
 title=$so
 #title=""$ar" "-" "$so""
@@ -215,7 +214,7 @@ case "$station" in
 ;;
     "$gb_news" )
         convert  ~/.config/radiotray-ng/bookmark_icons/GBN.png -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
-        On_GB_News
+        On_LBC_News
 ;;
     "$lbc_london" )
         convert ~/.config/radiotray-ng/bookmark_icons/lbc2 -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
@@ -247,9 +246,9 @@ case "$station" in
 ;;
     "$bloomr" )
         convert ~/.config/radiotray-ng/bookmark_icons/br -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon    
-# ;;
-#     "$radio_paradise" )
-#         On_radioparadise
+;;
+    "$radio_paradise" )
+        On_radioparadise
 ;;
     #If status = 'not playing' don't do anything
     "$not_playing" )
@@ -269,7 +268,7 @@ case "$station" in
 esac
 
 # Show artist and title info or "No Info"
-if [ "$lbc_uk" = "$st" ] || [ "$gb_news" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$talksport" = "$st" ] || [ "$times_radio" = "$st" ] || [ "$talkradio" = "$st" ]; #|| [ "$talksport2" = "$st" ] || [ "$radio_paradise" = "$st" ]
+if [ "$lbc_uk" = "$st" ] || [ "$lbc_news" = "$st" ] || [ "$lbc_london" = "$st" ] || [ "$radio_paradise" = "$st" ] || [ "$talksport" = "$st" ] || [ "$times_radio" = "$st" ] || [ "$talkradio" = "$st" ]; #|| [ "$talksport2" = "$st" ] 
     then
     conkytitle=$(cat ~/.conky/conkyradiotray-ng/onair.txt)
  
@@ -287,4 +286,3 @@ fi
 echo "$conkyartist""$conkyspacer""$conkytitle"
 
 exit 0
-fi
