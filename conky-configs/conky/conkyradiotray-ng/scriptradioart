@@ -212,8 +212,8 @@ status=''
 rp='Radio Paradise'
 artist=${so: -0}
 cadena=${st: -14}
-rpartist=$(awk -F '[<>]' '/artist/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
-rpsongtitle=$(awk -F '[<>]' '/title/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
+#rpartist=$(awk -F '[<>]' '/artist/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
+#rpsongtitle=$(awk -F '[<>]' '/title/{print $3}' ~/.config/radiotray-ng/bookmark_icons/now.xml)
 if [ "$artist" = "$status" ]; 
 then
 title='antenna tower icon white'
@@ -236,7 +236,8 @@ fi
 
 
 #Read the first line of artist_title.txt for artist & song title and populate $title_read
-title_read=$(head -1 ~/.conky/conkyradiotray-ng/artist_title.txt)
+#title_read=$(head -1 ~/.conky/conkyradiotray-ng/artist_title.txt)
+title_read=$(head -1 ~/.conky/conkyradiotray-ng/onair.txt)
 
 #Read $title_read and substitute white spaces for '+' and '&' for '%26' and '#' for '%23' and ':' for '%3A' and ';' for '%3B' and ',' for '%2C' and '[' for '%5B' and ']' for '%5D' so google image search works on the whole string
 title_search=$(echo $title_read | sed 's/ /+/g' | sed 's/&/%26/g' | sed 's/#/%23/g' | sed 's/:/%3A/g' | sed 's/;/%3B/g' | sed 's/,/%2C/g' | sed 's/\[/%5B/g' | sed 's/\]/%5D/g')
@@ -303,10 +304,11 @@ case "$station" in
     *)
         #Check if albumart is already downloaded, if not, populate artist_title.txt with artist & song title, then download albumart and magick to icon and resize it
         if
-        [ "$title_read" != "$title" ];
+        [ "$title_read" != "$conkytitle" ];
         then
         #echo "$title" | fold -s -w80 > ~/.conky/conkyradiotray-ng/artist_title.txt
-        echo "$ar" - "$so" | fold -s -w80 > ~/.conky/conkyradiotray-ng/artist_title.txt
+        #echo "$ar" - "$so" | fold -s -w80 > ~/.conky/conkyradiotray-ng/artist_title.txt
+        echo "$ar" - "$so" | fold -s -w80 > ~/.conky/conkyradiotray-ng/onair.txt
         wget -qO miniatureGoogleImage "$linkMiniature"
         magick ~/miniatureGoogleImage -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
         fi
