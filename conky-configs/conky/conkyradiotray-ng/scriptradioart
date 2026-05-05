@@ -249,17 +249,6 @@ then
 station='(not playing)'
 fi
 
-
-#Read the first line of artist_title.txt for artist & song title and populate $title_read
-title_read=$(head -1 ~/.conky/conkyradiotray-ng/artist_title.txt)
-
-#Read $title_read and substitute white spaces for '+' and '&' for '%26' and '#' for '%23' and ':' for '%3A' and ';' for '%3B' and ',' for '%2C' and '[' for '%5B' and ']' for '%5D' so google image search works on the whole string
-title_search=$(echo $title_read | sed 's/ /+/g' | sed 's/&/%26/g' | sed 's/#/%23/g' | sed 's/:/%3A/g' | sed 's/;/%3B/g' | sed 's/,/%2C/g' | sed 's/\[/%5B/g' | sed 's/\]/%5D/g')
-
-#Get the URL of $title_search, define awk record seperator as "src", select the second record with NR==2, cut up to the 6th character, then remove the last 11 characters with sed
-linkMiniature=$(wget -U 'Googlebot-Image/1.0' -qO - "www.google.co.uk/search?q=$title_search\&tbm=isch" | awk -v RS='[[:blank:]]' '/^src=/' | awk 'NR==2' | cut -c6- | sed 's/.\{11\}$//')
-
-
 #Check each station variable and use imagemagick magick command to resize image and copy to ~/.config/radiotray-ng/bookmark_icons/icon
 case "$station" in 
     "$lbc_uk" )
@@ -319,17 +308,51 @@ case "$station" in
 ;;
     #If any other case get albumart using miniatureGoogleImage
     *)
-        #Check if albumart is already downloaded, if not, populate artist_title.txt with artist & song title, then download albumart and magick to icon and resize it
-        # Generate a hash from the source data
-        new_hash=$(echo "$linkMiniature$ar$so" | md5sum | cut -d' ' -f1)
-        hash_file="/tmp/radiotray_hash"
-
-        if [ ! -f "$hash_file" ] || [ "$(cat $hash_file)" != "$new_hash" ]; then
-            echo "$ar" - "$so" | fold -s -w80 > ~/.conky/conkyradiotray-ng/artist_title.txt
-            wget -O miniatureGoogleImage "$linkMiniature"
-            magick ~/miniatureGoogleImage -resize 110 ~/.config/radiotray-ng/bookmark_icons/icon
-            echo "$new_hash" > "$hash_file"
+        # Set paths
+        ICON_PATH="$HOME/.config/radiotray-ng/bookmark_icons/icon"
+        HASH_FILE="/tmp/radiotray_hash"
+        ARTIST_TITLE_FILE="$HOME/.conky/conkyradiotray-ng/artist_title.txt"
+        
+        # Generate hash from current artist and song
+        current_hash=$(echo "$ar$so" | md5sum | cut -d' ' -f1)
+        saved_hash=""
+        
+        # Read saved hash if file exists
+        if [ -f "$HASH_FILE" ]; then
+            saved_hash=$(cat "$HASH_FILE")
         fi
+        
+        # Check if track has changed
+        if [ "$saved_hash" != "$current_hash" ]; then
+            # Track changed - need to get new album art
+            if [ -n "$ar" ] && [ -n "$so" ] && [ "$ar" != "null" ] && [ "$so" != "null" ]; then
+                
+                # Save artist and title to file
+                echo "$ar - $so" | fold -s -w80 > "$ARTIST_TITLE_FILE"
+                
+                # Prepare search string
+                title_search=$(echo "$ar - $so" | sed 's/ /+/g' | sed 's/&/%26/g' | sed 's/#/%23/g' | sed 's/:/%3A/g' | sed 's/;/%3B/g' | sed 's/,/%2C/g' | sed 's/\[/%5B/g' | sed 's/\]/%5D/g')
+                
+                # Get image URL from Google
+                linkMiniature=$(wget -U 'Googlebot-Image/1.0' -qO - "www.google.co.uk/search?q=$title_search\&tbm=isch" | awk -v RS='[[:blank:]]' '/^src=/' | awk 'NR==2' | cut -c6- | sed 's/.\{11\}$//')
+                
+                # Download and process image if URL is valid
+                if [ -n "$linkMiniature" ] && [ "$linkMiniature" != "http://" ] && [ "$linkMiniature" != "https://" ]; then
+                    wget -O /tmp/miniatureGoogleImage "$linkMiniature" 2>/dev/null
+                    
+                    # Verify download succeeded (file exists and has content)
+                    if [ -f /tmp/miniatureGoogleImage ] && [ -s /tmp/miniatureGoogleImage ]; then
+                        # Check if it's a valid image (optional but recommended)
+                        if file /tmp/miniatureGoogleImage | grep -q "image"; then
+                            magick /tmp/miniatureGoogleImage -resize 110 "$ICON_PATH"
+                            # Save hash ONLY after successful download
+                            echo "$current_hash" > "$HASH_FILE"
+                        fi
+                    fi
+                fi
+            fi
+        fi
+        # If hash matches, album art is already correct - do nothing
 ;;
 esac
 
@@ -348,7 +371,6 @@ else
     conkyartist=$ar
     
 fi
-
 
 echo "$conkytitle"
 
