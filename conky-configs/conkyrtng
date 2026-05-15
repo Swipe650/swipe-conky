@@ -1,6 +1,6 @@
-background yes
+# background yes
 use_xft yes
-xftfont 123:size=8
+xftfont Monospace:size=8
 xftalpha 0.5
 update_interval 1
 total_run_times 0
@@ -40,17 +40,18 @@ TEXT
 
 # RADIOTRAY
 ${if_running radiotray-ng}
+${if_match "${execi 10 bash -c 'timeout 1 qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state 2>/dev/null | grep -q . && echo YES || echo NO'}" == "YES"}
 
-${voffset -19}${color}${if_match "${execi 10 /home/swipe/.conky/conkyradiotray-ng/scriptradio}" == "NO"}${color #efefef}${font Ubuntu:pixelsize=14:bold}${else}${color #efefef}#${font Ubuntu:pixelsize=14:bold}Radiotray-ng app now playing:
+${voffset -19}${color}${if_match "${execi 10 /home/swipe/.conky/conkyradiotray-ng/scriptradio 2>/dev/null}" == "NO"}${color #efefef}${font Ubuntu:pixelsize=13:bold}${else}${color #efefef}#${font Ubuntu:pixelsize=13:bold}Radiotray-ng app now playing:
 
 ${voffset 0}${color #FFC433}${font Ubuntu:pixelsize=13:bold}Radio Station:${font}${color}  
 
-${font Ubuntu:pixelsize=13:bold}${color #ffffff}${execi 10 qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state | jq -r '.station' | fold -s -w 17}
+${font Ubuntu:pixelsize=13:bold}${color #ffffff}${execi 10 bash -c 'qdbus com.github.radiotray_ng /com/github/radiotray_ng com.github.radiotray_ng.get_player_state 2>/dev/null | jq -r ".station" 2>/dev/null | fold -s -w 17'}
 
-${voffset 15}${if_existing /home/swipe/.conky/muted.png} ${image ~/.conky/muted.png -p 77,93 -s 35x35 -f 1}$endif${voffset 0}${if_match "${exec pidof -x toggle_mute3_rtng.sh}" != ""}${font Ubuntu:pixelsize=14:bold} ${execpi 1 cat ~/.conkytimer}${else}$endif
-${voffset 0}${color FFC433}${font Ubuntu:pixelsize=13:bold}Artist & Title:${font}${color}
+${voffset 15}${if_existing /home/swipe/.conky/muted.png} ${image ~/.conky/muted.png -p 77,99 -s 35x35 -f 1}$endif${voffset 0}${if_match "${exec pidof -x toggle_mute3_rtng.sh}" != ""}${font Ubuntu:pixelsize=13:bold} ${execpi 1 cat ~/.conkytimer}${else}$endif
+${voffset 0}${color FFC433}${font Ubuntu:pixelsize=13:bold}Artist & Title:${font}${color}${endif}
 
-${font Ubuntu:pixelsize=12:bold}${color #ffffff}${execi 15 /home/swipe/.conky/conkyradiotray-ng/scriptradioart | fold -s -w 40}${color}${image ~/.config/radiotray-ng/bookmark_icons/icon -p 125,45 -f 1}${endif}
+${font Ubuntu:pixelsize=13:bold}${color #ffffff}${execi 15 bash -c '/home/swipe/.conky/conkyradiotray-ng/scriptradioart 2>/dev/null | fold -s -w 40'}${color}${image ~/.config/radiotray-ng/bookmark_icons/icon -p 125,65 -f 1}${endif}
 $else${color #696969}${font Ubuntu:pixelsize=13:bold}#No activity${font}$endif
 ${if_running tidal-hifi}${voffset -200}${endif}
-${voffset -30}
+${voffset -30}${endif}
